@@ -2,11 +2,6 @@
 
 namespace App\DataFixtures;
 
-<<<<<<< HEAD
-use App\Entity\Framework;
-use App\Entity\Level;
-use App\Entity\Program;
-=======
 use App\Entity\Author;
 use App\Entity\Framework;
 use App\Entity\Level;
@@ -14,21 +9,12 @@ use App\Entity\Program;
 use App\Entity\Ressource;
 use App\Entity\TopicFramework;
 use App\Entity\TopicProgrammingLanguage;
->>>>>>> bfe2bf0a5c4036119db48dc3ea48b0b8b00e041a
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Validator\Constraints\Length;
 
 class AppFixtures extends Fixture
 {
-<<<<<<< HEAD
-    public function load(ObjectManager $manager)
-    {
-
-       /*  $faker = \Faker\Factory::create();*/
-        $manager->flush();
-    }
-=======
   public function load(ObjectManager $manager)
   {
     $fabPot = new Author();
@@ -78,5 +64,4 @@ class AppFixtures extends Fixture
 
     $manager->flush();
   }
->>>>>>> bfe2bf0a5c4036119db48dc3ea48b0b8b00e041a
 }
