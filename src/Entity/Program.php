@@ -31,14 +31,13 @@ class Program
     private $frameworks;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="program", orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\TopicProgrammingLanguage", mappedBy="programmingLanguage", cascade={"persist", "remove"})
      */
-    private $ressources;
+    private $topic;
 
     public function __construct()
     {
         $this->frameworks = new ArrayCollection();
-        $this->ressources = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,32 +88,18 @@ class Program
         return $this;
     }
 
-    /**
-     * @return Collection|Ressource[]
-     */
-    public function getRessources(): Collection
+    public function getTopic(): ?TopicProgrammingLanguage
     {
-        return $this->ressources;
+        return $this->topic;
     }
 
-    public function addRessource(Ressource $ressource): self
+    public function setTopic(TopicProgrammingLanguage $topic): self
     {
-        if (!$this->ressources->contains($ressource)) {
-            $this->ressources[] = $ressource;
-            $ressource->setProgram($this);
-        }
+        $this->topic = $topic;
 
-        return $this;
-    }
-
-    public function removeRessource(Ressource $ressource): self
-    {
-        if ($this->ressources->contains($ressource)) {
-            $this->ressources->removeElement($ressource);
-            // set the owning side to null (unless already changed)
-            if ($ressource->getProgram() === $this) {
-                $ressource->setProgram(null);
-            }
+        // set the owning side of the relation if necessary
+        if ($topic->getProgrammingLanguage() !== $this) {
+            $topic->setProgrammingLanguage($this);
         }
 
         return $this;
