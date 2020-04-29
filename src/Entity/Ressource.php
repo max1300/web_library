@@ -35,17 +35,6 @@ class Ressource
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="ressources")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $program;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Framework", inversedBy="ressources")
-     */
-    private $framework;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $language;
@@ -55,6 +44,12 @@ class Ressource
      * @ORM\JoinColumn(nullable=false)
      */
     private $level;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="ressources")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $topic;
 
     public function getId(): ?int
     {
@@ -97,30 +92,6 @@ class Ressource
         return $this;
     }
 
-    public function getProgram(): ?Program
-    {
-        return $this->program;
-    }
-
-    public function setProgram(?Program $program): self
-    {
-        $this->program = $program;
-
-        return $this;
-    }
-
-    public function getFramework(): ?Framework
-    {
-        return $this->framework;
-    }
-
-    public function setFramework(?Framework $framework): self
-    {
-        $this->framework = $framework;
-
-        return $this;
-    }
-
     public function getLanguage(): ?string
     {
         return $this->language;
@@ -141,6 +112,18 @@ class Ressource
     public function setLevel(?Level $level): self
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    public function getTopic(): ?Topic
+    {
+        return $this->topic;
+    }
+
+    public function setTopic(?Topic $topic): self
+    {
+        $this->topic = $topic;
 
         return $this;
     }

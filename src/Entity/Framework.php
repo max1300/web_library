@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,14 +34,9 @@ class Framework
     private $docUrl;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="framework")
+     * @ORM\OneToOne(targetEntity="App\Entity\TopicFramework", mappedBy="framework", cascade={"persist", "remove"})
      */
-    private $ressources;
-
-    public function __construct()
-    {
-        $this->ressources = new ArrayCollection();
-    }
+    private $topic;
 
     public function getId(): ?int
     {
@@ -86,32 +79,18 @@ class Framework
         return $this;
     }
 
-    /**
-     * @return Collection|Ressource[]
-     */
-    public function getRessources(): Collection
+    public function getTopic(): ?TopicFramework
     {
-        return $this->ressources;
+        return $this->topic;
     }
 
-    public function addRessource(Ressource $ressource): self
+    public function setTopic(TopicFramework $topic): self
     {
-        if (!$this->ressources->contains($ressource)) {
-            $this->ressources[] = $ressource;
-            $ressource->setFramework($this);
-        }
+        $this->topic = $topic;
 
-        return $this;
-    }
-
-    public function removeRessource(Ressource $ressource): self
-    {
-        if ($this->ressources->contains($ressource)) {
-            $this->ressources->removeElement($ressource);
-            // set the owning side to null (unless already changed)
-            if ($ressource->getFramework() === $this) {
-                $ressource->setFramework(null);
-            }
+        // set the owning side of the relation if necessary
+        if ($topic->getFramework() !== $this) {
+            $topic->setFramework($this);
         }
 
         return $this;
