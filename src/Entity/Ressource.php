@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -10,6 +12,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *     normalizationContext={"groups"={"resource:read"}},
  *     denormalizationContext={"groups"={"resource:write"}}
+ * )
+ * @ApiFilter(
+ *     SearchFilter::class, properties={
+ *          "author": "exact",
+ *          "author.name" : "partial",
+ *          "level.name" : "partial"
+ *     }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\RessourceRepository")
  */
