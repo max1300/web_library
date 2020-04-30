@@ -6,9 +6,13 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"level:read"}},
+ *     denormalizationContext={"groups"={"level:write"}}
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\LevelRepository")
  */
 class Level
@@ -17,16 +21,19 @@ class Level
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"resource:read", "level:read", "level:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"resource:read", "level:read", "level:write"})
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="level", orphanRemoval=true)
+     * @Groups("level:read")
      */
     private $ressources;
 

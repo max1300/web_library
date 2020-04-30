@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     denormalizationContext={"groups"={"framework:write"}}
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\FrameworkRepository")
  */
 class Framework
@@ -15,26 +18,31 @@ class Framework
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"resource:read", "author:read", "level:read", "framework:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"resource:read", "author:read", "level:read", "framework:write"})
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="frameworks")
+     * @Groups({"resource:read", "author:read", "level:read"})
      */
     private $program;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"resource:read", "author:read", "framework:write"})
      */
     private $docUrl;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\TopicFramework", mappedBy="framework", cascade={"persist", "remove"})
+     * @Groups("framework:write")
      */
     private $topic;
 

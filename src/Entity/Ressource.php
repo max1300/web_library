@@ -4,9 +4,13 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"resource:read"}},
+ *     denormalizationContext={"groups"={"resource:write"}}
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\RessourceRepository")
  */
 class Ressource
@@ -15,39 +19,46 @@ class Ressource
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"resource:read", "resource:write", "author:read"})
      */
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="ressources")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="ressources", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"resource:read", "resource:write"})
      */
     private $author;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"resource:read", "resource:write"})
      */
     private $language;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"resource:read", "resource:write", "author:read"})
      */
     private $level;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
      */
     private $topic;
 
