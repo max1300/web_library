@@ -10,6 +10,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
+ *     itemOperations={
+ *     "get"={"path"="/level/{id}"},
+ *      "put"={"path"="/level/{id}"},
+ *      "delete"={"path"="/level/{id}"},
+ *      "patch"={"path"="/level/{id}"}
+ *     },
+ *     collectionOperations={
+ *      "post"={"path"="/level"},
+ *      "get"={"path"="/levels"}
+ *     },
  *     normalizationContext={"groups"={"level:read"}},
  *     denormalizationContext={"groups"={"level:write"}}
  * )

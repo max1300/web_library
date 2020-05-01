@@ -8,6 +8,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
+ *     itemOperations={
+ *     "get"={"path"="/framework/{id}"},
+ *      "put"={"path"="/framework/{id}"},
+ *      "delete"={"path"="/framework/{id}"},
+ *      "patch"={"path"="/framework/{id}"}
+ *     },
+ *     collectionOperations={
+ *      "post"={"path"="/framework"},
+ *      "get"={"path"="/frameworks"}
+ *     },
  *     denormalizationContext={"groups"={"framework:write"}}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\FrameworkRepository")

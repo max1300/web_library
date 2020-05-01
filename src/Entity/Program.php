@@ -10,6 +10,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
+ *     itemOperations={
+ *     "get"={"path"="/program/{id}"},
+ *      "put"={"path"="/program/{id}"},
+ *      "delete"={"path"="/program/{id}"},
+ *      "patch"={"path"="/program/{id}"}
+ *     },
+ *     collectionOperations={
+ *      "post"={"path"="/program"},
+ *      "get"={"path"="/programs"}
+ *     },
  *     denormalizationContext={"groups"={"program:write"}}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
