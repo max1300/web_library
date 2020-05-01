@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *     itemOperations={
- *     "get"={"path"="/author/{id}"},
+ *      "get"={"path"="/author/{id}"},
  *      "put"={"path"="/author/{id}"},
  *      "delete"={"path"="/author/{id}"},
  *      "patch"={"path"="/author/{id}"}

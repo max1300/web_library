@@ -32,8 +32,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 70; $i++) {
             $user = new User();
             $login = $faker->userName;
-            $user->setActive($faker->boolean(75))
-                ->setEmail($faker->email)
+            $user->setEmail($faker->email)
                 ->setLogin($login)
                 ->setPassword($this->encoder->encodePassword(
                     $user,
@@ -107,7 +106,7 @@ class AppFixtures extends Fixture
             'https://symfony.com/doc/current/index.html'
         );
 
-        $this->getResource(
+        $this->getFrameworkResource(
             $manager,
             $author,
             $level,
@@ -147,7 +146,7 @@ class AppFixtures extends Fixture
             'https://react.com/doc/current/index.html'
         );
 
-        $this->getResource(
+        $this->getFrameworkResource(
             $manager,
             $author,
             $level,
@@ -187,7 +186,7 @@ class AppFixtures extends Fixture
             'https://java.com/doc/current/index.html'
         );
 
-        $this->getResource(
+        $this->getFrameworkResource(
             $manager,
             $author,
             $level,
@@ -245,7 +244,7 @@ class AppFixtures extends Fixture
      * @param ObjectManager $manager
      * @param Author $author
      * @param Level $level
-     * @param TopicProgrammingLanguage $phpTopic
+     * @param TopicProgrammingLanguage $programmingLanguage
      * @param $language
      * @param $name
      * @param $url
@@ -254,7 +253,7 @@ class AppFixtures extends Fixture
         ObjectManager $manager,
         Author $author,
         Level $level,
-        TopicProgrammingLanguage $phpTopic,
+        TopicProgrammingLanguage $programmingLanguage,
         $language,
         $name,
         $url
@@ -266,7 +265,36 @@ class AppFixtures extends Fixture
             ->setLevel($level)
             ->setName($name)
             ->setUrl($url)
-            ->setTopic($phpTopic);
+            ->setTopic($programmingLanguage);
+        $manager->persist($resource);
+    }
+
+    /**
+     * @param ObjectManager $manager
+     * @param Author $author
+     * @param Level $level
+     * @param TopicFramework $framework
+     * @param $language
+     * @param $name
+     * @param $url
+     */
+    public function getFrameworkResource(
+        ObjectManager $manager,
+        Author $author,
+        Level $level,
+        TopicFramework $framework,
+        $language,
+        $name,
+        $url
+    ): void
+    {
+        $resource = new Ressource();
+        $resource->setAuthor($author)
+            ->setLanguage($language)
+            ->setLevel($level)
+            ->setName($name)
+            ->setUrl($url)
+            ->setTopic($framework);
         $manager->persist($resource);
     }
 

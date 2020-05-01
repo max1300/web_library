@@ -2,10 +2,26 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ApiResource(
+ *     itemOperations={
+ *     "get"={"path"="/user/{id}"},
+ *      "put"={"path"="/user/{id}"},
+ *      "delete"={"path"="/user/{id}"},
+ *      "patch"={"path"="/user/{id}"}
+ *     },
+ *     collectionOperations={
+ *      "post"={"path"="/user"},
+ *      "get"={"path"="/users"}
+ *     },
+ *     normalizationContext={"groups"={"user:read"}},
+ *     denormalizationContext={"groups"={"user:write"}},
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface
@@ -19,6 +35,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"user:read", "user:write"})
      */
     private $email;
 
@@ -30,21 +47,19 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"user:write"})
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user:read", "user:write"})
      */
     private $login;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user:read", "user:write"})
      */
     private $profilPic;
 
@@ -127,7 +142,7 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getLogin(): ?string
+    public function getLogin(): string
     {
         return $this->login;
     }
@@ -135,18 +150,6 @@ class User implements UserInterface
     public function setLogin(string $login): self
     {
         $this->login = $login;
-
-        return $this;
-    }
-
-    public function getActive(): ?bool
-    {
-        return $this->active;
-    }
-
-    public function setActive(bool $active): self
-    {
-        $this->active = $active;
 
         return $this;
     }
