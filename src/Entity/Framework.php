@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -9,6 +10,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *     mercure=true,
+ *     itemOperations={
+ *     "get"={"path"="/framework/{id}"},
+ *      "put"={"path"="/framework/{id}"},
+ *      "delete"={"path"="/framework/{id}"},
+ *      "patch"={"path"="/framework/{id}"}
+ *     },
+ *     collectionOperations={
+ *      "post"={"path"="/framework"},
+ *      "get"={"path"="/frameworks"}
+ *     },
  *     denormalizationContext={"groups"={"framework:write"}}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\FrameworkRepository")
@@ -33,7 +45,11 @@ class Framework
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="frameworks")
      * @Groups({"resource:read", "author:read", "level:read"})
+<<<<<<< HEAD
      * @Assert\NotNull
+=======
+     * @ApiProperty(push=true)
+>>>>>>> b9d932ad67bb1741b62b66a4840e7f8b6d4bcec4
      */
     private $program;
 

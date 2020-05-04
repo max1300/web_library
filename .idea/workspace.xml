@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/web_library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web_library.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Author.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Author.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Framework.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Framework.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Level.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Level.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Program.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Program.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Ressource.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Ressource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Topic.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Topic.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TopicFramework.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TopicFramework.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TopicProgrammingLanguage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TopicProgrammingLanguage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,20 +42,7 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="web-library" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="information_schema: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="web-library" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="web_library: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="web-library" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="web_library: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="author: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -171,6 +145,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
       <path value="$PROJECT_DIR$/vendor/symfony/web-server-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
     </include_path>
   </component>
   <component name="ProjectId" id="1bALIz2KdwxuHTKwqCULMJWIjrp" />
@@ -179,7 +154,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../react_web_library/web_library_front" />
+    <property name="settings.editor.selected.configurable" value="com.kalessil.phpStorm.phpInspectionsEA.EAApplicationConfiguration" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -225,8 +201,68 @@
       <updated>1588069882255</updated>
       <workItem from="1588069903983" duration="182000" />
       <workItem from="1588187138450" duration="5248000" />
-      <workItem from="1588229503921" duration="9023000" />
+      <workItem from="1588229503921" duration="15413000" />
+      <workItem from="1588339902606" duration="1937000" />
+      <workItem from="1588345873752" duration="11247000" />
+      <workItem from="1588575668643" duration="4809000" />
     </task>
+    <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
+      <created>1588241330892</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1588241330893</updated>
+    </task>
+    <task id="LOCAL-00002" summary="&quot;adding entity user with fixtures corresponding&quot;">
+      <created>1588258798449</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1588258798450</updated>
+    </task>
+    <task id="LOCAL-00003" summary="&quot;fix: adding entity user with fixtures corresponding&quot;">
+      <created>1588258924801</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1588258924801</updated>
+    </task>
+    <task id="LOCAL-00004" summary="&quot;refactorisation des fixtures&quot;">
+      <created>1588359997787</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1588359997787</updated>
+    </task>
+    <task id="LOCAL-00005" summary="&quot;remodelisation des routes&quot;">
+      <created>1588361658318</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1588361658318</updated>
+    </task>
+    <task id="LOCAL-00006" summary="&quot;initialize user as an api-resource :&#10;changing routes url,&#10;adding serialization and deserialization attributes&quot;">
+      <created>1588369353833</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1588369353833</updated>
+    </task>
+    <task id="LOCAL-00007" summary="&quot;activation du systeme d'invalidation du cache et de mercure&quot;">
+      <created>1588579660186</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1588579660186</updated>
+    </task>
+    <task id="LOCAL-00008" summary="&quot;activation http/2 pour certaines relations&quot;">
+      <created>1588579955818</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1588579955819</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,5 +280,27 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="&quot;adding Groups annotation to entity&quot;" />
+    <MESSAGE value="&quot;adding entity user with fixtures corresponding&quot;" />
+    <MESSAGE value="&quot;fix: adding entity user with fixtures corresponding&quot;" />
+    <MESSAGE value="&quot;refactorisation des fixtures&quot;" />
+    <MESSAGE value="&quot;remodelisation des routes&quot;" />
+    <MESSAGE value="&quot;initialize user as an api-resource :&#10;changing routes url,&#10;adding serialization and deserialization attributes&quot;" />
+    <MESSAGE value="&quot;activation du systeme d'invalidation du cache et de mercure&quot;" />
+    <MESSAGE value="&quot;activation http/2 pour certaines relations&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;activation http/2 pour certaines relations&quot;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php</url>
+          <line>4</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

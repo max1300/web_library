@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,7 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource()
+ * @ApiResource(mercure=true)
  * @ORM\Entity(repositoryClass="App\Repository\TopicRepository")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
@@ -31,7 +32,11 @@ abstract class Topic
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="topic")
+<<<<<<< HEAD
      * @Assert\NotNull
+=======
+     * @ApiProperty(push=true)
+>>>>>>> b9d932ad67bb1741b62b66a4840e7f8b6d4bcec4
      */
     private $ressources;
 

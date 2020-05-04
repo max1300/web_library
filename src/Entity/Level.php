@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +12,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *     mercure=true,
+ *     itemOperations={
+ *     "get"={"path"="/level/{id}"},
+ *      "put"={"path"="/level/{id}"},
+ *      "delete"={"path"="/level/{id}"},
+ *      "patch"={"path"="/level/{id}"}
+ *     },
+ *     collectionOperations={
+ *      "post"={"path"="/level"},
+ *      "get"={"path"="/levels"}
+ *     },
  *     normalizationContext={"groups"={"level:read"}},
  *     denormalizationContext={"groups"={"level:write"}}
  * )
@@ -36,6 +48,7 @@ class Level
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="level", orphanRemoval=true)
      * @Groups("level:read")
+     * @ApiProperty(push=true)
      */
     private $ressources;
 

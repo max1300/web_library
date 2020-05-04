@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,6 +11,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
+ *     mercure=true,
+ *     itemOperations={
+ *      "get"={"path"="/author/{id}"},
+ *      "put"={"path"="/author/{id}"},
+ *      "delete"={"path"="/author/{id}"},
+ *      "patch"={"path"="/author/{id}"}
+ *     },
+ *     collectionOperations={
+ *      "post"={"path"="/author"},
+ *      "get"={"path"="/authors"}
+ *     },
  *     normalizationContext={"groups"={"author:read"}}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
@@ -43,6 +55,7 @@ class Author
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="author", orphanRemoval=true)
      * @Groups("author:read")
+     * @ApiProperty(push=true)
      */
     private $ressources;
 

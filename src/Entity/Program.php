@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +12,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *     mercure=true,
+ *     itemOperations={
+ *     "get"={"path"="/program/{id}"},
+ *      "put"={"path"="/program/{id}"},
+ *      "delete"={"path"="/program/{id}"},
+ *      "patch"={"path"="/program/{id}"}
+ *     },
+ *     collectionOperations={
+ *      "post"={"path"="/program"},
+ *      "get"={"path"="/programs"}
+ *     },
  *     denormalizationContext={"groups"={"program:write"}}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
@@ -34,6 +46,7 @@ class Program
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Framework", mappedBy="program")
+     * @ApiProperty(push=true)
      */
     private $frameworks;
 
