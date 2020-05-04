@@ -23,7 +23,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "get"={"path"="/ressources"}
  *     },
  *     normalizationContext={"groups"={"resource:read"}},
- *     denormalizationContext={"groups"={"resource:write"}}
+ *     denormalizationContext={"groups"={"resource:write"}},
+ *     attributes={"order"={"author.name"}}
  * )
  * @ApiFilter(
  *     SearchFilter::class, properties={
