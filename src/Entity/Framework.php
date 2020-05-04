@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -25,24 +26,30 @@ class Framework
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"resource:read", "author:read", "level:read", "framework:write"})
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="frameworks")
      * @Groups({"resource:read", "author:read", "level:read"})
+     * @Assert\NotNull
      */
     private $program;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"resource:read", "author:read", "framework:write"})
+     * @Assert\Url(
+     *    message = "The url '{{ value }}' is not a valid url",
+     * )
      */
     private $docUrl;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\TopicFramework", mappedBy="framework", cascade={"persist", "remove"})
      * @Groups("framework:write")
+     * @Assert\NotBlank
      */
     private $topic;
 

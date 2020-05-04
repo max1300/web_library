@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -26,12 +27,16 @@ class Ressource
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"resource:read", "resource:write", "author:read"})
+     * @Assert\Url(
+     *    message = "The url '{{ value }}' is not a valid url",
+     * )
      */
     private $url;
 
@@ -39,19 +44,25 @@ class Ressource
      * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="ressources", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"resource:read", "resource:write"})
+     * @Assert\NotBlank
+     * @Assert\Valid()
      */
     private $author;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"resource:read", "resource:write"})
+     * @Assert\Choice({"French", "English"})
+     * @Assert\valid()
      */
-    private $language;
+    protected $language;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"resource:read", "resource:write", "author:read"})
+     * @Assert\NotBlank
+     * @Assert\Valid()
      */
     private $level;
 
@@ -59,6 +70,8 @@ class Ressource
      * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
+     * @Assert\NotBlank
+     * @Assert\valid()
      */
     private $topic;
 
