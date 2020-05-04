@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(mercure=true)
  * @ORM\Entity(repositoryClass="App\Repository\TopicProgrammingLanguageRepository")
  */
 class TopicProgrammingLanguage extends Topic

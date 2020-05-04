@@ -8,6 +8,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
+ *     mercure=true,
  *     itemOperations={
  *     "get"={"path"="/framework/{id}"},
  *      "put"={"path"="/framework/{id}"},
