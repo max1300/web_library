@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -39,6 +40,7 @@ class Program
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"resource:read", "author:read", "level:read", "program:write"})
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -51,6 +53,7 @@ class Program
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\TopicProgrammingLanguage", mappedBy="programmingLanguage", cascade={"persist", "remove"})
      * @Groups("program:write")
+     * @Assert\NotBlank
      */
     private $topic;
 
