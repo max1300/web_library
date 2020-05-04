@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -50,6 +51,7 @@ class Author
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="author", orphanRemoval=true)
      * @Groups("author:read")
+     * @ApiProperty(push=true)
      */
     private $ressources;
 

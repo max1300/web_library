@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/api_platform.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/api_platform.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Author.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Author.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -204,7 +203,7 @@
       <workItem from="1588229503921" duration="15413000" />
       <workItem from="1588339902606" duration="1937000" />
       <workItem from="1588345873752" duration="11247000" />
-      <workItem from="1588575668643" duration="1893000" />
+      <workItem from="1588575668643" duration="2217000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -248,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588369353833</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="&quot;activation du systeme d'invalidation du cache et de mercure&quot;">
+      <created>1588579660186</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1588579660186</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,7 +280,8 @@
     <MESSAGE value="&quot;refactorisation des fixtures&quot;" />
     <MESSAGE value="&quot;remodelisation des routes&quot;" />
     <MESSAGE value="&quot;initialize user as an api-resource :&#10;changing routes url,&#10;adding serialization and deserialization attributes&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;initialize user as an api-resource :&#10;changing routes url,&#10;adding serialization and deserialization attributes&quot;" />
+    <MESSAGE value="&quot;activation du systeme d'invalidation du cache et de mercure&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;activation du systeme d'invalidation du cache et de mercure&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -42,6 +43,7 @@ class Framework
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="frameworks")
      * @Groups({"resource:read", "author:read", "level:read"})
+     * @ApiProperty(push=true)
      */
     private $program;
 

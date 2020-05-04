@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
@@ -59,6 +60,7 @@ class Ressource
      * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="ressources", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"resource:read", "resource:write"})
+     * @ApiProperty(push=true)
      */
     private $author;
 
@@ -72,6 +74,7 @@ class Ressource
      * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"resource:read", "resource:write", "author:read"})
+     * @ApiProperty(push=true)
      */
     private $level;
 
@@ -79,6 +82,7 @@ class Ressource
      * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
+     * @ApiProperty(push=true)
      */
     private $topic;
 

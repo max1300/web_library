@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -43,6 +44,7 @@ class Program
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Framework", mappedBy="program")
+     * @ApiProperty(push=true)
      */
     private $frameworks;
 
