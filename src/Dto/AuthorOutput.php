@@ -9,13 +9,13 @@ final class AuthorOutput {
 
     /**
      * @var string
-     * @Groups({"author:read"})
+     * @Groups({"author:read", "resource:read", "level:read"})
      */
     public $authorName;
 
     /**
      * @var string
-     * @Groups({"author:read"})
+     * @Groups({"author:read", "resource:read"})
      */
     public $authorWebsite;
 

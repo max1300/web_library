@@ -3,11 +3,12 @@
 
 namespace App\DataTransformer;
 
-use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
-use App\Dto\RessourceOutput;
-use App\Entity\Ressource;
 
-class RessourceOutputDataTransformer implements DataTransformerInterface
+use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
+use App\Dto\LevelOutput;
+use App\Entity\Level;
+
+class LevelOutputDataTransformer implements DataTransformerInterface
 {
 
     /**
@@ -17,18 +18,14 @@ class RessourceOutputDataTransformer implements DataTransformerInterface
      * @param $data
      * @param string $to
      * @param array $context
-     * @return RessourceOutput
+     * @return void
      */
-    public function transform($data, string $to, array $context = []): RessourceOutput
+    public function transform($data, string $to, array $context = []): LevelOutput
     {
-        $output = new RessourceOutput();
-        $output->resourceName = $data->getName();
-        $output->url = $data->getUrl();
-        $output->author = $data->getAuthor();
-        $output->level = $data->getLevel();
-        $output->language = $data->getLanguage();
-        $output->topic = $data->getTopic();
-        return $output;
+        $levelOutput = new LevelOutput();
+        $levelOutput->levelName = $data->getName();
+        $levelOutput->levelRessources = $data->getRessources();
+        return $levelOutput;
     }
 
     /**
@@ -41,6 +38,6 @@ class RessourceOutputDataTransformer implements DataTransformerInterface
      */
     public function supportsTransformation($data, string $to, array $context = []): bool
     {
-        return RessourceOutput::class === $to && $data instanceof Ressource;
+        return LevelOutput::class === $to && $data instanceof Level;
     }
 }

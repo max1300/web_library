@@ -3,11 +3,12 @@
 
 namespace App\DataTransformer;
 
-use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
-use App\Dto\RessourceOutput;
-use App\Entity\Ressource;
 
-class RessourceOutputDataTransformer implements DataTransformerInterface
+use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
+use App\Dto\FrameworkOutput;
+use App\Entity\Framework;
+
+class FrameworkOutputDataTransformer implements DataTransformerInterface
 {
 
     /**
@@ -17,17 +18,14 @@ class RessourceOutputDataTransformer implements DataTransformerInterface
      * @param $data
      * @param string $to
      * @param array $context
-     * @return RessourceOutput
+     * @return FrameworkOutput
      */
-    public function transform($data, string $to, array $context = []): RessourceOutput
+    public function transform($data, string $to, array $context = []): FrameworkOutput
     {
-        $output = new RessourceOutput();
-        $output->resourceName = $data->getName();
-        $output->url = $data->getUrl();
-        $output->author = $data->getAuthor();
-        $output->level = $data->getLevel();
-        $output->language = $data->getLanguage();
-        $output->topic = $data->getTopic();
+        $output = new FrameworkOutput();
+        $output->frameworkName = $data->getName();
+        $output->program = $data->getProgram();
+        $output->docUrl = $data->getDocUrl();
         return $output;
     }
 
@@ -41,6 +39,6 @@ class RessourceOutputDataTransformer implements DataTransformerInterface
      */
     public function supportsTransformation($data, string $to, array $context = []): bool
     {
-        return RessourceOutput::class === $to && $data instanceof Ressource;
+        return FrameworkOutput::class === $to && $data instanceof Framework;
     }
 }

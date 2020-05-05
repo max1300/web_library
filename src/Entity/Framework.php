@@ -7,6 +7,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Dto\FrameworkOutput;
 
 /**
  * @ApiResource(
@@ -21,6 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "post"={"path"="/framework"},
  *      "get"={"path"="/frameworks"}
  *     },
+ *     output=FrameworkOutput::class,
+ *     normalizationContext={"groups"={"framework:read"}},
  *     denormalizationContext={"groups"={"framework:write"}}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\FrameworkRepository")
@@ -31,20 +34,20 @@ class Framework
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "author:read", "level:read", "framework:write"})
+     * @Groups({"resource:read", "author:read", "level:read", "framework:write", "framework:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "author:read", "level:read", "framework:write"})
+     * @Groups({"resource:read", "author:read", "level:read", "framework:write", "program:read", "framework:read"})
      * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="frameworks")
-     * @Groups({"resource:read", "author:read", "level:read"})
+     * @Groups({"resource:read", "author:read", "level:read", "framework:read"})
      * @ApiProperty(push=true)
      */
     private $program; //a voir il faudra sans doute l'insérer dans le groupe de serialisation "resource:write" mais pour l'instant

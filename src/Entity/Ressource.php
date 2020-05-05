@@ -24,6 +24,7 @@ use App\Dto\RessourceOutput;
  *      "post"={"path"="/ressource"},
  *      "get"={"path"="/ressources"}
  *     },
+ *     output=RessourceOutput::class,
  *     normalizationContext={"groups"={"resource:read"}},
  *     denormalizationContext={"groups"={"resource:write"}},
  *     attributes={"order"={"author.name"}}

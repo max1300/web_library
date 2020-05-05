@@ -27,3 +27,6 @@ services:
     # please note that last definitions always *replace* previous ones
     'App\DataTransformer\AuthorOutputDataTransformer': ~
     'App\DataTransformer\RessourceOutputDataTransformer': ~
+    'App\DataTransformer\LevelOutputDataTransformer': ~
+    'App\DataTransformer\FrameworkOutputDataTransformer': ~
+    'App\DataTransformer\ProgramOutputDataTransformer': ~
