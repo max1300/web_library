@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="&quot;Mise en place des Dto en Output pour Author, Framework,&#10;Level, Program, Ressource&quot;">
-      <change afterPath="$PROJECT_DIR$/src/DataTransformer/FrameworkOutputDataTransformer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataTransformer/LevelOutputDataTransformer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataTransformer/ProgramOutputDataTransformer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dto/FrameworkOutput.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dto/LevelOutput.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dto/ProgramOutput.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/DataTransformer/UserOutputDataTransformer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Dto/UserOutput.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataTransformer/RessourceOutputDataTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataTransformer/RessourceOutputDataTransformer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dto/AuthorOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dto/AuthorOutput.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dto/RessourceOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dto/RessourceOutput.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Framework.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Framework.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Level.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Level.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Program.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Program.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Ressource.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Ressource.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -222,7 +210,7 @@
       <workItem from="1588229503921" duration="15413000" />
       <workItem from="1588339902606" duration="1937000" />
       <workItem from="1588345873752" duration="11247000" />
-      <workItem from="1588575668643" duration="45859000" />
+      <workItem from="1588575668643" duration="46406000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -315,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588680476390</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="&quot;Mise en place des Dto en Output pour Author, Framework,&#10;Level, Program, Ressource&quot;">
+      <created>1588710564274</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1588710564276</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -30,3 +30,4 @@ services:
     'App\DataTransformer\LevelOutputDataTransformer': ~
     'App\DataTransformer\FrameworkOutputDataTransformer': ~
     'App\DataTransformer\ProgramOutputDataTransformer': ~
+    'App\DataTransformer\UserOutputDataTransformer': ~

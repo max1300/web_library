@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use App\Dto\UserOutput;
 
 /**
  * @ApiResource(
@@ -20,6 +21,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "post"={"path"="/user"},
  *      "get"={"path"="/users"}
  *     },
+ *     output=UserOutput::class,
  *     normalizationContext={"groups"={"user:read"}},
  *     denormalizationContext={"groups"={"user:write"}},
  * )
