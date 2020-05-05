@@ -45,11 +45,8 @@ class Framework
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="frameworks")
      * @Groups({"resource:read", "author:read", "level:read"})
-<<<<<<< HEAD
      * @Assert\NotNull
-=======
      * @ApiProperty(push=true)
->>>>>>> b9d932ad67bb1741b62b66a4840e7f8b6d4bcec4
      */
     private $program;
 

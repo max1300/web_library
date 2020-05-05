@@ -2,8 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/DataTransformer/AuthorOutputDataTransformer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataTransformer/RessourceOutputDataTransformer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Dto/AuthorOutput.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Dto/RessourceOutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Author.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Author.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Framework.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Framework.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Ressource.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Ressource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Topic.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Topic.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -204,7 +216,7 @@
       <workItem from="1588229503921" duration="15413000" />
       <workItem from="1588339902606" duration="1937000" />
       <workItem from="1588345873752" duration="11247000" />
-      <workItem from="1588575668643" duration="7618000" />
+      <workItem from="1588575668643" duration="31199000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -269,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588585184798</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="&quot;commit oublie de ce que j'ai fait&quot;">
+      <created>1588593057799</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1588593057800</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,17 +317,7 @@
     <MESSAGE value="&quot;activation du systeme d'invalidation du cache et de mercure&quot;" />
     <MESSAGE value="&quot;activation http/2 pour certaines relations&quot;" />
     <MESSAGE value="&quot;ajout d'une route /docs qui renvoie à la même page que /api. &#10;Ajout d'une sécurité sur /api qui est accessible seulement si on est pleinement authentifié.&#10;L'url /docs est toujours accessible de manière anonyme&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;ajout d'une route /docs qui renvoie à la même page que /api. &#10;Ajout d'une sécurité sur /api qui est accessible seulement si on est pleinement authentifié.&#10;L'url /docs est toujours accessible de manière anonyme&quot;" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php</url>
-          <line>4</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="&quot;commit oublie de ce que j'ai fait&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;commit oublie de ce que j'ai fait&quot;" />
   </component>
 </project>

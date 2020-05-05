@@ -9,6 +9,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Dto\AuthorOutput;
+
 /**
  * @ApiResource(
  *     mercure=true,
@@ -22,7 +24,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "post"={"path"="/author"},
  *      "get"={"path"="/authors"}
  *     },
- *     normalizationContext={"groups"={"author:read"}}
+ *     output=AuthorOutput::class,
+ *     normalizationContext={"groups"={"author:read"}},
+ *     denormalizationContext={"groups"={"author:write"}},
  * )
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
  */
@@ -32,20 +36,20 @@ class Author
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "resource:write", "author:read"})
+     * @Groups({"resource:read", "resource:write", "author:read", "author:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:write", "author:read"})
+     * @Groups({"resource:read", "resource:write", "author:read", "author:write"})
      * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"resource:read", "resource:write", "author:read"})
+     * @Groups({"resource:read", "resource:write", "author:read", "author:write"})
      * @Assert\Url(
      *    message = "The url '{{ value }}' is not a valid url",
      * )
