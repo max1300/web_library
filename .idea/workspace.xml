@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/web_library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web_library.iml" afterDir="false" />
+    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="&quot;correction des problemes liés aux groupes de sérialisation sur l'entité ressource&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/api_platform.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/api_platform.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Framework.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Framework.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Program.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Program.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Ressource.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Ressource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/TopicFramework.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TopicFramework.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200501203225.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -214,7 +213,7 @@
       <workItem from="1588229503921" duration="15413000" />
       <workItem from="1588339902606" duration="1937000" />
       <workItem from="1588345873752" duration="11247000" />
-      <workItem from="1588575668643" duration="32399000" />
+      <workItem from="1588575668643" duration="38991000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -293,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588670208942</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="&quot;commit pour safia&quot;">
+      <created>1588671576714</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1588671576714</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,6 +330,8 @@
     <MESSAGE value="&quot;ajout d'une route /docs qui renvoie à la même page que /api. &#10;Ajout d'une sécurité sur /api qui est accessible seulement si on est pleinement authentifié.&#10;L'url /docs est toujours accessible de manière anonyme&quot;" />
     <MESSAGE value="&quot;commit oublie de ce que j'ai fait&quot;" />
     <MESSAGE value="&quot;commit pour lucas&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;commit pour lucas&quot;" />
+    <MESSAGE value="&quot;commit pour safia&quot;" />
+    <MESSAGE value="&quot;correction des problemes liés aux groupes de sérialisation sur l'entité ressource&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;correction des problemes liés aux groupes de sérialisation sur l'entité ressource&quot;" />
   </component>
 </project>

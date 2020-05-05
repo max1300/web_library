@@ -40,7 +40,6 @@ class Program
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"resource:read", "author:read", "level:read", "program:write"})
-     * @Assert\NotBlank
      */
     private $name;
 

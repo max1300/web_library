@@ -8,7 +8,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource(mercure=true)
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\TopicFrameworkRepository")
  */
 class TopicFramework extends Topic

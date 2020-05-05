@@ -15,8 +15,8 @@ use App\Dto\RessourceOutput;
  * @ApiResource(
  *     mercure=true,
  *     itemOperations={
- *      "put"={"path"="/ressource/{id}"},
  *      "get"={"path"="/ressource/{id}"},
+ *      "put"={"path"="/ressource/{id}"},
  *      "delete"={"path"="/ressource/{id}"},
  *      "patch"={"path"="/ressource/{id}"}
  *     },
@@ -24,7 +24,6 @@ use App\Dto\RessourceOutput;
  *      "post"={"path"="/ressource"},
  *      "get"={"path"="/ressources"}
  *     },
- *     output=RessourceOutput::class,
  *     normalizationContext={"groups"={"resource:read"}},
  *     denormalizationContext={"groups"={"resource:write"}},
  *     attributes={"order"={"author.name"}}
