@@ -66,12 +66,8 @@ class Ressource
      * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="ressources", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"resource:read", "resource:write"})
-<<<<<<< HEAD
      * @Assert\NotBlank
      * @Assert\Valid()
-=======
-     * @ApiProperty(push=true)
->>>>>>> b9d932ad67bb1741b62b66a4840e7f8b6d4bcec4
      */
     private $author;
 
@@ -79,7 +75,6 @@ class Ressource
      * @ORM\Column(type="string", length=255)
      * @Groups({"resource:read", "resource:write"})
      * @Assert\Choice({"French", "English"})
-     * @Assert\valid()
      */
     protected $language;
 
@@ -87,12 +82,8 @@ class Ressource
      * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"resource:read", "resource:write", "author:read"})
-<<<<<<< HEAD
      * @Assert\NotBlank
      * @Assert\Valid()
-=======
-     * @ApiProperty(push=true)
->>>>>>> b9d932ad67bb1741b62b66a4840e7f8b6d4bcec4
      */
     private $level;
 
@@ -100,12 +91,8 @@ class Ressource
      * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
-<<<<<<< HEAD
      * @Assert\NotBlank
-     * @Assert\valid()
-=======
-     * @ApiProperty(push=true)
->>>>>>> b9d932ad67bb1741b62b66a4840e7f8b6d4bcec4
+     * @Assert\Valid()
      */
     private $topic;
 

@@ -15,9 +15,18 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: lazy
+            stateless: true
+            anonymous: true
             provider: app_user_provider
-
+            json_login:
+                check_path: /authentication_token
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success                
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
@@ -31,3 +40,4 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY  }
         - { path: ^/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
+        - { path: ^/authentication_token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
