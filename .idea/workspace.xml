@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/DataTransformer/UserOutputDataTransformer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dto/UserOutput.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataTransformer/LevelOutputDataTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataTransformer/LevelOutputDataTransformer.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -210,7 +209,8 @@
       <workItem from="1588229503921" duration="15413000" />
       <workItem from="1588339902606" duration="1937000" />
       <workItem from="1588345873752" duration="11247000" />
-      <workItem from="1588575668643" duration="46406000" />
+      <workItem from="1588575668643" duration="47472000" />
+      <workItem from="1588748834534" duration="587000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -310,7 +310,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588710564276</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="&quot;Mise en place Dto Output pour entity User&quot;">
+      <created>1588711334298</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1588711334298</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,6 +351,7 @@
     <MESSAGE value="&quot;commit pour safia&quot;" />
     <MESSAGE value="&quot;correction des problemes liés aux groupes de sérialisation sur l'entité ressource&quot;" />
     <MESSAGE value="&quot;Mise en place des Dto en Output pour Author, Framework,&#10;Level, Program, Ressource&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Mise en place des Dto en Output pour Author, Framework,&#10;Level, Program, Ressource&quot;" />
+    <MESSAGE value="&quot;Mise en place Dto Output pour entity User&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Mise en place Dto Output pour entity User&quot;" />
   </component>
 </project>

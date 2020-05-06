@@ -5,11 +5,19 @@ namespace App\DataTransformer;
 
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
+use ApiPlatform\Core\Validator\ValidatorInterface;
 use App\Dto\ProgramOutput;
 use App\Entity\Program;
 
 class ProgramOutputDataTransformer implements DataTransformerInterface
 {
+
+    private $validator;
+
+    public function __construct(ValidatorInterface $validator)
+    {
+        $this->validator = $validator;
+    }
 
     /**
      * Transforms the given object to something else, usually another object.
@@ -22,6 +30,8 @@ class ProgramOutputDataTransformer implements DataTransformerInterface
      */
     public function transform($data, string $to, array $context = []): ProgramOutput
     {
+        $this->validator->validate($data);
+
         $output = new ProgramOutput();
         $output->programName = $data->getName();
         $output->frameworks = $data->getFrameworks();

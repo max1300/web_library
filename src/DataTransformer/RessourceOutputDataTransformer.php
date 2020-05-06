@@ -4,11 +4,19 @@
 namespace App\DataTransformer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
+use ApiPlatform\Core\Validator\ValidatorInterface;
 use App\Dto\RessourceOutput;
 use App\Entity\Ressource;
 
 class RessourceOutputDataTransformer implements DataTransformerInterface
 {
+
+    private $validator;
+
+    public function __construct(ValidatorInterface $validator)
+    {
+        $this->validator = $validator;
+    }
 
     /**
      * Transforms the given object to something else, usually another object.
@@ -21,6 +29,8 @@ class RessourceOutputDataTransformer implements DataTransformerInterface
      */
     public function transform($data, string $to, array $context = []): RessourceOutput
     {
+        $this->validator->validate($data);
+
         $output = new RessourceOutput();
         $output->resourceName = $data->getName();
         $output->url = $data->getUrl();

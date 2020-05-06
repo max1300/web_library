@@ -5,11 +5,19 @@ namespace App\DataTransformer;
 
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
+use ApiPlatform\Core\Validator\ValidatorInterface;
 use App\Dto\FrameworkOutput;
 use App\Entity\Framework;
 
 class FrameworkOutputDataTransformer implements DataTransformerInterface
 {
+
+    private $validator;
+
+    public function __construct(ValidatorInterface $validator)
+    {
+        $this->validator = $validator;
+    }
 
     /**
      * Transforms the given object to something else, usually another object.
@@ -22,6 +30,8 @@ class FrameworkOutputDataTransformer implements DataTransformerInterface
      */
     public function transform($data, string $to, array $context = []): FrameworkOutput
     {
+        $this->validator->validate($data);
+
         $output = new FrameworkOutput();
         $output->frameworkName = $data->getName();
         $output->program = $data->getProgram();
