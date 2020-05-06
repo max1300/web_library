@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="&quot;creation b_maxime&quot;">
-      <change afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200506093227.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/CommentRepository.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -367,7 +368,6 @@
     <MESSAGE value="&quot;Mise en place Dto Output pour entity User&quot;" />
     <MESSAGE value="&quot;Ajout du validateur sur les Dto en output&quot;" />
     <MESSAGE value="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;" />
-    <MESSAGE value="&quot;creation b_maxime&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;creation b_maxime&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;" />
   </component>
 </project>
