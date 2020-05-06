@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Elasticsearch\DataProvider\Filter\OrderFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -35,12 +36,13 @@ use DateTimeInterface;
  *     attributes={"order"={"author.name"}}
  * )
  * @ApiFilter(
+ *     OrderFilter::class, properties={"createdAt"="desc"},
  *     SearchFilter::class, properties={
  *          "author": "exact",
  *          "author.name" : "partial",
  *          "level.name" : "partial"
  *     }
- *     OrderFilter::class, properties={"createdAt": "DESC"})
+ *     
  * )
  * @ORM\Entity(repositoryClass="App\Repository\RessourceRepository")
  */
