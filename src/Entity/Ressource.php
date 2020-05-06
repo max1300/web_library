@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\RessourceOutput;
+use DateTime;
+use DateTimeInterface;
 
 /**
  * @ApiResource(
@@ -38,6 +40,7 @@ use App\Dto\RessourceOutput;
  *          "author.name" : "partial",
  *          "level.name" : "partial"
  *     }
+ *     OrderFilter::class, properties={"createdAt": "DESC"})
  * )
  * @ORM\Entity(repositoryClass="App\Repository\RessourceRepository")
  */
@@ -109,9 +112,15 @@ class Ressource
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->createdAt = new DateTime();
     }
 
     public function getId(): ?int
@@ -218,6 +227,18 @@ class Ressource
                 $comment->setRessource(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
