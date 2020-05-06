@@ -38,6 +38,11 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+<<<<<<< HEAD
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY  }
         - { path: ^/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
         - { path: ^/authentication_token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+=======
+        # - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+>>>>>>> c2f6c5c79a12b74386ee9333986505e2d1fcc4ea

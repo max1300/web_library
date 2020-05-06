@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Dto\ProgramOutput;
 
 /**
  * @ApiResource(
@@ -23,6 +24,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "post"={"path"="/program"},
  *      "get"={"path"="/programs"}
  *     },
+ *     output=ProgramOutput::class,
+ *     normalizationContext={"groups"={"program:read"}},
  *     denormalizationContext={"groups"={"program:write"}}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
@@ -33,19 +36,19 @@ class Program
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "author:read", "level:read", "program:write"})
+     * @Groups({"resource:read", "author:read", "level:read", "program:write", "program:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "author:read", "level:read", "program:write"})
-     * @Assert\NotBlank
+     * @Groups({"resource:read", "author:read", "level:read", "program:write", "program:read"})
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Framework", mappedBy="program")
+     * @Groups({"program:read"})
      * @ApiProperty(push=true)
      */
     private $frameworks;

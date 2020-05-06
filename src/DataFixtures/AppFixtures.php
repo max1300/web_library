@@ -14,7 +14,6 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Validator\Constraints\Length;
 
 class AppFixtures extends Fixture
 {
@@ -44,7 +43,7 @@ class AppFixtures extends Fixture
 
 
         $authors = ['Fabien Potencier', 'Damien Terro', 'Maxime Renaud'];
-        $websites = ['https://symfony.com/', 'https://Damien Terro.com', 'https://Maxime Renaud.com'];
+        $websites = ['https://symfony.com/', 'https://DamienTerro.com', 'https://MaximeRenaud.com'];
         $levels = ['Débutant', 'Intermédiaire', 'Confirmé'];
         $programs = ['PHP', 'JAVASCRIPT', 'JAVA'];
 
@@ -101,7 +100,7 @@ class AppFixtures extends Fixture
             $author,
             $level,
             $phpTopic,
-            'fr',
+            'French',
             'Découvrez les tableaux en PHP',
             'https://symfony.com/doc/current/index.html'
         );
@@ -111,7 +110,7 @@ class AppFixtures extends Fixture
             $author,
             $level,
             $symfonyTopic,
-            'fr',
+            'French',
             'Découvrez Symfony',
             'https://symfony.com/doc/current/index.html'
         );
@@ -141,7 +140,7 @@ class AppFixtures extends Fixture
             $author,
             $level,
             $javascriptTopic,
-            'fr',
+            'French',
             'Découvrez les tableaux en javascript',
             'https://react.com/doc/current/index.html'
         );
@@ -151,7 +150,7 @@ class AppFixtures extends Fixture
             $author,
             $level,
             $reactTopic,
-            'fr',
+            'French',
             'Découvrez React',
             'https://react.com/doc/current/index.html'
         );
@@ -181,7 +180,7 @@ class AppFixtures extends Fixture
             $author,
             $level,
             $javaTopic,
-            'fr',
+            'French',
             'Découvrez les tableaux en Java',
             'https://java.com/doc/current/index.html'
         );
@@ -191,7 +190,7 @@ class AppFixtures extends Fixture
             $author,
             $level,
             $springTopic,
-            'fr',
+            'French',
             'Decouvrez Spring',
             'https://spring.com/doc/current/index.html'
         );

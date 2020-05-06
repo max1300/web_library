@@ -6,9 +6,12 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Dto\RessourceOutput;
 
 /**
  * @ApiResource(
@@ -23,6 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "post"={"path"="/ressource"},
  *      "get"={"path"="/ressources"}
  *     },
+ *     output=RessourceOutput::class,
  *     normalizationContext={"groups"={"resource:read"}},
  *     denormalizationContext={"groups"={"resource:write"}},
  *     attributes={"order"={"author.name"}}
@@ -48,7 +52,7 @@ class Ressource
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
+     * @Groups({"resource:read", "resource:write", "author:read", "level:read", "comment:read"})
      * @Assert\NotBlank
      */
     private $name;
@@ -95,6 +99,16 @@ class Ressource
      * @Assert\Valid()
      */
     private $topic;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="ressource", orphanRemoval=true)
+     */
+    private $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -169,6 +183,37 @@ class Ressource
     public function setTopic(?Topic $topic): self
     {
         $this->topic = $topic;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setRessource($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getRessource() === $this) {
+                $comment->setRessource(null);
+            }
+        }
 
         return $this;
     }
