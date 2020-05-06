@@ -15,15 +15,16 @@ use App\Dto\RessourceOutput;
 
 /**
  * @ApiResource(
+ *     attributes={"security"="is_granted('ROLE_USER')"},
  *     mercure=true,
  *     itemOperations={
- *      "get"={"path"="/ressource/{id}"},
- *      "put"={"path"="/ressource/{id}"},
+ *      "get"={"path"="/ressource/{id}", "security"="is_granted('ROLE_USER') and object.owner == user", "security_message"="Sorry, but you are not the ressource owner."},
+ *      "put"={"path"="/ressource/{id}", "security_post_denormalize"="is_granted('ROLE_ADMIN') or (object.owner == user and previous_object.owner == user)","security_post_denormalize_message"="Sorry, but you are not the actual book owner."},
  *      "delete"={"path"="/ressource/{id}"},
  *      "patch"={"path"="/ressource/{id}"}
  *     },
  *     collectionOperations={
- *      "post"={"path"="/ressource"},
+ *      "post"={"path"="/ressource", "security"="is_granted('ROLE_ADMIN')", "security_message"="Only admins can add books."},
  *      "get"={"path"="/ressources"}
  *     },
  *     output=RessourceOutput::class,
