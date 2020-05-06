@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
+    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;">
+      <change afterPath="$PROJECT_DIR$/src/DataPersisters/CommentPersister.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataTransformer/CommentOutputDataTransformer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Dto/CommentOutput.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Comment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataTransformer/LevelOutputDataTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataTransformer/LevelOutputDataTransformer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dto/RessourceOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dto/RessourceOutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dto/UserOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dto/UserOutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Ressource.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Ressource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -210,7 +218,7 @@
       <workItem from="1588339902606" duration="1937000" />
       <workItem from="1588345873752" duration="11247000" />
       <workItem from="1588575668643" duration="47472000" />
-      <workItem from="1588748834534" duration="587000" />
+      <workItem from="1588748834534" duration="6378000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -317,7 +325,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588711334298</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="&quot;Ajout du validateur sur les Dto en output&quot;">
+      <created>1588749635028</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1588749635028</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,6 +367,8 @@
     <MESSAGE value="&quot;correction des problemes liés aux groupes de sérialisation sur l'entité ressource&quot;" />
     <MESSAGE value="&quot;Mise en place des Dto en Output pour Author, Framework,&#10;Level, Program, Ressource&quot;" />
     <MESSAGE value="&quot;Mise en place Dto Output pour entity User&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Mise en place Dto Output pour entity User&quot;" />
+    <MESSAGE value="&quot;Ajout du validateur sur les Dto en output&quot;" />
+    <MESSAGE value="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;" />
   </component>
 </project>

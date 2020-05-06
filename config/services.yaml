@@ -31,3 +31,4 @@ services:
     'App\DataTransformer\FrameworkOutputDataTransformer': ~
     'App\DataTransformer\ProgramOutputDataTransformer': ~
     'App\DataTransformer\UserOutputDataTransformer': ~
+    'App\DataTransformer\CommentOutputDataTransformer': ~
