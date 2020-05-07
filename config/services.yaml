@@ -25,3 +25,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    'App\DataTransformer\AuthorOutputDataTransformer': ~
+    'App\DataTransformer\RessourceOutputDataTransformer': ~
+    'App\DataTransformer\LevelOutputDataTransformer': ~
+    'App\DataTransformer\FrameworkOutputDataTransformer': ~
+    'App\DataTransformer\ProgramOutputDataTransformer': ~
+    'App\DataTransformer\UserOutputDataTransformer': ~
+    'App\DataTransformer\CommentOutputDataTransformer': ~
+    App\EventListener\EntityCreatedListener:
+      tags:
+        - name: 'doctrine.event_listener'
+          event: 'prePersist' 
