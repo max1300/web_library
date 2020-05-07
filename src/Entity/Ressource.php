@@ -72,7 +72,6 @@ class Ressource
      * @Groups({"resource:read", "resource:write"})
      * @Assert\NotBlank
      * @Assert\Valid()
-     * @ApiProperty(push=true)
      */
     private $author;
 
@@ -89,7 +88,6 @@ class Ressource
      * @Groups({"resource:read", "resource:write", "author:read"})
      * @Assert\NotBlank
      * @Assert\Valid()
-     * @ApiProperty(push=true)
      */
     private $level;
 
@@ -98,8 +96,7 @@ class Ressource
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
      * @Assert\NotBlank
-     * @Assert\valid()
-     * @ApiProperty(push=true)
+     * @Assert\Valid()
      */
     private $topic;
 

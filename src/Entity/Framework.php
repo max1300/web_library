@@ -47,8 +47,8 @@ class Framework
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="frameworks")
-     * @Groups({"resource:read", "author:read", "level:read", "framework:read"})
-     * @ApiProperty(push=true)
+     * @Groups({"resource:read", "author:read", "level:read"})
+     * @Assert\NotNull
      */
     private $program; //a voir il faudra sans doute l'insérer dans le groupe de serialisation "resource:write" mais pour l'instant
                     // on retire l'assert et on ne l'insere pas car ça gene
