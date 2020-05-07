@@ -19,17 +19,38 @@ use DateTimeInterface;
 /**
  * @ApiResource(
  *    
- *     attributes={"security"="is_granted('ROLE_USER')","order"={"createdAt": "DESC"} },
+ *     attributes={
+ *       "security"="is_granted('ROLE_USER')",
+ *       "order"={"createdAt": "DESC"}
+ *     },
  *     mercure=true,
  *     itemOperations={
- *      "get"={"path"="/ressource/{id}"},
- *      "put"={"path"="/ressource/{id}"},
- *      "delete"={"path"="/ressource/{id}"},
- *      "patch"={"path"="/ressource/{id}"}
+ *      "get"={
+ *        "path"="/ressource/{id}", 
+ *        "security"="is_granted('ROLE_USER') and object.owner == user", 
+ *        "security_message"="Sorry, but you are not the ressource owner."
+ *      },
+ *      "put"={
+ *        "path"="/ressource/{id}",
+ *        "security"="is_granted('ROLE_ADMIN') or object.owner == user",
+ *        "security_message"="Sorry, but you are not the actual ressource owner."
+ *      },
+ *      "delete"={
+ *        "path"="/ressource/{id}"
+ *      },
+ *      "patch"={
+ *        "path"="/ressource/{id}"
+ *      }
  *     },
  *     collectionOperations={
- *      "post"={"path"="/ressource", "security"="is_granted('ROLE_ADMIN')", "security_message"="Only admins can add books."},
- *      "get"={"path"="/ressources"}
+ *      "post"={
+ *        "path"="/ressource", 
+ *        "security"="is_granted('ROLE_ADMIN')", 
+ *        "security_message"="Only admins can add ressources."
+ *      },
+ *      "get"={
+ *        "path"="/ressources"
+ *      }
  *     },
  *     output=RessourceOutput::class,
  *     normalizationContext={"groups"={"resource:read"}},
