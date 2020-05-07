@@ -43,9 +43,12 @@ class UserPersister implements DataPersisterInterface
      */
     public function persist($data)
     {
-        if($data->getPassword()){
+        if(!$data instanceof User) {
+            return null;
+        }
+
+        if ($data->getPassword()) {
             $data->setPassword($this->encoder->encodePassword($data, $data->getPassword()));
-            $data->eraseCredentials();
         }
 
         $this->manager->persist($data);
