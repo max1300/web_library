@@ -19,7 +19,7 @@ use DateTimeInterface;
 /**
  * @ApiResource(
  *    
- *     attributes={"security"="is_granted('ROLE_USER')","order"={"createdAt": "DESC"} },
+ *     attributes={"security"="is_granted('ROLE_USER')","order"={"createdAt": "DESC"}},
  *     mercure=true,
  *     itemOperations={
  *      "get"={"path"="/ressource/{id}"},
