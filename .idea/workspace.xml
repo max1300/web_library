@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200506093227.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/CommentRepository.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,11 +48,6 @@
     <select />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
@@ -214,7 +210,7 @@
       <workItem from="1588339902606" duration="1937000" />
       <workItem from="1588345873752" duration="11247000" />
       <workItem from="1588575668643" duration="47472000" />
-      <workItem from="1588748834534" duration="7819000" />
+      <workItem from="1588748834534" duration="6713000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -335,14 +331,7 @@
       <option name="project" value="LOCAL" />
       <updated>1588758225383</updated>
     </task>
-    <task id="LOCAL-00018" summary="&quot;push pour ajout du CommentRepository et de la dernière migration en cours&quot;">
-      <created>1588758500195</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1588758500195</updated>
-    </task>
-    <option name="localTasksCounter" value="19" />
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,7 +368,6 @@
     <MESSAGE value="&quot;Mise en place Dto Output pour entity User&quot;" />
     <MESSAGE value="&quot;Ajout du validateur sur les Dto en output&quot;" />
     <MESSAGE value="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;" />
-    <MESSAGE value="&quot;push pour ajout du CommentRepository et de la dernière migration en cours&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;push pour ajout du CommentRepository et de la dernière migration en cours&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;" />
   </component>
 </project>
