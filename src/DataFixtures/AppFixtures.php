@@ -9,11 +9,12 @@ use App\Entity\Program;
 use App\Entity\Ressource;
 use App\Entity\TopicFramework;
 use App\Entity\TopicProgrammingLanguage;
-use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Constraints\Length;
+use Faker;
+use App\Entity\User;
 
 class AppFixtures extends Fixture
 {
@@ -21,7 +22,7 @@ class AppFixtures extends Fixture
 
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
-        $this->encoder = $encoder;
+      $this->encoder = $encoder;
     }
 
     public function load(ObjectManager $manager) :void
@@ -296,8 +297,5 @@ class AppFixtures extends Fixture
             ->setTopic($framework);
         $manager->persist($resource);
     }
-
-
-
-
+  
 }

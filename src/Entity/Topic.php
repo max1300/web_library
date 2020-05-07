@@ -33,7 +33,6 @@ abstract class Topic
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="topic")
      * @Assert\NotNull
-     * @ApiProperty(push=true)
      */
     private $ressources;
 
