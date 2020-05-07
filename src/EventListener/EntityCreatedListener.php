@@ -12,9 +12,9 @@ class EntityCreatedListener
     {
     $entity = $args->getObject();
 
-    if ($entity instanceof Ressource) {
-        $entity->setCreatedAt(new DateTime());
-    }
-    
+        if ($entity instanceof Ressource) {
+            $entity->setCreatedAt(new DateTime());
+        }
+
     }
 }
