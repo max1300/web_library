@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200506093227.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/CommentRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -151,16 +158,22 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/namshi/jose" />
+      <path value="$PROJECT_DIR$/vendor/lexik/jwt-authentication-bundle" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
     </include_path>
   </component>
   <component name="ProjectId" id="1bALIz2KdwxuHTKwqCULMJWIjrp" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../react_web_library/web_library_front" />
-    <property name="settings.editor.selected.configurable" value="com.kalessil.phpStorm.phpInspectionsEA.EAApplicationConfiguration" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -211,6 +224,7 @@
       <workItem from="1588345873752" duration="11247000" />
       <workItem from="1588575668643" duration="47472000" />
       <workItem from="1588748834534" duration="6713000" />
+      <workItem from="1588847177824" duration="2429000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -331,7 +345,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588758225383</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="&quot;user repo&quot;">
+      <created>1588847371908</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1588847371909</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,6 +389,7 @@
     <MESSAGE value="&quot;Mise en place Dto Output pour entity User&quot;" />
     <MESSAGE value="&quot;Ajout du validateur sur les Dto en output&quot;" />
     <MESSAGE value="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;" />
+    <MESSAGE value="&quot;user repo&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;user repo&quot;" />
   </component>
 </project>
