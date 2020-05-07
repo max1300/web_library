@@ -1,0 +1,17 @@
+App\Entity\Entity:
+    attributes:
+        security: 'is_granted("ROLE_USER")'
+    collectionOperations:
+        post:
+            method: 'POST'
+            security: 'is_granted("ROLE_ADMIN")'
+            security_message: 'Only admins can add ressources.'
+    itemOperations:
+        get:
+            method: 'GET'
+            security: 'is_granted("ROLE_USER") and object.owner == user'
+            security_message: 'Sorry, but you are not the ressource owner.'
+        put:
+            method: 'PUT'
+            security: "is_granted('ROLE_ADMIN') or (object.owner == user and previous_object.owner == user)"
+            security_message: 'Sorry, but you are not the actual ressource owner.'
