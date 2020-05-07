@@ -6,5 +6,5 @@ swagger_ui:
   path: /docs
   controller: api_platform.swagger.action.ui
 authentication_token:
-    path: /authentication_token
+    path: /api/login_check
     methods: ['POST']
