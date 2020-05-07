@@ -36,7 +36,6 @@ use DateTimeInterface;
  *     attributes={"order"={"author.name"}}
  * )
  * @ApiFilter(
- *     OrderFilter::class, properties={"createdAt"="desc"},
  *     SearchFilter::class, properties={
  *          "author": "exact",
  *          "author.name" : "partial",
@@ -122,7 +121,6 @@ class Ressource
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-        $this->createdAt = new DateTime();
     }
 
     public function getId(): ?int
