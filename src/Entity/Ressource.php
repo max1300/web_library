@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Elasticsearch\DataProvider\Filter\OrderFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,9 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\RessourceOutput;
+use DateTime;
+use DateTimeInterface;
 
 /**
  * @ApiResource(
+ *    
+ *     attributes={"security"="is_granted('ROLE_USER')","order"={"createdAt": "DESC"} },
  *     mercure=true,
  *     itemOperations={
  *      "get"={"path"="/ressource/{id}"},
@@ -23,7 +28,7 @@ use App\Dto\RessourceOutput;
  *      "patch"={"path"="/ressource/{id}"}
  *     },
  *     collectionOperations={
- *      "post"={"path"="/ressource"},
+ *      "post"={"path"="/ressource", "security"="is_granted('ROLE_ADMIN')", "security_message"="Only admins can add books."},
  *      "get"={"path"="/ressources"}
  *     },
  *     output=RessourceOutput::class,
@@ -37,7 +42,9 @@ use App\Dto\RessourceOutput;
  *          "author.name" : "partial",
  *          "level.name" : "partial"
  *     }
+ *     
  * )
+ * @ApiFilter(OrderFilter::class, properties={"createdAt"="desc"})
  * @ORM\Entity(repositoryClass="App\Repository\RessourceRepository")
  */
 class Ressource
@@ -104,6 +111,11 @@ class Ressource
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="ressource", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -214,6 +226,18 @@ class Ressource
                 $comment->setRessource(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

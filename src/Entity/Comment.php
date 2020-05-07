@@ -7,6 +7,8 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use App\Dto\CommentOutput;
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ApiResource(
@@ -52,6 +54,11 @@ class Comment
      * @Groups({"comment:read", "comment:write"})
      */
     private $user;
+    
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+    }
 
     public function getId(): ?int
     {
