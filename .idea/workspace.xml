@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/EventSubscriber/PasswordHashSubscriber.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/jwt/private.pem" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/jwt/public.pem" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataPersisters/UserPersister.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -226,7 +224,7 @@
       <workItem from="1588575668643" duration="47472000" />
       <workItem from="1588748834534" duration="6713000" />
       <workItem from="1588847177824" duration="2429000" />
-      <workItem from="1589138797313" duration="690000" />
+      <workItem from="1589138797313" duration="2469000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -368,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588854465585</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="&quot;fix pour rendre impossible la lecture de l'email d'un utilisateur&quot;">
+      <created>1589139781786</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1589139781786</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -409,6 +414,7 @@
     <MESSAGE value="commit recuperation code damien" />
     <MESSAGE value="commit" />
     <MESSAGE value="&quot;commit pour foutre le bordel&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;commit pour foutre le bordel&quot;" />
+    <MESSAGE value="&quot;fix pour rendre impossible la lecture de l'email d'un utilisateur&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;fix pour rendre impossible la lecture de l'email d'un utilisateur&quot;" />
   </component>
 </project>
