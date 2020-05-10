@@ -42,7 +42,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user:write"})
-     * @Assert\NotNull
+     * @Assert\NotBlank()
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."
      * )
@@ -58,14 +58,19 @@ class User implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Groups({"user:write"})
-     * @Assert\NotNull
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *     pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
+     *     message="Password must be at least seven character long and containe at least one digit or one special character, one upper case letter and one lower case letter"
+     * )
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"user:read", "user:write"})
-     * @Assert\NotNull
+     * @Assert\NotBlank()
+     * @Assert\Length(min=5, max=255)
      */
     private $login;
 

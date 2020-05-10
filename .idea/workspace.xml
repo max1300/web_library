@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/EventSubscriber/PasswordHashSubscriber.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataPersisters/UserPersister.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -224,7 +223,7 @@
       <workItem from="1588575668643" duration="47472000" />
       <workItem from="1588748834534" duration="6713000" />
       <workItem from="1588847177824" duration="2429000" />
-      <workItem from="1589138797313" duration="2469000" />
+      <workItem from="1589138797313" duration="3657000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -373,7 +372,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589139781786</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="&quot;Creation d'un eventSubscriber pour remplacer le dataPersister pour l'encodage des mots de passe&quot;">
+      <created>1589141575231</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1589141575231</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -385,8 +391,39 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="b_maxime" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
               <option name="COLUMN_ORDER" />
             </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="b_maxime" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="develop" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
@@ -415,6 +452,7 @@
     <MESSAGE value="commit" />
     <MESSAGE value="&quot;commit pour foutre le bordel&quot;" />
     <MESSAGE value="&quot;fix pour rendre impossible la lecture de l'email d'un utilisateur&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;fix pour rendre impossible la lecture de l'email d'un utilisateur&quot;" />
+    <MESSAGE value="&quot;Creation d'un eventSubscriber pour remplacer le dataPersister pour l'encodage des mots de passe&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation d'un eventSubscriber pour remplacer le dataPersister pour l'encodage des mots de passe&quot;" />
   </component>
 </project>
