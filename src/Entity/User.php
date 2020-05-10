@@ -15,14 +15,13 @@ use App\Dto\UserOutput;
  * @ApiResource(
  *     mercure=true,
  *     itemOperations={
- *     "get"={"path"="/user/{id}"},
- *      "put"={"path"="/user/{id}"},
- *      "delete"={"path"="/user/{id}"},
- *      "patch"={"path"="/user/{id}"}
+ *     "get",
+ *      "put",
+ *      "delete"
  *     },
  *     collectionOperations={
- *      "post"={"path"="/user"},
- *      "get"={"path"="/users"}
+ *      "post",
+ *      "get"
  *     },
  *     output=UserOutput::class,
  *     normalizationContext={"groups"={"user:read"}},
@@ -36,12 +35,13 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"user:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user:write"})
      * @Assert\NotNull
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."
@@ -77,6 +77,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
+     * @Groups({"user:read"})
      */
     private $comments;
 

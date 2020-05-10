@@ -18,12 +18,6 @@ final class UserOutput
      * @var string
      * @Groups({"user:read"})
      */
-    public $email;
-
-    /**
-     * @var string
-     * @Groups({"user:read"})
-     */
     public $picture;
 
 }
