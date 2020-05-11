@@ -16,8 +16,14 @@ use App\Dto\UserOutput;
  *     mercure=true,
  *     itemOperations={
  *     "get",
- *      "put",
- *      "delete"
+ *      "put"={
+ *        "security"="is_granted('ROLE_ADMIN') or object.owner == user",
+ *        "security_message"="Sorry, but only admins or owner of the account can modify this account."
+ *      },
+ *      "delete"={
+ *        "security"="is_granted('ROLE_ADMIN')",
+ *        "security_message"="Only admins can delete users."
+ *      }
  *     },
  *     collectionOperations={
  *      "post",

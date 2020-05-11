@@ -1,26 +1,29 @@
 <?php
 
+
 namespace App\EventSubscriber;
 
+
 use ApiPlatform\Core\EventListener\EventPriorities;
-use App\Entity\User;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use App\Entity\Comment;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class PasswordHashSubscriber implements EventSubscriberInterface
+class AuthorEntitySubscriber implements EventSubscriberInterface
 {
-    private $encoder;
+
+    private $tokenStorage;
 
     /**
-     * PasswordHashSubscriber constructor.
-     * @param $encoder
+     * AuthorEntitySubscriber constructor.
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(TokenStorageInterface $tokenStorage)
     {
-        $this->encoder = $encoder;
+        $this->tokenStorage = $tokenStorage;
     }
 
 
@@ -45,19 +48,21 @@ class PasswordHashSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::VIEW => ['hashPassword', EventPriorities::PRE_WRITE]
+            KernelEvents::VIEW => ['getAuthenticatedUser', EventPriorities::PRE_WRITE]
         ];
     }
 
-    public function hashPassword(ViewEvent $event)
+    public function getAuthenticatedUser(ViewEvent $event)
     {
-        $user = $event->getControllerResult();
+        $entity = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if(!$user instanceof User || Request::METHOD_POST !== $method) {
+        $author = $this->tokenStorage->getToken()->getUser();
+
+        if (!$entity instanceof Comment || Request::METHOD_POST !== $method){
             return;
         }
 
-        $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
+        $entity->setUser($author);
     }
 }

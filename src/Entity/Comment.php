@@ -7,12 +7,27 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use App\Dto\CommentOutput;
-use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ApiResource(
  *     mercure=true,
+ *     itemOperations={
+ *     "get",
+ *      "put"={
+ *        "security"="is_granted('ROLE_ADMIN') or object.owner == user",
+ *        "security_message"="Sorry, but only admins or owner of the account can modify this account."
+ *      },
+ *      "delete"={
+ *        "security"="is_granted('ROLE_ADMIN')",
+ *        "security_message"="Only admins can delete users."
+ *      }
+ *     },
+ *     collectionOperations={
+ *      "post"={
+ *          "access_control"="is_granted('IS_AUTHENTICATED_FULLY')"
+ *      },
+ *      "get"
+ *     },
  *     output=CommentOutput::class,
  *     normalizationContext={"groups"={"comment:read"}},
  *     denormalizationContext={"groups"={"comment:write"}},
@@ -51,7 +66,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"comment:read", "comment:write"})
+     * @Groups({"comment:read"})
      */
     private $user;
     

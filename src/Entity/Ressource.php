@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Elasticsearch\DataProvider\Filter\OrderFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -13,44 +12,32 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\RessourceOutput;
-use DateTime;
-use DateTimeInterface;
 
 /**
  * @ApiResource(
- *    
  *     attributes={
  *       "security"="is_granted('ROLE_USER')",
  *       "order"={"createdAt": "DESC"}
  *     },
  *     mercure=true,
  *     itemOperations={
- *      "get"={
- *        "path"="/ressource/{id}", 
- *        "security"="is_granted('ROLE_USER') and object.owner == user", 
- *        "security_message"="Sorry, but you are not the ressource owner."
- *      },
+ *      "get",
  *      "put"={
- *        "path"="/ressource/{id}",
  *        "security"="is_granted('ROLE_ADMIN') or object.owner == user",
- *        "security_message"="Sorry, but you are not the actual ressource owner."
+ *        "security_message"="Sorry, but only admins or owner of the ressources can modify them."
  *      },
  *      "delete"={
- *        "path"="/ressource/{id}"
+ *        "security"="is_granted('ROLE_ADMIN')",
+ *        "security_message"="Only admins can delete ressources."
  *      },
- *      "patch"={
- *        "path"="/ressource/{id}"
- *      }
+ *      "patch"
  *     },
  *     collectionOperations={
  *      "post"={
- *        "path"="/ressource", 
  *        "security"="is_granted('ROLE_ADMIN')", 
  *        "security_message"="Only admins can add ressources."
  *      },
- *      "get"={
- *        "path"="/ressources"
- *      }
+ *      "get"
  *     },
  *     output=RessourceOutput::class,
  *     normalizationContext={"groups"={"resource:read"}},
