@@ -13,8 +13,8 @@ use App\Dto\CommentOutput;
  *     mercure=true,
  *     itemOperations={
  *     "get",
- *      "put"={
- *        "security"="is_granted('ROLE_ADMIN') or object.owner == user",
+ *     "put"={
+ *        "security"="is_granted('ROLE_ADMIN') or object.getUser() == user",
  *        "security_message"="Sorry, but only admins or owner of the account can modify this account."
  *      },
  *      "delete"={

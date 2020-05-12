@@ -23,8 +23,8 @@ use App\Dto\RessourceOutput;
  *     itemOperations={
  *      "get",
  *      "put"={
- *        "security"="is_granted('ROLE_ADMIN') or object.owner == user",
- *        "security_message"="Sorry, but only admins or owner of the ressources can modify them."
+ *        "security"="is_granted('ROLE_ADMIN') or object.getUser() == user",
+ *        "security_message"="Sorry, but only admins or publisher of the ressources can modify them."
  *      },
  *      "delete"={
  *        "security"="is_granted('ROLE_ADMIN')",
@@ -34,8 +34,7 @@ use App\Dto\RessourceOutput;
  *     },
  *     collectionOperations={
  *      "post"={
- *        "security"="is_granted('ROLE_ADMIN')", 
- *        "security_message"="Only admins can add ressources."
+ *        "security"="is_granted('IS_AUTHENTICATED_FULLY')"
  *      },
  *      "get"
  *     },

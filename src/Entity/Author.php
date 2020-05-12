@@ -15,14 +15,13 @@ use App\Dto\AuthorOutput;
  * @ApiResource(
  *     mercure=true,
  *     itemOperations={
- *      "get"={"path"="/author/{id}"},
- *      "put"={"path"="/author/{id}"},
- *      "delete"={"path"="/author/{id}"},
- *      "patch"={"path"="/author/{id}"}
+ *      "get",
+ *      "put",
+ *      "delete",
  *     },
  *     collectionOperations={
- *      "post"={"path"="/author"},
- *      "get"={"path"="/authors"}
+ *      "post",
+ *      "get"
  *     },
  *     output=AuthorOutput::class,
  *     normalizationContext={"groups"={"author:read"}},
