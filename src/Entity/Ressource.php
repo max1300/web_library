@@ -62,7 +62,7 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
+     * @Groups({"resource:read", "author:read", "level:read"})
      */
     private $id;
 
@@ -128,7 +128,7 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ressources")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
