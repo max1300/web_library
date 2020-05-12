@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
+    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="&quot;Creation d'interfaces pour regrouper la logique de certaines fonctions utilisées dans les eventslistener et subscriber&quot;">
+      <change afterPath="$PROJECT_DIR$/src/Entity/AuthorEntityInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/PublishedAtInterface.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dto/UserOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dto/UserOutput.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Author.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Author.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Level.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Level.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Ressource.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Ressource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TopicFramework.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TopicFramework.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventSubscriber/PasswordHashSubscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventSubscriber/PasswordHashSubscriber.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventListener/EntityCreatedListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListener/EntityCreatedListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventSubscriber/AuthorEntitySubscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventSubscriber/AuthorEntitySubscriber.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -238,6 +237,7 @@
       <workItem from="1589138797313" duration="6775000" />
       <workItem from="1589146434111" duration="156000" />
       <workItem from="1589226583644" duration="8926000" />
+      <workItem from="1589307219104" duration="2799000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -407,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589230966641</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="&quot; Modifications User et entités globales :&#10;- Ajout d'un lien vers les commentaires de l'utilisateur dans le Dto User&#10;- Chemins des entités remis comme à l'origine sur Api platform&#10;- Correction des sécurités sur les accès restreints&#10;- AJout de mercure dans l'entité TopicFramework&#10;- Déplacement des contexts de normalisation et dénormalisation directement dans les opérations pour l'entité User&#10;- Modification du passwordHashSubscriber pour qu'il prenne en compte les actions de type put&quot;">
+      <created>1589307647854</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1589307647854</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -458,8 +465,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&quot;adding Groups annotation to entity&quot;" />
-    <MESSAGE value="&quot;adding entity user with fixtures corresponding&quot;" />
     <MESSAGE value="&quot;fix: adding entity user with fixtures corresponding&quot;" />
     <MESSAGE value="&quot;refactorisation des fixtures&quot;" />
     <MESSAGE value="&quot;remodelisation des routes&quot;" />
@@ -483,6 +488,8 @@
     <MESSAGE value="&quot;Creation d'un eventSubscriber pour remplacer le dataPersister pour l'encodage des mots de passe&quot;" />
     <MESSAGE value="&quot;Ajout de certaines contraintes de validation pour les user :&#10;- passage des assert\NotNull en Assert\NotBlank&#10;- ajout d'une Assert\Regex pour que l'utilisateur definisse une mot de passe plus complexe lors de son inscription&quot;" />
     <MESSAGE value="&quot;Ajout automatique de l'id du User qui publie un commentaire dans le champ user_id de l'entité Comment&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Ajout automatique de l'id du User qui publie un commentaire dans le champ user_id de l'entité Comment&quot;" />
+    <MESSAGE value="&quot; Modifications User et entités globales :&#10;- Ajout d'un lien vers les commentaires de l'utilisateur dans le Dto User&#10;- Chemins des entités remis comme à l'origine sur Api platform&#10;- Correction des sécurités sur les accès restreints&#10;- AJout de mercure dans l'entité TopicFramework&#10;- Déplacement des contexts de normalisation et dénormalisation directement dans les opérations pour l'entité User&#10;- Modification du passwordHashSubscriber pour qu'il prenne en compte les actions de type put&quot;" />
+    <MESSAGE value="&quot;Creation d'interfaces pour regrouper la logique de certaines fonctions utilisées dans les eventslistener et subscriber&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation d'interfaces pour regrouper la logique de certaines fonctions utilisées dans les eventslistener et subscriber&quot;" />
   </component>
 </project>

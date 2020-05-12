@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use App\Dto\CommentOutput;
 
@@ -34,7 +35,7 @@ use App\Dto\CommentOutput;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
-class Comment
+class Comment implements AuthorEntityInterface, PublishedAtInterface
 {
     /**
      * @ORM\Id()
@@ -97,7 +98,7 @@ class Comment
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $createdAt): PublishedAtInterface
     {
         $this->createdAt = $createdAt;
 
@@ -121,7 +122,7 @@ class Comment
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?UserInterface $user): AuthorEntityInterface
     {
         $this->user = $user;
 

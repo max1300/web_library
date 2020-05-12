@@ -9,9 +9,11 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\RessourceOutput;
+
 
 /**
  * @ApiResource(
@@ -54,7 +56,7 @@ use App\Dto\RessourceOutput;
  * @ApiFilter(OrderFilter::class, properties={"createdAt"="desc"})
  * @ORM\Entity(repositoryClass="App\Repository\RessourceRepository")
  */
-class Ressource
+class Ressource implements AuthorEntityInterface, PublishedAtInterface
 {
     /**
      * @ORM\Id()
@@ -123,6 +125,12 @@ class Ressource
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ressources")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -242,9 +250,21 @@ class Ressource
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): PublishedAtInterface
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?UserInterface $user): AuthorEntityInterface
+    {
+        $this->user = $user;
 
         return $this;
     }
