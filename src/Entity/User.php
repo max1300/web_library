@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -93,12 +94,13 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
-     * @Groups({"user:get"})
+     * @ApiSubresource(maxDepth=1)
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="user")
+     * @ApiSubresource(maxDepth=1)
      */
     private $ressources;
 

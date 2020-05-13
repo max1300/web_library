@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -41,14 +42,14 @@ class Author
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:write", "author:read", "author:write"})
+     * @Groups({"resource:write", "author:read", "author:write"})
      * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"resource:read", "resource:write", "author:read", "author:write"})
+     * @Groups({"resource:write", "author:read", "author:write"})
      * @Assert\Url(
      *    message = "The url '{{ value }}' is not a valid url",
      * )
@@ -57,7 +58,7 @@ class Author
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="author", orphanRemoval=true)
-     * @Groups("author:read")
+     * @ApiSubresource(maxDepth=1)
      * @ApiProperty(push=true)
      */
     private $ressources;
