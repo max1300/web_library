@@ -2,7 +2,6 @@
 
 namespace App\Dto;
 
-use App\Entity\Comment;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 
@@ -22,10 +21,10 @@ final class UserOutput
     public $picture;
 
     /**
-     * @var Comment
-     * @Groups({"user:get"})
+     * @var string
+     * @Groups({"user:get-admin"})
      */
-    public $userComments;
+    public $email;
 
 
 }

@@ -43,6 +43,7 @@ use App\Dto\UserOutput;
  */
 class User implements UserInterface
 {
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -53,7 +54,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"user:post"})
+     * @Groups({"user:post", "user:get-admin"})
      * @Assert\NotBlank()
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."

@@ -36,7 +36,7 @@ class UserOutputDataTransformer implements DataTransformerInterface
         $output->login = $data->getLogin();
         $output->email = $data->getEmail();
         $output->picture = $data->getProfilPic();
-        $output->userComments = $data->getComments();
+        $output->email = $data->getEmail();
         return $output;
     }
 
