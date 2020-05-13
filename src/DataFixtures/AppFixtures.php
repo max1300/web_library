@@ -29,6 +29,16 @@ class AppFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
         $users = [];
 
+        $admin = new User();
+        $admin->setLogin('maxime')
+            ->setEmail('maxime@gmail.com')
+            ->setPassword($this->encoder->encodePassword(
+                $admin,
+                'maxime1234'
+            ))
+            ->setRoles(['ROLE_ADMIN']);
+        $manager->persist($admin);
+
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
             $login = $faker->userName;
@@ -38,6 +48,7 @@ class AppFixtures extends Fixture
                     $user,
                     'pass_' . $login
                 ))
+                ->setRoles(['ROLE_USER'])
                 ->setProfilPic($faker->imageUrl(150, 150));
             $manager->persist($user);
             $users[] = $user;

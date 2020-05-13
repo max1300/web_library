@@ -11,7 +11,7 @@ final class UserOutput
 
     /**
      * @var string
-     * @Groups({"user:get", "comment:read"})
+     * @Groups({"user:get", "comment:read", "resource:read"})
      */
     public $login;
 
@@ -26,5 +26,6 @@ final class UserOutput
      * @Groups({"user:get"})
      */
     public $userComments;
+
 
 }

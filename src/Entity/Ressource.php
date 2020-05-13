@@ -133,6 +133,7 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"resource:read"})
      */
     private $user;
 

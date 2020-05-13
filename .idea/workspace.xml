@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="&quot;Ajout de subresource pour alléger les groups de serialisation :&#10;- /api/authors/{id}/ressources =&gt; pour accéder à toutes les ressources qui ont le même auteur&#10;- /api/levels/{id}/ressources =&gt; pour accéder aux ressources qui ont le même niveau&#10;- /api/ressources/{id}/author =&gt; pour accéder à l'auteur d'une ressource (à discuter)&#10;- /api/ressources/{id}/level =&gt; pour accéder au niveau d'une ressource (à discuter)&#10;- /api/ressources/{id}/comments =&gt; pour accéder aux commentaires d'une ressource&#10;- /api/users/{id}/comments =&gt; pour accéder aux commentaires postés par un user&#10;- /api/users/{id}/ressources =&gt; pour accéder aux ressources postées par un user&quot;">
+    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Author.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Author.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Level.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Level.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataTransformer/RessourceOutputDataTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataTransformer/RessourceOutputDataTransformer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataTransformer/UserOutputDataTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataTransformer/UserOutputDataTransformer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dto/RessourceOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dto/RessourceOutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dto/UserOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dto/UserOutput.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Ressource.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Ressource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
@@ -235,7 +239,7 @@
       <workItem from="1589146434111" duration="156000" />
       <workItem from="1589226583644" duration="8926000" />
       <workItem from="1589307219104" duration="9514000" />
-      <workItem from="1589350816555" duration="9609000" />
+      <workItem from="1589350816555" duration="13422000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -433,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589352094851</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="&quot;Ajout de subresource pour alléger les groups de serialisation :&#10;- /api/authors/{id}/ressources =&gt; pour accéder à toutes les ressources qui ont le même auteur&#10;- /api/levels/{id}/ressources =&gt; pour accéder aux ressources qui ont le même niveau&#10;- /api/ressources/{id}/author =&gt; pour accéder à l'auteur d'une ressource (à discuter)&#10;- /api/ressources/{id}/level =&gt; pour accéder au niveau d'une ressource (à discuter)&#10;- /api/ressources/{id}/comments =&gt; pour accéder aux commentaires d'une ressource&#10;- /api/users/{id}/comments =&gt; pour accéder aux commentaires postés par un user&#10;- /api/users/{id}/ressources =&gt; pour accéder aux ressources postées par un user&quot;">
+      <created>1589401340282</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1589401340282</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
