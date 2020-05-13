@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\RessourceOutput;
+use DateTimeInterface;
 
 
 /**
@@ -128,7 +129,7 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ressources")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
@@ -245,12 +246,12 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): PublishedAtInterface
+    public function setCreatedAt(DateTimeInterface $createdAt): PublishedAtInterface
     {
         $this->createdAt = $createdAt;
 

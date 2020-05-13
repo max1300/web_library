@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/symfony2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
+    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="&quot;Passage de l'attribut Ressource.user en non nullable et arrangement des fixtures pour générer des users pendant le load&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Ressource.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Ressource.php" afterDir="false" />
@@ -233,7 +232,8 @@
       <workItem from="1589138797313" duration="6775000" />
       <workItem from="1589146434111" duration="156000" />
       <workItem from="1589226583644" duration="8926000" />
-      <workItem from="1589307219104" duration="7971000" />
+      <workItem from="1589307219104" duration="9514000" />
+      <workItem from="1589350816555" duration="1174000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -417,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589312395469</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="&quot;Passage du champ user_id de l'entité ressource à null afin de charger les fixtures (schema de base de donnée recrée sur un doctrine:schema:drop puis doctrine:schema update donc pas de migration pour ce coup là&quot;">
+      <created>1589317747041</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1589317747041</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -468,8 +475,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&quot;fix: adding entity user with fixtures corresponding&quot;" />
-    <MESSAGE value="&quot;refactorisation des fixtures&quot;" />
     <MESSAGE value="&quot;remodelisation des routes&quot;" />
     <MESSAGE value="&quot;initialize user as an api-resource :&#10;changing routes url,&#10;adding serialization and deserialization attributes&quot;" />
     <MESSAGE value="&quot;activation du systeme d'invalidation du cache et de mercure&quot;" />
@@ -493,6 +498,8 @@
     <MESSAGE value="&quot;Ajout automatique de l'id du User qui publie un commentaire dans le champ user_id de l'entité Comment&quot;" />
     <MESSAGE value="&quot; Modifications User et entités globales :&#10;- Ajout d'un lien vers les commentaires de l'utilisateur dans le Dto User&#10;- Chemins des entités remis comme à l'origine sur Api platform&#10;- Correction des sécurités sur les accès restreints&#10;- AJout de mercure dans l'entité TopicFramework&#10;- Déplacement des contexts de normalisation et dénormalisation directement dans les opérations pour l'entité User&#10;- Modification du passwordHashSubscriber pour qu'il prenne en compte les actions de type put&quot;" />
     <MESSAGE value="&quot;Creation d'interfaces pour regrouper la logique de certaines fonctions utilisées dans les eventslistener et subscriber&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation d'interfaces pour regrouper la logique de certaines fonctions utilisées dans les eventslistener et subscriber&quot;" />
+    <MESSAGE value="&quot;Passage du champ user_id de l'entité ressource à null afin de charger les fixtures (schema de base de donnée recrée sur un doctrine:schema:drop puis doctrine:schema update donc pas de migration pour ce coup là&quot;" />
+    <MESSAGE value="&quot;Passage de l'attribut Ressource.user en non nullable et arrangement des fixtures pour générer des users pendant le load&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Passage de l'attribut Ressource.user en non nullable et arrangement des fixtures pour générer des users pendant le load&quot;" />
   </component>
 </project>
