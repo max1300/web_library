@@ -3,54 +3,42 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Elasticsearch\DataProvider\Filter\OrderFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\RessourceOutput;
-use DateTime;
-use DateTimeInterface;
+
 
 /**
  * @ApiResource(
- *    
  *     attributes={
  *       "security"="is_granted('ROLE_USER')",
  *       "order"={"createdAt": "DESC"}
  *     },
  *     mercure=true,
  *     itemOperations={
- *      "get"={
- *        "path"="/ressource/{id}", 
- *        "security"="is_granted('ROLE_USER') and object.owner == user", 
- *        "security_message"="Sorry, but you are not the ressource owner."
- *      },
+ *      "get",
  *      "put"={
- *        "path"="/ressource/{id}",
- *        "security"="is_granted('ROLE_ADMIN') or object.owner == user",
- *        "security_message"="Sorry, but you are not the actual ressource owner."
+ *        "security"="is_granted('ROLE_ADMIN') or object.getUser() == user",
+ *        "security_message"="Sorry, but only admins or publisher of the ressources can modify them."
  *      },
  *      "delete"={
- *        "path"="/ressource/{id}"
+ *        "security"="is_granted('ROLE_ADMIN')",
+ *        "security_message"="Only admins can delete ressources."
  *      },
- *      "patch"={
- *        "path"="/ressource/{id}"
- *      }
+ *      "patch"
  *     },
  *     collectionOperations={
  *      "post"={
- *        "path"="/ressource", 
- *        "security"="is_granted('ROLE_ADMIN')", 
- *        "security_message"="Only admins can add ressources."
+ *        "security"="is_granted('IS_AUTHENTICATED_FULLY')"
  *      },
- *      "get"={
- *        "path"="/ressources"
- *      }
+ *      "get"
  *     },
  *     output=RessourceOutput::class,
  *     normalizationContext={"groups"={"resource:read"}},
@@ -68,13 +56,13 @@ use DateTimeInterface;
  * @ApiFilter(OrderFilter::class, properties={"createdAt"="desc"})
  * @ORM\Entity(repositoryClass="App\Repository\RessourceRepository")
  */
-class Ressource
+class Ressource implements AuthorEntityInterface, PublishedAtInterface
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
+     * @Groups({"resource:read", "author:read", "level:read"})
      */
     private $id;
 
@@ -137,6 +125,12 @@ class Ressource
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ressources")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -256,9 +250,21 @@ class Ressource
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): PublishedAtInterface
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?UserInterface $user): AuthorEntityInterface
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -15,18 +15,28 @@ use App\Dto\UserOutput;
  * @ApiResource(
  *     mercure=true,
  *     itemOperations={
- *     "get"={"path"="/user/{id}"},
- *      "put"={"path"="/user/{id}"},
- *      "delete"={"path"="/user/{id}"},
- *      "patch"={"path"="/user/{id}"}
+ *     "get"={
+ *          "normalization_context"={"groups"={"user:get"}}
+ *      },
+ *      "put"={
+ *        "security"="is_granted('ROLE_ADMIN') or object == user",
+ *        "security_message"="Sorry, but only admins or owner of the account can modify this account.",
+ *         "denormalization_context"={"groups"={"user:put"}}
+ *      },
+ *      "delete"={
+ *        "security"="is_granted('ROLE_ADMIN')",
+ *        "security_message"="Only admins can delete users."
+ *      }
  *     },
  *     collectionOperations={
- *      "post"={"path"="/user"},
- *      "get"={"path"="/users"}
+ *      "post"={
+ *          "denormalization_context"={"groups"={"user:post"}}
+ *       },
+ *      "get"={
+ *          "normalization_context"={"groups"={"user:get"}}
+ *      }
  *     },
- *     output=UserOutput::class,
- *     normalizationContext={"groups"={"user:read"}},
- *     denormalizationContext={"groups"={"user:write"}},
+ *     output=UserOutput::class
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -36,13 +46,14 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"user:get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"user:read", "user:write"})
-     * @Assert\NotNull
+     * @Groups({"user:post"})
+     * @Assert\NotBlank()
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."
      * )
@@ -57,32 +68,44 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Groups({"user:write"})
-     * @Assert\NotNull
+     * @Groups({"user:post", "user:put"})
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *     pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
+     *     message="Password must be at least seven character long and containe at least one digit or one special character, one upper case letter and one lower case letter"
+     * )
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "user:write"})
-     * @Assert\NotNull
+     * @Groups({"user:get", "user:post", "user:put"})
+     * @Assert\NotBlank()
+     * @Assert\Length(min=5, max=255)
      */
     private $login;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user:get", "user:post", "user:put"})
      */
     private $profilPic;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
+     * @Groups({"user:get"})
      */
     private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="user")
+     */
+    private $ressources;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->ressources = new ArrayCollection();
     }
 
 
@@ -213,6 +236,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ressource[]
+     */
+    public function getRessources(): Collection
+    {
+        return $this->ressources;
+    }
+
+    public function addRessource(Ressource $ressource): self
+    {
+        if (!$this->ressources->contains($ressource)) {
+            $this->ressources[] = $ressource;
+            $ressource->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRessource(Ressource $ressource): self
+    {
+        if ($this->ressources->contains($ressource)) {
+            $this->ressources->removeElement($ressource);
+            // set the owning side to null (unless already changed)
+            if ($ressource->getUser() === $this) {
+                $ressource->setUser(null);
             }
         }
 

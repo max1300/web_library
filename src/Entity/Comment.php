@@ -5,21 +5,37 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use App\Dto\CommentOutput;
-use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ApiResource(
  *     mercure=true,
+ *     itemOperations={
+ *     "get",
+ *     "put"={
+ *        "security"="is_granted('ROLE_ADMIN') or object.getUser() == user",
+ *        "security_message"="Sorry, but only admins or owner of the account can modify this account."
+ *      },
+ *      "delete"={
+ *        "security"="is_granted('ROLE_ADMIN')",
+ *        "security_message"="Only admins can delete users."
+ *      }
+ *     },
+ *     collectionOperations={
+ *      "post"={
+ *          "access_control"="is_granted('IS_AUTHENTICATED_FULLY')"
+ *      },
+ *      "get"
+ *     },
  *     output=CommentOutput::class,
  *     normalizationContext={"groups"={"comment:read"}},
  *     denormalizationContext={"groups"={"comment:write"}},
  * )
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
-class Comment
+class Comment implements AuthorEntityInterface, PublishedAtInterface
 {
     /**
      * @ORM\Id()
@@ -51,7 +67,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"comment:read", "comment:write"})
+     * @Groups({"comment:read"})
      */
     private $user;
     
@@ -82,7 +98,7 @@ class Comment
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $createdAt): PublishedAtInterface
     {
         $this->createdAt = $createdAt;
 
@@ -106,7 +122,7 @@ class Comment
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?UserInterface $user): AuthorEntityInterface
     {
         $this->user = $user;
 

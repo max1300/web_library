@@ -15,14 +15,13 @@ use App\Dto\LevelOutput;
  * @ApiResource(
  *     mercure=true,
  *     itemOperations={
- *     "get"={"path"="/level/{id}"},
- *      "put"={"path"="/level/{id}"},
- *      "delete"={"path"="/level/{id}"},
- *      "patch"={"path"="/level/{id}"}
+ *      "get",
+ *      "put",
+ *      "delete"
  *     },
  *     collectionOperations={
- *      "post"={"path"="/level"},
- *      "get"={"path"="/levels"}
+ *      "post",
+ *      "get"
  *     },
  *     output=LevelOutput::class,
  *     normalizationContext={"groups"={"level:read"}},

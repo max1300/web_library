@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/symfony2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Ressource.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Ressource.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +50,17 @@
     <select />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost:8000" id="2c29b257-4443-4f12-8311-6e7f2dfb71fd" name="localhost:8000" port="8000" />
+    </servers>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -225,6 +230,10 @@
       <workItem from="1588575668643" duration="47472000" />
       <workItem from="1588748834534" duration="6713000" />
       <workItem from="1588847177824" duration="2429000" />
+      <workItem from="1589138797313" duration="6775000" />
+      <workItem from="1589146434111" duration="156000" />
+      <workItem from="1589226583644" duration="8926000" />
+      <workItem from="1589307219104" duration="7971000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -352,7 +361,63 @@
       <option name="project" value="LOCAL" />
       <updated>1588847371909</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="commit recuperation code damien">
+      <created>1588854239697</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1588854239697</updated>
+    </task>
+    <task id="LOCAL-00020" summary="commit recuperation code damien">
+      <created>1588854465585</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1588854465585</updated>
+    </task>
+    <task id="LOCAL-00021" summary="&quot;fix pour rendre impossible la lecture de l'email d'un utilisateur&quot;">
+      <created>1589139781786</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1589139781786</updated>
+    </task>
+    <task id="LOCAL-00022" summary="&quot;Creation d'un eventSubscriber pour remplacer le dataPersister pour l'encodage des mots de passe&quot;">
+      <created>1589141575231</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1589141575231</updated>
+    </task>
+    <task id="LOCAL-00023" summary="&quot;Ajout de certaines contraintes de validation pour les user :&#10;- passage des assert\NotNull en Assert\NotBlank&#10;- ajout d'une Assert\Regex pour que l'utilisateur definisse une mot de passe plus complexe lors de son inscription&quot;">
+      <created>1589142877268</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1589142877268</updated>
+    </task>
+    <task id="LOCAL-00024" summary="&quot;Ajout automatique de l'id du User qui publie un commentaire dans le champ user_id de l'entité Comment&quot;">
+      <created>1589230966641</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1589230966641</updated>
+    </task>
+    <task id="LOCAL-00025" summary="&quot; Modifications User et entités globales :&#10;- Ajout d'un lien vers les commentaires de l'utilisateur dans le Dto User&#10;- Chemins des entités remis comme à l'origine sur Api platform&#10;- Correction des sécurités sur les accès restreints&#10;- AJout de mercure dans l'entité TopicFramework&#10;- Déplacement des contexts de normalisation et dénormalisation directement dans les opérations pour l'entité User&#10;- Modification du passwordHashSubscriber pour qu'il prenne en compte les actions de type put&quot;">
+      <created>1589307647854</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1589307647854</updated>
+    </task>
+    <task id="LOCAL-00026" summary="&quot;Creation d'interfaces pour regrouper la logique de certaines fonctions utilisées dans les eventslistener et subscriber&quot;">
+      <created>1589312395469</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1589312395469</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -364,16 +429,45 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="b_maxime" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="b_maxime" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="develop" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&quot;adding Groups annotation to entity&quot;" />
-    <MESSAGE value="&quot;adding entity user with fixtures corresponding&quot;" />
     <MESSAGE value="&quot;fix: adding entity user with fixtures corresponding&quot;" />
     <MESSAGE value="&quot;refactorisation des fixtures&quot;" />
     <MESSAGE value="&quot;remodelisation des routes&quot;" />
@@ -390,6 +484,15 @@
     <MESSAGE value="&quot;Ajout du validateur sur les Dto en output&quot;" />
     <MESSAGE value="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;" />
     <MESSAGE value="&quot;user repo&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;user repo&quot;" />
+    <MESSAGE value="commit recuperation code damien" />
+    <MESSAGE value="commit" />
+    <MESSAGE value="&quot;commit pour foutre le bordel&quot;" />
+    <MESSAGE value="&quot;fix pour rendre impossible la lecture de l'email d'un utilisateur&quot;" />
+    <MESSAGE value="&quot;Creation d'un eventSubscriber pour remplacer le dataPersister pour l'encodage des mots de passe&quot;" />
+    <MESSAGE value="&quot;Ajout de certaines contraintes de validation pour les user :&#10;- passage des assert\NotNull en Assert\NotBlank&#10;- ajout d'une Assert\Regex pour que l'utilisateur definisse une mot de passe plus complexe lors de son inscription&quot;" />
+    <MESSAGE value="&quot;Ajout automatique de l'id du User qui publie un commentaire dans le champ user_id de l'entité Comment&quot;" />
+    <MESSAGE value="&quot; Modifications User et entités globales :&#10;- Ajout d'un lien vers les commentaires de l'utilisateur dans le Dto User&#10;- Chemins des entités remis comme à l'origine sur Api platform&#10;- Correction des sécurités sur les accès restreints&#10;- AJout de mercure dans l'entité TopicFramework&#10;- Déplacement des contexts de normalisation et dénormalisation directement dans les opérations pour l'entité User&#10;- Modification du passwordHashSubscriber pour qu'il prenne en compte les actions de type put&quot;" />
+    <MESSAGE value="&quot;Creation d'interfaces pour regrouper la logique de certaines fonctions utilisées dans les eventslistener et subscriber&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation d'interfaces pour regrouper la logique de certaines fonctions utilisées dans les eventslistener et subscriber&quot;" />
   </component>
 </project>

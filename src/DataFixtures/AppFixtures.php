@@ -29,7 +29,7 @@ class AppFixtures extends Fixture
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < 70; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $user = new User();
             $login = $faker->userName;
             $user->setEmail($faker->email)
