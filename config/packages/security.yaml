@@ -27,7 +27,8 @@ security:
             stateless: true
             guard:
                 authenticators:
-                - lexik_jwt_authentication.jwt_token_authenticator
+               # - lexik_jwt_authentication.jwt_token_authenticator
+                - App\Security\CustomTokenAuthenticator
         main:
             anonymous: lazy
             # activate different ways to authenticate

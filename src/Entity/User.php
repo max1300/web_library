@@ -8,9 +8,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\UserOutput;
+use App\Controller\ResetPasswordAction;
 
 /**
  * @ApiResource(
@@ -23,7 +25,16 @@ use App\Dto\UserOutput;
  *      "put"={
  *        "security"="is_granted('ROLE_ADMIN') or object == user",
  *        "security_message"="Sorry, but only admins or owner of the account can modify this account.",
- *         "denormalization_context"={"groups"={"user:put"}}
+ *         "denormalization_context"={"groups"={"user:put"}},
+ *         "normalization_context"={"groups"={"user:get"}}
+ *      },
+ *      "put-reset-password"={
+ *        "security"="is_granted('ROLE_ADMIN') or object == user",
+ *        "security_message"="Sorry, but only admins or owner of the account can modify this account.",
+ *        "method"="PUT",
+ *        "path"="/users/{id}/reset-password",
+ *        "controller"=ResetPasswordAction::class,
+ *        "denormalization_context"={"groups"={"user:put-reset-password"}}
  *      },
  *      "delete"={
  *        "security"="is_granted('ROLE_ADMIN')",
@@ -56,9 +67,10 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user:post", "user:get-admin", "user:get-owner"})
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"user:post"})
      * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     groups={"user:post"}
      * )
      */
     private $email;
@@ -72,20 +84,40 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Groups({"user:post", "user:put"})
-     * @Assert\NotBlank()
+     * @Groups({"user:post"})
+     * @Assert\NotBlank(groups={"user:post"})
      * @Assert\Regex(
      *     pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
-     *     message="Password must be at least seven character long and containe at least one digit or one special character, one upper case letter and one lower case letter"
+     *     message="Password must be at least seven character long and containe at least one digit or one special character, one upper case letter and one lower case letter",
+     *     groups={"user:post"}
      * )
      */
     private $password;
 
     /**
+     * @var string The hashed password
+     * @Groups({"user:put-reset-password"})
+     * @Assert\NotBlank(groups={"user:put-reset-password"})
+     * @Assert\Regex(
+     *     pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
+     *     message="Password must be at least seven character long and containe at least one digit or one special character, one upper case letter and one lower case letter",
+     *     groups={"user:put-reset-password"}
+     * )
+     */
+    private $newPassword;
+
+    /**
+     * @Groups({"user:put-reset-password"})
+     * @Assert\NotBlank(groups={"user:put-reset-password"})
+     * @UserPassword(groups={"user:put-reset-password"})
+     */
+    private $oldPassword;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"user:get", "user:post", "user:put", "resource:read"})
-     * @Assert\NotBlank()
-     * @Assert\Length(min=5, max=255)
+     * @Assert\NotBlank(groups={"user:post", "user:put"})
+     * @Assert\Length(min=5, max=255, groups={"user:post", "user:put"})
      */
     private $login;
 
@@ -106,6 +138,11 @@ class User implements UserInterface
      * @ApiSubresource(maxDepth=1)
      */
     private $ressources;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $passwordChangeDate;
 
     public function __construct()
     {
@@ -277,4 +314,42 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getNewPassword(): ?string
+    {
+        return $this->newPassword;
+    }
+
+    public function setNewPassword(string $newPassword): void
+    {
+        $this->newPassword = $newPassword;
+    }
+
+    public function getOldPassword(): ?string
+    {
+        return $this->oldPassword;
+    }
+
+    public function setOldPassword($oldPassword): void
+    {
+        $this->oldPassword = $oldPassword;
+    }
+
+
+    public function getPasswordChangeDate()
+    {
+        return $this->passwordChangeDate;
+    }
+
+
+    public function setPasswordChangeDate($passwordChangeDate): void
+    {
+        $this->passwordChangeDate = $passwordChangeDate;
+    }
+
+
+
 }
