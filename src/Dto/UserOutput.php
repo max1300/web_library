@@ -20,11 +20,26 @@ final class UserOutput
      */
     public $picture;
 
+
     /**
      * @var string
-     * @Groups({"user:get-admin"})
+     * @Groups({"user:get-admin", "user:get-owner"})
      */
     public $email;
+
+    /**
+     * @var string
+     * @Groups({"user:get-admin", "user:get-owner"})
+     */
+    public $role;
+
+    public $username;
+
+
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
 
 
 }

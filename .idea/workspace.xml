@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Serializer/UserContextBuilder.php" afterDir="false" />
+    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="&quot;Creation d'un normalizer d'attribut pour que chaque user est accès à sa fiche complète sur son profil&quot;">
+      <change afterPath="$PROJECT_DIR$/src/Serializer/UserAttributeNormalizer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataTransformer/UserOutputDataTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataTransformer/UserOutputDataTransformer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Dto/UserOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dto/UserOutput.php" afterDir="false" />
@@ -236,7 +237,8 @@
       <workItem from="1589146434111" duration="156000" />
       <workItem from="1589226583644" duration="8926000" />
       <workItem from="1589307219104" duration="9514000" />
-      <workItem from="1589350816555" duration="16287000" />
+      <workItem from="1589350816555" duration="16545000" />
+      <workItem from="1589485081382" duration="9195000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -448,7 +450,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589406029998</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="&quot;Ajout d'un groupe de serialization spécial ADMIN dans l'entité USER et création d'un directory Serializer contenant une classe&#10;qui change le context de serialization en fonction du role de l'utilisateur. Ainsi l'administrateur pourra voir les emails de tous les utilisateurs&#10;alors qu'un simple utilisateur ne le peut pas&quot;">
+      <created>1589409034230</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1589409034230</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -499,8 +508,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&quot;activation du systeme d'invalidation du cache et de mercure&quot;" />
-    <MESSAGE value="&quot;activation http/2 pour certaines relations&quot;" />
     <MESSAGE value="&quot;ajout d'une route /docs qui renvoie à la même page que /api. &#10;Ajout d'une sécurité sur /api qui est accessible seulement si on est pleinement authentifié.&#10;L'url /docs est toujours accessible de manière anonyme&quot;" />
     <MESSAGE value="&quot;commit oublie de ce que j'ai fait&quot;" />
     <MESSAGE value="&quot;commit pour lucas&quot;" />
@@ -524,6 +531,8 @@
     <MESSAGE value="&quot;Passage de l'attribut Ressource.user en non nullable et arrangement des fixtures pour générer des users pendant le load&quot;" />
     <MESSAGE value="&quot;Ajout de subresource pour alléger les groups de serialisation :&#10;- /api/authors/{id}/ressources =&gt; pour accéder à toutes les ressources qui ont le même auteur&#10;- /api/levels/{id}/ressources =&gt; pour accéder aux ressources qui ont le même niveau&#10;- /api/ressources/{id}/author =&gt; pour accéder à l'auteur d'une ressource (à discuter)&#10;- /api/ressources/{id}/level =&gt; pour accéder au niveau d'une ressource (à discuter)&#10;- /api/ressources/{id}/comments =&gt; pour accéder aux commentaires d'une ressource&#10;- /api/users/{id}/comments =&gt; pour accéder aux commentaires postés par un user&#10;- /api/users/{id}/ressources =&gt; pour accéder aux ressources postées par un user&quot;" />
     <MESSAGE value="&quot;Mise en place du ROLE_ADMIN dans les fixtures et la hierarchie des roles pour tester la sécurité sur certaines routes (fait par Safia). Cela semble bien marcher&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Mise en place du ROLE_ADMIN dans les fixtures et la hierarchie des roles pour tester la sécurité sur certaines routes (fait par Safia). Cela semble bien marcher&quot;" />
+    <MESSAGE value="&quot;Ajout d'un groupe de serialization spécial ADMIN dans l'entité USER et création d'un directory Serializer contenant une classe&#10;qui change le context de serialization en fonction du role de l'utilisateur. Ainsi l'administrateur pourra voir les emails de tous les utilisateurs&#10;alors qu'un simple utilisateur ne le peut pas&quot;" />
+    <MESSAGE value="&quot;Creation d'un normalizer d'attribut pour que chaque user est accès à sa fiche complète sur son profil&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation d'un normalizer d'attribut pour que chaque user est accès à sa fiche complète sur son profil&quot;" />
   </component>
 </project>

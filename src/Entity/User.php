@@ -17,6 +17,7 @@ use App\Dto\UserOutput;
  *     mercure=true,
  *     itemOperations={
  *     "get"={
+ *          "acces_control"="is_granted('IS_AUTHENTICATED_FULLY')",
  *          "normalization_context"={"groups"={"user:get"}}
  *      },
  *      "put"={
@@ -54,7 +55,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"user:post", "user:get-admin"})
+     * @Groups({"user:post", "user:get-admin", "user:get-owner"})
      * @Assert\NotBlank()
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."
@@ -64,6 +65,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"user:get-admin", "user:get-owner"})
      */
     private $roles = [];
 
