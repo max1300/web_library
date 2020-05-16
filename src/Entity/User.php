@@ -144,10 +144,22 @@ class User implements UserInterface
      */
     private $passwordChangeDate;
 
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $enabledAccount;
+
+    /**
+     * @ORM\Column(type="string", length=40, nullable=true)
+     */
+    private $confirmationToken;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->ressources = new ArrayCollection();
+        $this->enabledAccount = false;
     }
 
 
@@ -348,6 +360,34 @@ class User implements UserInterface
     public function setPasswordChangeDate($passwordChangeDate): void
     {
         $this->passwordChangeDate = $passwordChangeDate;
+    }
+
+
+    public function isEnabledAccount(): bool
+    {
+        return $this->enabledAccount;
+    }
+
+
+    public function setEnabledAccount(bool $enabledAccount): void
+    {
+        $this->enabledAccount = $enabledAccount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmationToken()
+    {
+        return $this->confirmationToken;
+    }
+
+    /**
+     * @param mixed $confirmationToken
+     */
+    public function setConfirmationToken($confirmationToken): void
+    {
+        $this->confirmationToken = $confirmationToken;
     }
 
 

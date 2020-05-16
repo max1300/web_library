@@ -9,8 +9,10 @@ use App\Entity\Program;
 use App\Entity\Ressource;
 use App\Entity\TopicFramework;
 use App\Entity\TopicProgrammingLanguage;
+use App\Security\TokenGenerator;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Exception;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Faker;
 use App\Entity\User;
@@ -18,10 +20,15 @@ use App\Entity\User;
 class AppFixtures extends Fixture
 {
     private $encoder;
+    /**
+     * @var TokenGenerator
+     */
+    private $tokenGenerator;
 
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordEncoderInterface $encoder, TokenGenerator $tokenGenerator)
     {
-      $this->encoder = $encoder;
+        $this->encoder = $encoder;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     public function load(ObjectManager $manager) :void
@@ -36,7 +43,9 @@ class AppFixtures extends Fixture
                 $admin,
                 'maxime1234'
             ))
-            ->setRoles(['ROLE_ADMIN']);
+            ->setRoles(['ROLE_ADMIN'])
+            ->setEnabledAccount(true);
+
         $manager->persist($admin);
 
         for ($i = 0; $i < 10; $i++) {
@@ -50,6 +59,14 @@ class AppFixtures extends Fixture
                 ))
                 ->setRoles(['ROLE_USER'])
                 ->setProfilPic($faker->imageUrl(150, 150));
+
+            if ($i === 2 || $i === 6) {
+                $user->setEnabledAccount(false);
+                $user->setConfirmationToken($this->tokenGenerator->getRandomToken());
+            } else {
+                $user->setEnabledAccount(true);
+            }
+
             $manager->persist($user);
             $users[] = $user;
         }
@@ -77,7 +94,7 @@ class AppFixtures extends Fixture
           if($i === 0){
               try {
                   $this->getDataPhp($manager, $program, $author, $level, $users);
-              } catch (\Exception $e) {
+              } catch (Exception $e) {
                   echo 'Exception reçue : ',  $e->getMessage(), "\n";
               }
           }
@@ -85,7 +102,7 @@ class AppFixtures extends Fixture
           if($i === 1){
               try {
                   $this->getDataJavascript($manager, $program, $author, $level, $users);
-              } catch (\Exception $e) {
+              } catch (Exception $e) {
                   echo 'Exception reçue : ',  $e->getMessage(), "\n";
               }
           }
@@ -93,7 +110,7 @@ class AppFixtures extends Fixture
           if($i === 2){
               try {
                   $this->getDataJava($manager, $program, $author, $level, $users);
-              } catch (\Exception $e) {
+              } catch (Exception $e) {
                   echo 'Exception reçue : ',  $e->getMessage(), "\n";
               }
           }
@@ -107,7 +124,7 @@ class AppFixtures extends Fixture
      * @param Author $author
      * @param Level $level
      * @param $users
-     * @throws \Exception
+     * @throws Exception
      */
     public function getDataPhp(ObjectManager $manager, Program $program, Author $author, Level $level, $users): void
     {
@@ -151,7 +168,7 @@ class AppFixtures extends Fixture
      * @param Author $author
      * @param Level $level
      * @param $users
-     * @throws \Exception
+     * @throws Exception
      */
     public function getDataJavascript(ObjectManager $manager, Program $program, Author $author, Level $level, $users): void
     {
@@ -195,7 +212,7 @@ class AppFixtures extends Fixture
      * @param Author $author
      * @param Level $level
      * @param $users
-     * @throws \Exception
+     * @throws Exception
      */
     public function getDataJava(ObjectManager $manager, Program $program, Author $author, Level $level, $users): void
     {
