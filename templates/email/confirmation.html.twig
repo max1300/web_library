@@ -1,0 +1,9 @@
+<h3>
+    Salut {{ user.login }}, si tu pouvais confirmer ton adresse email, ca serait vraiment super
+</h3>
+
+<p>
+    S'il te plait confirme ton adresse email en cliquant sur le lien suivant :
+    <hr>
+    <a href="{{ url('default_confirm_token', {'token': user.confirmationToken}) }}">clique sur ce lien</a>
+</p>
