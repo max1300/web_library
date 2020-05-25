@@ -1,0 +1,9 @@
+<h3>
+    Hello {{ user.login }}, 
+</h3>
+
+<p>
+    Please confirm your email in order to finalize your registration using the link below
+    <hr>
+    <a href="{{ url('default_confirm_token', {'token': user.tokenConfirmation}) }}">Click Here</a>
+</p>

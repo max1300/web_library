@@ -80,9 +80,22 @@ class User implements UserInterface
      */
     private $comments;
 
+      /**
+     * @ORM\Column(type="boolean")
+     */
+    private $enabledAccount;
+
+    /**
+     * @ORM\Column(type="string", length=40, nullable=true)
+     */
+    private $tokenConfirmation;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->ressources = new ArrayCollection();
+        $this->enabledAccount = false;
     }
 
 
@@ -217,5 +230,32 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function isEnabledAccount(): bool
+    {
+        return $this->enabledAccount;
+    }
+
+
+    public function setEnabledAccount(bool $enabledAccount): void
+    {
+        $this->enabledAccount = $enabledAccount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTokenConfirmation()
+    {
+        return $this->tokenConfirmation;
+    }
+
+    /**
+     * @param mixed $tokenConfirmation
+     */
+    public function setTokenConfirmation($tokenConfirmation): void
+    {
+        $this->tokenConfirmation = $tokenConfirmation;
     }
 }
