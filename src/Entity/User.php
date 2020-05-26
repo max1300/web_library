@@ -157,6 +157,11 @@ class User implements UserInterface
      */
     private $tokenConfirmation;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $forgotPasswordToken;
+
 
     public function __construct()
     {
@@ -392,6 +397,18 @@ class User implements UserInterface
     public function setTokenConfirmation($tokenConfirmation): void
     {
         $this->tokenConfirmation = $tokenConfirmation;
+    }
+
+    public function getForgotPasswordToken(): ?string
+    {
+        return $this->forgotPasswordToken;
+    }
+
+    public function setForgotPasswordToken(string $forgotPasswordToken): self
+    {
+        $this->forgotPasswordToken = $forgotPasswordToken;
+
+        return $this;
     }
 }
 
