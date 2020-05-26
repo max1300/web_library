@@ -1,4 +1,6 @@
 {
+    "name": "web-Library2020",
+    "description": "web-library2020 backend",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -14,15 +16,16 @@
         "symfony/dotenv": "4.4.*",
         "symfony/flex": "^1.3.1",
         "symfony/framework-bundle": "4.4.*",
-        "symfony/maker-bundle": "^1.15",
         "symfony/monolog-bundle": "^3.5",
         "symfony/orm-pack": "^1.0",
         "symfony/security-bundle": "4.4.*",
         "symfony/validator": "4.4.*",
-        "symfony/yaml": "4.4.*"
+        "symfony/yaml": "4.4.*",
+        "vich/uploader-bundle": "^1.13"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "symfony/maker-bundle": "^1.18",
         "symfony/profiler-pack": "^1.0"
     },
     "config": {

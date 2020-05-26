@@ -10,6 +10,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\UserOutput;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Entity\File as EntityFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ApiResource(
@@ -29,6 +33,7 @@ use App\Dto\UserOutput;
  *     denormalizationContext={"groups"={"user:write"}},
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @Vich\Uploadable
  */
 class User implements UserInterface
 {
@@ -70,10 +75,34 @@ class User implements UserInterface
     private $login;
 
     /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Vich\UploadableField(mapping="user_image", fileNameProperty="profilePic", size="profilePicSize")
+     * 
+     * @var File|null
+     */
+    private $profilePicFile;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"user:read", "user:write"})
+     * @var String|null
      */
-    private $profilPic;
+    private $profilePic;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var Int|null
+     */
+    private $profilePicSize;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTimeInterface|null
+     */
+    private $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
@@ -91,16 +120,16 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
     public function setEmail(string $email): self
     {
         $this->email = $email;
 
         return $this;
+    }
+    
+    public function getEmail(): ?string
+    {
+        return $this->email;
     }
 
     /**
@@ -111,6 +140,13 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->email;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     /**
@@ -125,9 +161,9 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
+    public function setPassword(string $password): self
     {
-        $this->roles = $roles;
+        $this->password = $password;
 
         return $this;
     }
@@ -138,13 +174,6 @@ class User implements UserInterface
     public function getPassword(): string
     {
         return (string) $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
     }
 
     /**
@@ -164,11 +193,6 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getLogin(): string
-    {
-        return $this->login;
-    }
-
     public function setLogin(string $login): self
     {
         $this->login = $login;
@@ -176,16 +200,56 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getProfilPic(): ?string
+    public function getLogin(): string
     {
-        return $this->profilPic;
+        return $this->login;
     }
 
-    public function setProfilPic(?string $profilPic): self
+     /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|UploadedFile|null $profilePicFile
+     */
+    public function setProfilePicFile(?EntityFile $profilePicFile = null): void
     {
-        $this->profilPic = $profilPic;
+        $this->profilePicFile = $profilePicFile;
+
+        if (null !== $profilePicFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getProfilePicFile(): ?EntityFile
+    {
+        return $this->profilePicFile;
+    }
+
+    public function setProfilePic(?string $profilePic): self
+    {
+        $this->profilePic = $profilePic;
 
         return $this;
+    }
+
+    public function getProfilePic(): ?string
+    {
+        return $this->profilePic;
+    }
+
+    public function setProfilePicSize (? int  $profilePicSize ): void
+    {
+        $this->profilePicSize = $profilePicSize;
+    }
+
+    public function getProfilePicSize () :? int
+    {
+        return  $this->profilePicSize;
     }
 
     /**
