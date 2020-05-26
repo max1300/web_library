@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200506093227.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/CommentRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/email/resetPasswordMail.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/swiftmailer.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/swiftmailer.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventSubscriber/AuthorEntitySubscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventSubscriber/AuthorEntitySubscriber.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +23,7 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
-      <executable />
+      <executable path="composer" />
     </execution>
   </component>
   <component name="DatabaseView">
@@ -48,7 +57,18 @@
     <select />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost:8000" id="2c29b257-4443-4f12-8311-6e7f2dfb71fd" name="localhost:8000" port="8000" />
+    </servers>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -151,16 +171,27 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/namshi/jose" />
+      <path value="$PROJECT_DIR$/vendor/lexik/jwt-authentication-bundle" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/templating" />
     </include_path>
   </component>
   <component name="ProjectId" id="1bALIz2KdwxuHTKwqCULMJWIjrp" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../react_web_library/web_library_front" />
-    <property name="settings.editor.selected.configurable" value="com.kalessil.phpStorm.phpInspectionsEA.EAApplicationConfiguration" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -211,6 +242,18 @@
       <workItem from="1588345873752" duration="11247000" />
       <workItem from="1588575668643" duration="47472000" />
       <workItem from="1588748834534" duration="6713000" />
+      <workItem from="1588847177824" duration="2429000" />
+      <workItem from="1589138797313" duration="6775000" />
+      <workItem from="1589146434111" duration="156000" />
+      <workItem from="1589226583644" duration="8926000" />
+      <workItem from="1589307219104" duration="9514000" />
+      <workItem from="1589350816555" duration="16545000" />
+      <workItem from="1589485081382" duration="16069000" />
+      <workItem from="1589578093644" duration="5000" />
+      <workItem from="1589658152460" duration="15408000" />
+      <workItem from="1589921455964" duration="3431000" />
+      <workItem from="1590005386361" duration="195000" />
+      <workItem from="1590391527401" duration="36888000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -331,7 +374,133 @@
       <option name="project" value="LOCAL" />
       <updated>1588758225383</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="&quot;user repo&quot;">
+      <created>1588847371908</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1588847371909</updated>
+    </task>
+    <task id="LOCAL-00019" summary="commit recuperation code damien">
+      <created>1588854239697</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1588854239697</updated>
+    </task>
+    <task id="LOCAL-00020" summary="commit recuperation code damien">
+      <created>1588854465585</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1588854465585</updated>
+    </task>
+    <task id="LOCAL-00021" summary="&quot;fix pour rendre impossible la lecture de l'email d'un utilisateur&quot;">
+      <created>1589139781786</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1589139781786</updated>
+    </task>
+    <task id="LOCAL-00022" summary="&quot;Creation d'un eventSubscriber pour remplacer le dataPersister pour l'encodage des mots de passe&quot;">
+      <created>1589141575231</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1589141575231</updated>
+    </task>
+    <task id="LOCAL-00023" summary="&quot;Ajout de certaines contraintes de validation pour les user :&#10;- passage des assert\NotNull en Assert\NotBlank&#10;- ajout d'une Assert\Regex pour que l'utilisateur definisse une mot de passe plus complexe lors de son inscription&quot;">
+      <created>1589142877268</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1589142877268</updated>
+    </task>
+    <task id="LOCAL-00024" summary="&quot;Ajout automatique de l'id du User qui publie un commentaire dans le champ user_id de l'entité Comment&quot;">
+      <created>1589230966641</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1589230966641</updated>
+    </task>
+    <task id="LOCAL-00025" summary="&quot; Modifications User et entités globales :&#10;- Ajout d'un lien vers les commentaires de l'utilisateur dans le Dto User&#10;- Chemins des entités remis comme à l'origine sur Api platform&#10;- Correction des sécurités sur les accès restreints&#10;- AJout de mercure dans l'entité TopicFramework&#10;- Déplacement des contexts de normalisation et dénormalisation directement dans les opérations pour l'entité User&#10;- Modification du passwordHashSubscriber pour qu'il prenne en compte les actions de type put&quot;">
+      <created>1589307647854</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1589307647854</updated>
+    </task>
+    <task id="LOCAL-00026" summary="&quot;Creation d'interfaces pour regrouper la logique de certaines fonctions utilisées dans les eventslistener et subscriber&quot;">
+      <created>1589312395469</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1589312395469</updated>
+    </task>
+    <task id="LOCAL-00027" summary="&quot;Passage du champ user_id de l'entité ressource à null afin de charger les fixtures (schema de base de donnée recrée sur un doctrine:schema:drop puis doctrine:schema update donc pas de migration pour ce coup là&quot;">
+      <created>1589317747041</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1589317747041</updated>
+    </task>
+    <task id="LOCAL-00028" summary="&quot;Passage de l'attribut Ressource.user en non nullable et arrangement des fixtures pour générer des users pendant le load&quot;">
+      <created>1589352094851</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1589352094851</updated>
+    </task>
+    <task id="LOCAL-00029" summary="&quot;Ajout de subresource pour alléger les groups de serialisation :&#10;- /api/authors/{id}/ressources =&gt; pour accéder à toutes les ressources qui ont le même auteur&#10;- /api/levels/{id}/ressources =&gt; pour accéder aux ressources qui ont le même niveau&#10;- /api/ressources/{id}/author =&gt; pour accéder à l'auteur d'une ressource (à discuter)&#10;- /api/ressources/{id}/level =&gt; pour accéder au niveau d'une ressource (à discuter)&#10;- /api/ressources/{id}/comments =&gt; pour accéder aux commentaires d'une ressource&#10;- /api/users/{id}/comments =&gt; pour accéder aux commentaires postés par un user&#10;- /api/users/{id}/ressources =&gt; pour accéder aux ressources postées par un user&quot;">
+      <created>1589401340282</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1589401340282</updated>
+    </task>
+    <task id="LOCAL-00030" summary="&quot;Mise en place du ROLE_ADMIN dans les fixtures et la hierarchie des roles pour tester la sécurité sur certaines routes (fait par Safia). Cela semble bien marcher&quot;">
+      <created>1589406029998</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1589406029998</updated>
+    </task>
+    <task id="LOCAL-00031" summary="&quot;Ajout d'un groupe de serialization spécial ADMIN dans l'entité USER et création d'un directory Serializer contenant une classe&#10;qui change le context de serialization en fonction du role de l'utilisateur. Ainsi l'administrateur pourra voir les emails de tous les utilisateurs&#10;alors qu'un simple utilisateur ne le peut pas&quot;">
+      <created>1589409034230</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1589409034230</updated>
+    </task>
+    <task id="LOCAL-00032" summary="&quot;Creation d'un normalizer d'attribut pour que chaque user est accès à sa fiche complète sur son profil&quot;">
+      <created>1589532920327</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1589532920327</updated>
+    </task>
+    <task id="LOCAL-00033" summary="&quot;Creation d'une fonctionnalité pour qu'un user puisse reset son password s'il le désire:&#10;- utilisation d'api_platform avec method put 'auxiliaire' =&gt; put-reset-password&#10;- controller =&gt; 'ResetPasswordAction' qui recupère le nouveau password, demande une validation avec la &#10;reconnaissance de l'ancien password, applique les contraintes de validations sur les deux champs 'newPassword' et 'oldPassword', crée une date identifiant le changement du password dans le temps, et crée un nouveau JWTtoken valide pour l'utilisateur&#10;- un authenticator custom pour gérer l'invalidation de l'ancien token de l'utilisateur afin d'être sur qu'il soit inutilisable&quot;">
+      <created>1589577904409</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1589577904410</updated>
+    </task>
+    <task id="LOCAL-00034" summary="&quot;Creation d'une notion de compte, pour gerer l'enregistrement des utilisateurs en deux parties:&#10;- d'abord le user s'inscrit alors un token de confirmation est généré et un account (mais le compte est desactivé)&#10;- puis le user recoit un token de confirmation qu'il rentre et alors il active son compte et peut s'authentifier &quot;">
+      <created>1589665427643</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1589665427644</updated>
+    </task>
+    <task id="LOCAL-00035" summary="&quot;Creation d'un systeme d'envoi de mail pour que l'utilisateur qui s'enregistre recoive un lien pour activer son compte&quot;">
+      <created>1589923477265</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1589923477265</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,31 +512,70 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="b_maxime" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="b_maxime" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="develop" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&quot;adding Groups annotation to entity&quot;" />
-    <MESSAGE value="&quot;adding entity user with fixtures corresponding&quot;" />
-    <MESSAGE value="&quot;fix: adding entity user with fixtures corresponding&quot;" />
-    <MESSAGE value="&quot;refactorisation des fixtures&quot;" />
-    <MESSAGE value="&quot;remodelisation des routes&quot;" />
-    <MESSAGE value="&quot;initialize user as an api-resource :&#10;changing routes url,&#10;adding serialization and deserialization attributes&quot;" />
-    <MESSAGE value="&quot;activation du systeme d'invalidation du cache et de mercure&quot;" />
-    <MESSAGE value="&quot;activation http/2 pour certaines relations&quot;" />
-    <MESSAGE value="&quot;ajout d'une route /docs qui renvoie à la même page que /api. &#10;Ajout d'une sécurité sur /api qui est accessible seulement si on est pleinement authentifié.&#10;L'url /docs est toujours accessible de manière anonyme&quot;" />
-    <MESSAGE value="&quot;commit oublie de ce que j'ai fait&quot;" />
-    <MESSAGE value="&quot;commit pour lucas&quot;" />
     <MESSAGE value="&quot;commit pour safia&quot;" />
     <MESSAGE value="&quot;correction des problemes liés aux groupes de sérialisation sur l'entité ressource&quot;" />
     <MESSAGE value="&quot;Mise en place des Dto en Output pour Author, Framework,&#10;Level, Program, Ressource&quot;" />
     <MESSAGE value="&quot;Mise en place Dto Output pour entity User&quot;" />
     <MESSAGE value="&quot;Ajout du validateur sur les Dto en output&quot;" />
     <MESSAGE value="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation table Comment avec ajout :&#10;-du Dto Output pour la table&#10;-du DataTransformer pour la table&#10;-de la normalisation et denormalisation&#10;-d'un dataPersister pour la date de création du commentaire&quot;" />
+    <MESSAGE value="&quot;user repo&quot;" />
+    <MESSAGE value="commit recuperation code damien" />
+    <MESSAGE value="commit" />
+    <MESSAGE value="&quot;commit pour foutre le bordel&quot;" />
+    <MESSAGE value="&quot;fix pour rendre impossible la lecture de l'email d'un utilisateur&quot;" />
+    <MESSAGE value="&quot;Creation d'un eventSubscriber pour remplacer le dataPersister pour l'encodage des mots de passe&quot;" />
+    <MESSAGE value="&quot;Ajout de certaines contraintes de validation pour les user :&#10;- passage des assert\NotNull en Assert\NotBlank&#10;- ajout d'une Assert\Regex pour que l'utilisateur definisse une mot de passe plus complexe lors de son inscription&quot;" />
+    <MESSAGE value="&quot;Ajout automatique de l'id du User qui publie un commentaire dans le champ user_id de l'entité Comment&quot;" />
+    <MESSAGE value="&quot; Modifications User et entités globales :&#10;- Ajout d'un lien vers les commentaires de l'utilisateur dans le Dto User&#10;- Chemins des entités remis comme à l'origine sur Api platform&#10;- Correction des sécurités sur les accès restreints&#10;- AJout de mercure dans l'entité TopicFramework&#10;- Déplacement des contexts de normalisation et dénormalisation directement dans les opérations pour l'entité User&#10;- Modification du passwordHashSubscriber pour qu'il prenne en compte les actions de type put&quot;" />
+    <MESSAGE value="&quot;Creation d'interfaces pour regrouper la logique de certaines fonctions utilisées dans les eventslistener et subscriber&quot;" />
+    <MESSAGE value="&quot;Passage du champ user_id de l'entité ressource à null afin de charger les fixtures (schema de base de donnée recrée sur un doctrine:schema:drop puis doctrine:schema update donc pas de migration pour ce coup là&quot;" />
+    <MESSAGE value="&quot;Passage de l'attribut Ressource.user en non nullable et arrangement des fixtures pour générer des users pendant le load&quot;" />
+    <MESSAGE value="&quot;Ajout de subresource pour alléger les groups de serialisation :&#10;- /api/authors/{id}/ressources =&gt; pour accéder à toutes les ressources qui ont le même auteur&#10;- /api/levels/{id}/ressources =&gt; pour accéder aux ressources qui ont le même niveau&#10;- /api/ressources/{id}/author =&gt; pour accéder à l'auteur d'une ressource (à discuter)&#10;- /api/ressources/{id}/level =&gt; pour accéder au niveau d'une ressource (à discuter)&#10;- /api/ressources/{id}/comments =&gt; pour accéder aux commentaires d'une ressource&#10;- /api/users/{id}/comments =&gt; pour accéder aux commentaires postés par un user&#10;- /api/users/{id}/ressources =&gt; pour accéder aux ressources postées par un user&quot;" />
+    <MESSAGE value="&quot;Mise en place du ROLE_ADMIN dans les fixtures et la hierarchie des roles pour tester la sécurité sur certaines routes (fait par Safia). Cela semble bien marcher&quot;" />
+    <MESSAGE value="&quot;Ajout d'un groupe de serialization spécial ADMIN dans l'entité USER et création d'un directory Serializer contenant une classe&#10;qui change le context de serialization en fonction du role de l'utilisateur. Ainsi l'administrateur pourra voir les emails de tous les utilisateurs&#10;alors qu'un simple utilisateur ne le peut pas&quot;" />
+    <MESSAGE value="&quot;Creation d'un normalizer d'attribut pour que chaque user est accès à sa fiche complète sur son profil&quot;" />
+    <MESSAGE value="&quot;Creation d'une fonctionnalité pour qu'un user puisse reset son password s'il le désire:&#10;- utilisation d'api_platform avec method put 'auxiliaire' =&gt; put-reset-password&#10;- controller =&gt; 'ResetPasswordAction' qui recupère le nouveau password, demande une validation avec la &#10;reconnaissance de l'ancien password, applique les contraintes de validations sur les deux champs 'newPassword' et 'oldPassword', crée une date identifiant le changement du password dans le temps, et crée un nouveau JWTtoken valide pour l'utilisateur&#10;- un authenticator custom pour gérer l'invalidation de l'ancien token de l'utilisateur afin d'être sur qu'il soit inutilisable&quot;" />
+    <MESSAGE value="&quot;Creation d'une notion de compte, pour gerer l'enregistrement des utilisateurs en deux parties:&#10;- d'abord le user s'inscrit alors un token de confirmation est généré et un account (mais le compte est desactivé)&#10;- puis le user recoit un token de confirmation qu'il rentre et alors il active son compte et peut s'authentifier &quot;" />
+    <MESSAGE value="&quot;Creation d'un systeme d'envoi de mail pour que l'utilisateur qui s'enregistre recoive un lien pour activer son compte&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation d'un systeme d'envoi de mail pour que l'utilisateur qui s'enregistre recoive un lien pour activer son compte&quot;" />
   </component>
 </project>
