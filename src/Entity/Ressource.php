@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Elasticsearch\DataProvider\Filter\OrderFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -13,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\RessourceOutput;
+use DateTimeInterface;
 
 
 /**
@@ -62,20 +64,19 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "author:read", "level:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:write", "author:read", "level:read", "comment:read"})
+     * @Groups({"resource:read", "resource:write", "comment:read"})
      * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:write", "author:read"})
+     * @Groups({"resource:read", "resource:write"})
      * @Assert\Url(
      *    message = "The url '{{ value }}' is not a valid url",
      * )
@@ -88,6 +89,7 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
      * @Groups({"resource:read", "resource:write"})
      * @Assert\NotBlank
      * @Assert\Valid()
+     * @ApiSubresource(maxDepth=1)
      */
     private $author;
 
@@ -101,16 +103,17 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read", "resource:write", "author:read"})
+     * @Groups({"resource:read", "resource:write"})
      * @Assert\NotBlank
      * @Assert\Valid()
+     * @ApiSubresource(maxDepth=1)
      */
     private $level;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read", "resource:write", "author:read", "level:read"})
+     * @Groups({"resource:read", "resource:write"})
      * @Assert\NotBlank
      * @Assert\Valid()
      */
@@ -118,6 +121,7 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="ressource", orphanRemoval=true)
+     * @ApiSubresource(maxDepth=1)
      */
     private $comments;
 
@@ -128,7 +132,8 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ressources")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"resource:read"})
      */
     private $user;
 
@@ -245,12 +250,12 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): PublishedAtInterface
+    public function setCreatedAt(DateTimeInterface $createdAt): PublishedAtInterface
     {
         $this->createdAt = $createdAt;
 

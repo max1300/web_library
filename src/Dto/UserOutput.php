@@ -2,7 +2,6 @@
 
 namespace App\Dto;
 
-use App\Entity\Comment;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 
@@ -11,7 +10,7 @@ final class UserOutput
 
     /**
      * @var string
-     * @Groups({"user:get", "comment:read"})
+     * @Groups({"user:get", "comment:read", "resource:read"})
      */
     public $login;
 
@@ -21,10 +20,26 @@ final class UserOutput
      */
     public $picture;
 
+
     /**
-     * @var Comment
-     * @Groups({"user:get"})
+     * @var string
+     * @Groups({"user:get-admin", "user:get-owner"})
      */
-    public $userComments;
+    public $email;
+
+    /**
+     * @var string
+     * @Groups({"user:get-admin", "user:get-owner"})
+     */
+    public $role;
+
+    public $username;
+
+
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
 
 }
