@@ -209,6 +209,12 @@
     "ralouphie/getallheaders": {
         "version": "3.0.3"
     },
+    "roave/security-advisories": {
+        "version": "dev-master"
+    },
+    "swiftmailer/swiftmailer": {
+        "version": "v6.2.3"
+    },
     "symfony/asset": {
         "version": "v4.4.7"
     },

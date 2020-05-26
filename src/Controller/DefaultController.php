@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 //Recoit le token transmis par l'utilisateur quand celui ci clique sur le lien dans l'email qu'on a envoyé et confirm le compte de l'utilisateur puis redirige sur "home"
 class DefaultController extends AbstractController
 {
