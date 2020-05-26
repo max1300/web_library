@@ -33,6 +33,7 @@ use App\Controller\ResetPasswordAction;
  *        "security_message"="Sorry, but only admins or owner of the account can modify this account.",
  *        "method"="PUT",
  *        "path"="/users/{id}/reset-password",
+ *        "route_name"="reset-password",
  *        "controller"=ResetPasswordAction::class,
  *        "denormalization_context"={"groups"={"user:put-reset-password"}}
  *      },

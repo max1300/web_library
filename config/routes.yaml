@@ -7,3 +7,6 @@ swagger_ui:
   controller: api_platform.swagger.action.ui
 api_login_check:
     path: /api/login_check
+reset-password:
+    path: /users/{id}/reset-password
+
