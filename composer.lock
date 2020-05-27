@@ -6809,9 +6809,10 @@
                 "type": "git",
                 "url": "https://github.com/symfony/templating.git",
                 "reference": "d65ba8cd13339b692f709ea36625851de218c4dc",
-            "time": "2020-03-27T16:54:36+00:00"
+                "time": "2020-03-27T16:54:36+00:00"
+            }
         },
-        
+        {
             "name": "symfony/translation-contracts",
             "version": "v2.0.1",
             "source": {
