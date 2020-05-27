@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="&quot;Amelioration du systeme de forgot password, creation d'un token dedié à la reinitialisation de mot de passe en cas&#10;d'oubli afin de renforcer la securité&#10;Supression de Email package et SwiftMailer pour laisser Mailer travailler en paix&quot;">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/web_library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web_library.iml" afterDir="false" />
+    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/swiftmailer.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Email/Mailer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataTransformer/UserOutputDataTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataTransformer/UserOutputDataTransformer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Mail/SymfonyMailer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mail/SymfonyMailer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/email/resetPasswordMail.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/email/resetPasswordMail.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +57,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpServers">
     <servers>
       <server host="localhost:8000" id="2c29b257-4443-4f12-8311-6e7f2dfb71fd" name="localhost:8000" port="8000" />
@@ -258,6 +248,7 @@
       <workItem from="1589921455964" duration="3431000" />
       <workItem from="1590005386361" duration="195000" />
       <workItem from="1590391527401" duration="36888000" />
+      <workItem from="1590564272211" duration="1633000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;adding Groups annotation to entity&quot;">
       <created>1588241330892</created>
@@ -504,7 +495,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589923477265</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="&quot;Amelioration du systeme de forgot password, creation d'un token dedié à la reinitialisation de mot de passe en cas&#10;d'oubli afin de renforcer la securité&#10;Supression de Email package et SwiftMailer pour laisser Mailer travailler en paix&quot;">
+      <created>1590526076176</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1590526076178</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
