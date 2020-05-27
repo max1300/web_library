@@ -5575,7 +5575,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-03-09T19:04:49+00:00"
+            "time": "2020-03-09T19:04:49+00:00",
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5589,7 +5589,7 @@
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
-            ],
+            ]
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
@@ -6808,10 +6808,10 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/templating.git",
-                "reference": "d65ba8cd13339b692f709ea36625851de218c4dc"
+                "reference": "d65ba8cd13339b692f709ea36625851de218c4dc",
             "time": "2020-03-27T16:54:36+00:00"
         },
-        {
+        
             "name": "symfony/translation-contracts",
             "version": "v2.0.1",
             "source": {
