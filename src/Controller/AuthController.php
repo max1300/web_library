@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Email\Mailer;
 use App\Entity\User;
+use App\Mail\SymfonyMailer;
 use App\Security\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,10 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 
 class AuthController extends AbstractController
 {
@@ -23,38 +19,38 @@ class AuthController extends AbstractController
      * @var EntityManagerInterface
      */
     private $entityManager;
-    /**
-     * @var \Swift_Mailer
-     */
-    private $mailer;
-    /**
-     * @var Environment
-     */
-    private $twig;
+
     /**
      * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
+    /**
+     * @var SymfonyMailer
+     */
+    private $mailer;
+    /**
+     * @var TokenGenerator
+     */
+    private $tokenGenerator;
 
     /**
      * AuthController constructor.
      * @param EntityManagerInterface $entityManager
-     * @param \Swift_Mailer $mailer
-     * @param Environment $twig
+     * @param SymfonyMailer $mailer
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct
     (
         EntityManagerInterface $entityManager,
-        \Swift_Mailer $mailer,
-        Environment $twig,
-        UserPasswordEncoderInterface $passwordEncoder
+        SymfonyMailer $mailer,
+        UserPasswordEncoderInterface $passwordEncoder,
+        TokenGenerator $tokenGenerator
     )
     {
         $this->entityManager = $entityManager;
         $this->mailer = $mailer;
-        $this->twig = $twig;
         $this->passwordEncoder = $passwordEncoder;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
 
@@ -76,9 +72,6 @@ class AuthController extends AbstractController
      * @param Request $request
      * @param UserPasswordEncoderInterface $encoder
      * @return Response
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
      */
     public function forgotPassword(Request $request, UserPasswordEncoderInterface $encoder)
     {
@@ -88,24 +81,11 @@ class AuthController extends AbstractController
 
             $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $mail]);
 
-            $body = $this->twig->render(
-                'email/resetPasswordMail.html.twig',
-                [
-                    'user' => $user
-                ]
-            );
-
             if ($user !== null)
             {
-                $message = (new \Swift_Message('Demande de réinitialisation de mot de passe'))
-                    ->setFrom('webster@gmail.com')
-                    ->setTo('ren.maxime@gmail.com')
-                    ->setBody($body, 'text/html');
-
-                $this->mailer->send($message);
+               $this->mailer->sendEmailForgotPassword($user);
             }
         }
-
         return new Response("OK");
     }
 
@@ -118,16 +98,16 @@ class AuthController extends AbstractController
     {
         if ($request->isMethod("PUT")) {
             $user_id = $request->query->get('user');
-            $newpassword = json_decode($request->getContent(), true);
+            $token = $request->query->get('token');
+            $newPassword = json_decode($request->getContent(), true);
 
             $user = $this->entityManager->getRepository(User::class)->findOneBy(['id' => $user_id]);
 
-            if ($user !== null)
+            if ($user !== null && $token === $user->getForgotPasswordToken())
             {
-                $user->setPassword($this->passwordEncoder->encodePassword($user, $newpassword["newPassword"]));
+                $user->setPassword($this->passwordEncoder->encodePassword($user, $newPassword["newPassword"]));
+                $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
                 $this->entityManager->flush();
-
-
             }
         }
         return new Response("OK");

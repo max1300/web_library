@@ -43,6 +43,7 @@ class AppFixtures extends Fixture
                 $admin,
                 'maxime1234'
             ))
+            ->setForgotPasswordToken($this->tokenGenerator->getRandomToken())
             ->setRoles(['ROLE_ADMIN'])
             ->setEnabledAccount(true);
 
@@ -57,12 +58,13 @@ class AppFixtures extends Fixture
                     $user,
                     'pass_' . $login
                 ))
+                ->setForgotPasswordToken($this->tokenGenerator->getRandomToken())
                 ->setRoles(['ROLE_USER'])
                 ->setProfilPic($faker->imageUrl(150, 150));
 
             if ($i === 2 || $i === 6) {
                 $user->setEnabledAccount(false);
-                $user->setConfirmationToken($this->tokenGenerator->getRandomToken());
+                $user->setTokenConfirmation($this->tokenGenerator->getRandomToken());
             } else {
                 $user->setEnabledAccount(true);
             }

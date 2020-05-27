@@ -108,6 +108,16 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
      */
     private $comments;
+  
+    /**
+     * @ORM\Column(type="string", length=40, nullable=true)
+     */
+    private $tokenConfirmation;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $forgotPasswordToken;
 
     public function __construct()
     {
@@ -279,6 +289,113 @@ class User implements UserInterface
                 $comment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ressource[]
+     */
+    public function getRessources(): Collection
+    {
+        return $this->ressources;
+    }
+
+    public function addRessource(Ressource $ressource): self
+    {
+        if (!$this->ressources->contains($ressource)) {
+            $this->ressources[] = $ressource;
+            $ressource->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRessource(Ressource $ressource): self
+    {
+        if ($this->ressources->contains($ressource)) {
+            $this->ressources->removeElement($ressource);
+            // set the owning side to null (unless already changed)
+            if ($ressource->getUser() === $this) {
+                $ressource->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewPassword(): ?string
+    {
+        return $this->newPassword;
+    }
+
+    public function setNewPassword(string $newPassword): void
+    {
+        $this->newPassword = $newPassword;
+    }
+
+    public function getOldPassword(): ?string
+    {
+        return $this->oldPassword;
+    }
+
+    public function setOldPassword($oldPassword): void
+    {
+        $this->oldPassword = $oldPassword;
+    }
+
+
+    public function getPasswordChangeDate()
+    {
+        return $this->passwordChangeDate;
+    }
+
+
+    public function setPasswordChangeDate($passwordChangeDate): void
+    {
+        $this->passwordChangeDate = $passwordChangeDate;
+    }
+
+
+
+    public function isEnabledAccount(): bool
+    {
+        return $this->enabledAccount;
+    }
+
+
+    public function setEnabledAccount(bool $enabledAccount): void
+    {
+        $this->enabledAccount = $enabledAccount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTokenConfirmation()
+    {
+        return $this->tokenConfirmation;
+    }
+
+    /**
+     * @param mixed $tokenConfirmation
+     */
+    public function setTokenConfirmation($tokenConfirmation): void
+    {
+        $this->tokenConfirmation = $tokenConfirmation;
+    }
+
+    public function getForgotPasswordToken(): ?string
+    {
+        return $this->forgotPasswordToken;
+    }
+
+    public function setForgotPasswordToken(string $forgotPasswordToken): self
+    {
+        $this->forgotPasswordToken = $forgotPasswordToken;
 
         return $this;
     }
