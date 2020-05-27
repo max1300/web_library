@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/email/resetPasswordMail.html.twig" afterDir="false" />
+    <list default="true" id="9cdafe00-a897-4cc4-97f5-1211d36604f2" name="Default Changelist" comment="&quot;Amelioration du systeme de forgot password, creation d'un token dedié à la reinitialisation de mot de passe en cas&#10;d'oubli afin de renforcer la securité&#10;Supression de Email package et SwiftMailer pour laisser Mailer travailler en paix&quot;">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/web_library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web_library.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/swiftmailer.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/swiftmailer.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/swiftmailer.yaml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Email/Mailer.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventSubscriber/AuthorEntitySubscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventSubscriber/AuthorEntitySubscriber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Mail/SymfonyMailer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mail/SymfonyMailer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/email/resetPasswordMail.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/email/resetPasswordMail.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -178,6 +180,8 @@
       <path value="$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle" />
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
       <path value="$PROJECT_DIR$/vendor/symfony/templating" />
+      <path value="$PROJECT_DIR$/vendor/symfony/google-mailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
     </include_path>
   </component>
   <component name="ProjectId" id="1bALIz2KdwxuHTKwqCULMJWIjrp" />
@@ -551,7 +555,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&quot;commit pour safia&quot;" />
     <MESSAGE value="&quot;correction des problemes liés aux groupes de sérialisation sur l'entité ressource&quot;" />
     <MESSAGE value="&quot;Mise en place des Dto en Output pour Author, Framework,&#10;Level, Program, Ressource&quot;" />
     <MESSAGE value="&quot;Mise en place Dto Output pour entity User&quot;" />
@@ -576,6 +579,7 @@
     <MESSAGE value="&quot;Creation d'une fonctionnalité pour qu'un user puisse reset son password s'il le désire:&#10;- utilisation d'api_platform avec method put 'auxiliaire' =&gt; put-reset-password&#10;- controller =&gt; 'ResetPasswordAction' qui recupère le nouveau password, demande une validation avec la &#10;reconnaissance de l'ancien password, applique les contraintes de validations sur les deux champs 'newPassword' et 'oldPassword', crée une date identifiant le changement du password dans le temps, et crée un nouveau JWTtoken valide pour l'utilisateur&#10;- un authenticator custom pour gérer l'invalidation de l'ancien token de l'utilisateur afin d'être sur qu'il soit inutilisable&quot;" />
     <MESSAGE value="&quot;Creation d'une notion de compte, pour gerer l'enregistrement des utilisateurs en deux parties:&#10;- d'abord le user s'inscrit alors un token de confirmation est généré et un account (mais le compte est desactivé)&#10;- puis le user recoit un token de confirmation qu'il rentre et alors il active son compte et peut s'authentifier &quot;" />
     <MESSAGE value="&quot;Creation d'un systeme d'envoi de mail pour que l'utilisateur qui s'enregistre recoive un lien pour activer son compte&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creation d'un systeme d'envoi de mail pour que l'utilisateur qui s'enregistre recoive un lien pour activer son compte&quot;" />
+    <MESSAGE value="&quot;Amelioration du systeme de forgot password, creation d'un token dedié à la reinitialisation de mot de passe en cas&#10;d'oubli afin de renforcer la securité&#10;Supression de Email package et SwiftMailer pour laisser Mailer travailler en paix&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Amelioration du systeme de forgot password, creation d'un token dedié à la reinitialisation de mot de passe en cas&#10;d'oubli afin de renforcer la securité&#10;Supression de Email package et SwiftMailer pour laisser Mailer travailler en paix&quot;" />
   </component>
 </project>
