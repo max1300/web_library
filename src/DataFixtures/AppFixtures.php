@@ -60,7 +60,7 @@ class AppFixtures extends Fixture
                 ))
                 ->setForgotPasswordToken($this->tokenGenerator->getRandomToken())
                 ->setRoles(['ROLE_USER'])
-                ->setProfilPic($faker->imageUrl(150, 150));
+                ->setProfilePic($faker->imageUrl(150, 150));
 
             if ($i === 2 || $i === 6) {
                 $user->setEnabledAccount(false);
