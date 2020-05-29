@@ -4,10 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Mail\SymfonyMailer;
+use App\Repository\UserRepository;
 use App\Security\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,6 +38,7 @@ class AuthController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @param SymfonyMailer $mailer
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param TokenGenerator $tokenGenerator
      */
     public function __construct
     (
@@ -56,24 +57,24 @@ class AuthController extends AbstractController
 
     /**
      * @Route("/api/login_check", name="login")
-     * @return JsonResponse
+     * @return Response
      */
-    public function login(): JsonResponse
+    public function login(): Response
     {
         $user = $this->getUser();
-        return $this->json(array(
+        return new Response([
             'username'=>$user->getUsername(),
             'roles'=>$user->getRoles(),
-        ));
+            'login'=>$user->getLogin()
+        ]);
     }
 
     /**
      * @Route("/mail-reset-password", name="reset")
      * @param Request $request
-     * @param UserPasswordEncoderInterface $encoder
      * @return Response
      */
-    public function forgotPassword(Request $request, UserPasswordEncoderInterface $encoder)
+    public function forgotPassword(Request $request)
     {
         if ($request->isMethod("POST"))
         {
@@ -90,25 +91,25 @@ class AuthController extends AbstractController
     }
 
     /**
-     * @Route("/reset-forgot-password", name="reset-forgot-password")
+     * @Route("/reset-forgot-password/{token}", name="reset-forgot-password", methods={"PUT"})
+     * @param string $token
      * @param Request $request
+     * @param UserRepository $repository
      * @return Response
      */
-    public function resetForgotPassword(Request $request)
+    public function resetForgotPassword(string $token, Request $request, UserRepository $repository)
     {
-        if ($request->isMethod("PUT")) {
-            $user_id = $request->query->get('user');
-            $token = $request->query->get('token');
-            $newPassword = json_decode($request->getContent(), true);
+        $newPassword = json_decode($request->getContent(), true);
 
-            $user = $this->entityManager->getRepository(User::class)->findOneBy(['id' => $user_id]);
+        $user = $repository->findOneBy(['forgotPasswordToken' => $token]);
 
-            if ($user !== null && $token === $user->getForgotPasswordToken())
-            {
-                $user->setPassword($this->passwordEncoder->encodePassword($user, $newPassword["newPassword"]));
-                $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
-                $this->entityManager->flush();
-            }
+        // control pour verifier si newPassword existe
+
+        if ($user !== null && $token === $user->getForgotPasswordToken())
+        {
+            $user->setPassword($this->passwordEncoder->encodePassword($user, $newPassword["newPassword"]));
+            $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
+            $this->entityManager->flush();
         }
         return new Response("OK");
     }
