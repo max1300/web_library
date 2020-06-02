@@ -72,7 +72,7 @@ class SymfonyMailer
         $email = (new Email())
             ->subject('Demande de réinitialisation de mot de passe')
             ->from('webster-no-reply@gmail.com')
-            ->to('ren.maxime@gmail.com')
+            ->to('msellek.safia@gmail.com')
             ->text($body, 'text/html');
 
         $this->mailer->send($email);
