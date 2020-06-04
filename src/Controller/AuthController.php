@@ -18,6 +18,7 @@ class AuthController extends AbstractController
     /**
      * @var EntityManagerInterface
      */
+    //pour modifier la base de donnée
     private $entityManager;
 
     /**
@@ -84,7 +85,7 @@ class AuthController extends AbstractController
 
             if ($user !== null)
             {
-               $this->mailer->sendEmailForgotPassword($user);
+                $this->mailer->sendEmailForgotPassword($user);
             }
         }
         return new Response("OK");
