@@ -74,7 +74,7 @@ class ContactController extends AbstractController
         }
 
         //Sending mail if the contact form does not contain errors
-        if ($formErrors == null)
+        if ($formErrors === null)
         {
             $this->mailer->sendContactMessage($contact);
             return new Response('OK');
