@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Entity\User;
+use App\Entity\Contact;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\Mailer\MailerInterface; 
 use Symfony\Component\Mime\Email;
@@ -77,4 +78,25 @@ class SymfonyMailer
 
         $this->mailer->send($email);
     }
+
+    //send contact message
+    public function sendContactMessage(Contact $contact)
+    {
+        $body = $this->twig->render(
+            'contact/contact.html.twig',
+            [
+                'contact' => $contact
+            ]
+        );
+
+        $email = (new Email())
+            ->subject('Message from a user')
+            ->from($contact->getEmail())
+            ->to('msellek.safia@gmail.com')
+            ->text($body, 'text/html');
+
+        $this->mailer->send($email);
+    }
+
+    
 }
