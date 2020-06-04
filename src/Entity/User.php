@@ -91,12 +91,12 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Groups({"user:post"})
-     * @Assert\NotBlank(groups={"user:post"})
+     * @Groups({"user:post", "user:put"})
+     * @Assert\NotBlank(groups={"user:post", "user:put"})
      * @Assert\Regex(
      *     pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
      *     message="Password must be at least seven character long and containe at least one digit or one special character, one upper case letter and one lower case letter",
-     *     groups={"user:post"}
+     *     groups={"user:post", "user:put"}
      * )
      */
     private $password;

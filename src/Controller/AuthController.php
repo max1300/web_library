@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ForgotPassword;
 use App\Entity\User;
 use App\Mail\SymfonyMailer;
 use App\Repository\UserRepository;
@@ -12,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AuthController extends AbstractController
 {
@@ -71,23 +74,23 @@ class AuthController extends AbstractController
     }
 
     /**
-     * @Route("/mail-reset-password", name="reset")
+     * @Route("/mail-reset-password", name="reset", methods={"POST"})
      * @param Request $request
+     * @param UserRepository $repository
      * @return Response
      */
-    public function forgotPassword(Request $request)
+    public function forgotPassword(Request $request, UserRepository $repository)
     {
-        if ($request->isMethod("POST"))
+        $mail = json_decode($request->getContent(), true);
+
+        $user = $repository->findOneBy(['email' => $mail]);
+
+
+        if ($user !== null)
         {
-            $mail = json_decode($request->getContent(), true);
-
-            $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $mail]);
-
-            if ($user !== null)
-            {
-                $this->mailer->sendEmailForgotPassword($user);
-            }
+           $this->mailer->sendEmailForgotPassword($user);
         }
+
         return new Response("OK");
     }
 
@@ -96,22 +99,62 @@ class AuthController extends AbstractController
      * @param string $token
      * @param Request $request
      * @param UserRepository $repository
+     * @param ValidatorInterface $validator
      * @return Response
      */
-    public function resetForgotPassword(string $token, Request $request, UserRepository $repository)
+    public function resetForgotPassword(
+        string $token,
+        Request $request,
+        UserRepository $repository,
+        ValidatorInterface $validator
+    )
     {
-        $newPassword = json_decode($request->getContent(), true);
+        //recuperation du nouveau mot de passe envoyé depuis react
+        $password = json_decode($request->getContent(), true);
 
+        //creation d'un objet forgotPassword et insertion du nouveau password react dans le champ password de l'objet
+        $forgotPassword = $this->createNewForgotPassword($password);
+
+        $passwordError = $validator->validateProperty($forgotPassword, 'password');
+        $formErrors = $this->getFormError($passwordError);
+
+        if ($formErrors) {
+            return new Response($formErrors['passwordError']);
+        }
+
+        //recuperation de l'utilisateur lié au token et à la demande de mot de passe oublié
         $user = $repository->findOneBy(['forgotPasswordToken' => $token]);
-
-        // control pour verifier si newPassword existe
 
         if ($user !== null && $token === $user->getForgotPasswordToken())
         {
-            $user->setPassword($this->passwordEncoder->encodePassword($user, $newPassword["newPassword"]));
+            $user->setPassword($this->passwordEncoder->encodePassword($user, $forgotPassword->getPassword()));
             $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
             $this->entityManager->flush();
+            return new Response("OK");
         }
-        return new Response("OK");
+    }
+
+    /**
+     * @param ConstraintViolationListInterface $passwordError
+     * @return array
+     */
+    public function getFormError(ConstraintViolationListInterface $passwordError): array
+    {
+        $formErrors = [];
+        if (count($passwordError) > 0) {
+            $formErrors['passwordError'] = $passwordError[0]->getMessage();
+        }
+        return $formErrors;
+    }
+
+    /**
+     * @param $password
+     * @return ForgotPassword
+     */
+    public function createNewForgotPassword($password): ForgotPassword
+    {
+        $forgotPassword = new ForgotPassword();
+        $forgotPassword->setPassword($password['password']);
+        return $forgotPassword;
     }
 }
