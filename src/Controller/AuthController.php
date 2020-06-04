@@ -21,6 +21,7 @@ class AuthController extends AbstractController
     /**
      * @var EntityManagerInterface
      */
+    //pour modifier la base de donnée
     private $entityManager;
 
     /**
@@ -83,6 +84,7 @@ class AuthController extends AbstractController
         $mail = json_decode($request->getContent(), true);
 
         $user = $repository->findOneBy(['email' => $mail]);
+
 
         if ($user !== null)
         {
