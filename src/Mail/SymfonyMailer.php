@@ -27,6 +27,11 @@ class SymfonyMailer
     private $twig;
 
     /**
+     * ADMIN_EMAIL variable
+     */
+    private $ADMIN_EMAIL;
+
+    /**
      * SymfonyMailer constructor.
      * @param MailerInterface $mailer
      * @param TransportInterface $transport
@@ -35,12 +40,14 @@ class SymfonyMailer
     public function __construct(
         MailerInterface $mailer,
         TransportInterface $transport,
-        Environment $twig
+        Environment $twig,
+        string $ADMIN_EMAIL
     )
     {
         $this->mailer = $mailer;
         $this->transport = $transport;
         $this->twig = $twig;
+        $this->ADMIN_EMAIL = $ADMIN_EMAIL;
     }
 
     public function sendEmailConfirmation(User $user)
@@ -73,7 +80,7 @@ class SymfonyMailer
         $email = (new Email())
             ->subject('Demande de réinitialisation de mot de passe')
             ->from('webster-no-reply@gmail.com')
-            ->to('msellek.safia@gmail.com')
+            ->to($this->ADMIN_EMAIL)
             ->text($body, 'text/html');
 
         $this->mailer->send($email);
@@ -90,9 +97,9 @@ class SymfonyMailer
         );
 
         $email = (new Email())
-            ->subject('Message from a user')
+            ->subject('Contact Message')
             ->from($contact->getEmail())
-            ->to('msellek.safia@gmail.com')
+            ->to($this->ADMIN_EMAIL)
             ->text($body, 'text/html');
 
         $this->mailer->send($email);
