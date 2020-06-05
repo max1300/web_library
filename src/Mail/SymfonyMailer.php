@@ -36,6 +36,7 @@ class SymfonyMailer
      * @param MailerInterface $mailer
      * @param TransportInterface $transport
      * @param Environment $twig
+     * @param string $ADMIN_EMAIL
      */
     public function __construct(
         MailerInterface $mailer,

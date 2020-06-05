@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Contact;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Mail\SymfonyMailer;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,17 +24,19 @@ class ContactController extends AbstractController
      * ContactController constructor.
      * @param SymfonyMailer $mailer
      */
-    function __construct(SymfonyMailer $mailer)
+    public function __construct(SymfonyMailer $mailer)
     {
         $this->mailer = $mailer;
     }
 
 
-
     /**
      * @Route("/contact", name="contact")
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @return JsonResponse|Response
      */
-    public function SendMessage(Request $request, EntityManagerInterface $em, ValidatorInterface $validator)  
+    public function SendMessage(Request $request, ValidatorInterface $validator)
     { 
        //Creation de l'objet
         $contact = new Contact();
@@ -74,7 +75,7 @@ class ContactController extends AbstractController
         }
 
         //Sending mail if the contact form does not contain errors
-        if ($formErrors == null)
+        if ($formErrors === null)
         {
             $this->mailer->sendContactMessage($contact);
             return new Response('OK');
