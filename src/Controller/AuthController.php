@@ -44,8 +44,7 @@ class AuthController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param TokenGenerator $tokenGenerator
      */
-    public function __construct
-    (
+    public function __construct(
         EntityManagerInterface $entityManager,
         SymfonyMailer $mailer,
         UserPasswordEncoderInterface $passwordEncoder,
