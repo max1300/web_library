@@ -89,6 +89,7 @@ class User implements UserInterface
     private $roles = [];
     
     /**
+     * @Groups({"user:post"})
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */

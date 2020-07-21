@@ -57,7 +57,6 @@ class AuthController extends AbstractController
         $this->tokenGenerator = $tokenGenerator;
     }
 
-
     /**
      * @Route("/api/login_check", name="login")
      * @return Response
