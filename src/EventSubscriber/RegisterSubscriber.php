@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Security\TokenGenerator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -48,10 +49,14 @@ class RegisterSubscriber implements EventSubscriberInterface
         $this->symfonyMailer = $mailer;
     }
 
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [
             KernelEvents::VIEW => ['userRegistered', EventPriorities::PRE_WRITE]
+
         ];
     }
 
@@ -65,6 +70,7 @@ class RegisterSubscriber implements EventSubscriberInterface
         }
 
         $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
+        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
 
         $user->setTokenConfirmation($this->tokenGenerator->getRandomToken());
 

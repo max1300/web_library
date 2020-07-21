@@ -87,13 +87,7 @@ class User implements UserInterface
      * @Groups({"user:get-admin", "user:get-owner"})
      */
     private $roles = [];
-    
-    /**
-     * @Groups({"user:post"})
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
+
 
     /**
      * @var string The hashed password

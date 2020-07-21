@@ -35,7 +35,6 @@ final class UserOutput
 
     public $username;
 
-    public $plainPassword;
 
     public function getUsername(): string
     {

@@ -38,7 +38,6 @@ class UserOutputDataTransformer implements DataTransformerInterface
             $output->email = $data->getEmail();
             $output->role = $data->getRoles();
             $output->username = $data->getUsername();
-            $output->plainPassword = $data->getPlainPassword();
             return $output;
     }
 
