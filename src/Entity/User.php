@@ -87,6 +87,13 @@ class User implements UserInterface
      * @Groups({"user:get-admin", "user:get-owner"})
      */
     private $roles = [];
+    
+    /**
+     * @Groups({"user:post"})
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @var string The hashed password
@@ -242,6 +249,16 @@ class User implements UserInterface
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $password): void
+    {
+        $this->plainPassword = $password;
     }
 
     public function setPassword(string $password): self
