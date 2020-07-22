@@ -36,6 +36,7 @@ class FrameworkOutputDataTransformer implements DataTransformerInterface
         $output->frameworkName = $data->getName();
         $output->program = $data->getProgram();
         $output->docUrl = $data->getDocUrl();
+        $output->topic = $data->getTopic();
         return $output;
     }
 

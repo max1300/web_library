@@ -35,6 +35,7 @@ class ProgramOutputDataTransformer implements DataTransformerInterface
         $output = new ProgramOutput();
         $output->programName = $data->getName();
         $output->frameworks = $data->getFrameworks();
+        $output->topic = $data -> getTopic();
         return $output;
     }
 

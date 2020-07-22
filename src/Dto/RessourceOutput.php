@@ -6,6 +6,7 @@ namespace App\Dto;
 
 use App\Entity\Author;
 use App\Entity\Level;
+use App\Entity\Program;
 use App\Entity\Topic;
 use App\Entity\User;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -54,4 +55,6 @@ final class RessourceOutput
      * @Groups({"resource:read"})
      */
     public $publisher;
+
+
 }

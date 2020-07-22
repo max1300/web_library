@@ -49,13 +49,11 @@ use DateTimeInterface;
  * )
  * @ApiFilter(
  *     SearchFilter::class, properties={
- *          "author": "exact",
- *          "author.name" : "partial",
- *          "level.name" : "partial"
+ *          "topic": "exact"
  *     }
  *     
  * )
- * @ApiFilter(OrderFilter::class, properties={"createdAt"="desc"})
+ * @ApiFilter(OrderFilter::class, properties={"createdAt"="desc", "topic"="exact"})
  * @ORM\Entity(repositoryClass="App\Repository\RessourceRepository")
  */
 class Ressource implements AuthorEntityInterface, PublishedAtInterface

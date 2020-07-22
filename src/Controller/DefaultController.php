@@ -24,7 +24,7 @@ class DefaultController extends AbstractController
      * @Route("/confirm-user/{token}", name="default_confirm_token")
      * @param string $token
      * @param UserConfirmationService $confirmationService
-     * @return RedirectResponse
+     * @return Response
      */
     public function confirmUser(string $token, UserConfirmationService $confirmationService)
     {
