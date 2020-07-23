@@ -4,6 +4,7 @@ namespace App\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
 
+use ApiPlatform\Core\Validator\ValidatorInterface;
 use App\Mail\SymfonyMailer;
 use App\Entity\User;
 use App\Security\TokenGenerator;
@@ -29,6 +30,10 @@ class RegisterSubscriber implements EventSubscriberInterface
      * @var SymfonyMailer
      */
     private $symfonyMailer;
+    /**
+     * @var ValidatorInterface
+     */
+    private $validator;
 
 
     /**
@@ -36,17 +41,19 @@ class RegisterSubscriber implements EventSubscriberInterface
      * @param UserPasswordEncoderInterface $encoder
      * @param TokenGenerator $tokenGenerator
      * @param SymfonyMailer $mailer
-
+     * @param ValidatorInterface $validator
      */
     public function __construct(
         UserPasswordEncoderInterface $encoder,
         TokenGenerator $tokenGenerator,
-        SymfonyMailer $mailer
+        SymfonyMailer $mailer,
+        ValidatorInterface $validator
     )
     {
         $this->encoder = $encoder;
         $this->tokenGenerator = $tokenGenerator;
         $this->symfonyMailer = $mailer;
+        $this->validator = $validator;
     }
 
     /**
@@ -68,12 +75,16 @@ class RegisterSubscriber implements EventSubscriberInterface
         if(!$user instanceof User || $method !== Request::METHOD_POST) {
             return;
         }
+        $errors = $this->validator->validate($user);
 
-        $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
-        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
+        if (empty($errors)){
+            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
+            $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
 
-        $user->setTokenConfirmation($this->tokenGenerator->getRandomToken());
+            $user->setTokenConfirmation($this->tokenGenerator->getRandomToken());
 
-        $this->symfonyMailer->sendEmailConfirmation($user);
+            $this->symfonyMailer->sendEmailConfirmation($user);
+        }
+
     }
 }
