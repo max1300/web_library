@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Security\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,12 +60,13 @@ class AuthController extends AbstractController
 
     /**
      * @Route("/api/login_check", name="login")
-     * @return Response
+     * @return JsonResponse
      */
-    public function login(): Response
+    public function login(Request $request, UserRepository $repository): JsonResponse
     {
-        $user = $this->getUser();
-        return new Response([
+        $data = json_decode($request->getContent(), true);
+        $user = $repository->findOneBy(['email' => $data["username"]]);
+        return $this->json([
             'username'=>$user->getUsername(),
             'roles'=>$user->getRoles(),
             'login'=>$user->getLogin()

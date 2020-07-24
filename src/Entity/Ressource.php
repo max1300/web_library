@@ -27,7 +27,7 @@ use DateTimeInterface;
  *     itemOperations={
  *      "get",
  *      "put"={
- *        "security"="is_granted('ROLE_ADMIN') or object.getUser() == user",
+ *        "security"="is_granted('ROLE_ADMIN') or object.user == user",
  *        "security_message"="Sorry, but only admins or publisher of the ressources can modify them."
  *      },
  *      "delete"={
@@ -38,7 +38,7 @@ use DateTimeInterface;
  *     },
  *     collectionOperations={
  *      "post"={
- *        "security"="is_granted('IS_AUTHENTICATED_FULLY')"
+ *        "acces_control"="is_granted('ROLE_ADMIN') or object.user == user"
  *      },
  *      "get"
  *     },
@@ -86,8 +86,6 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"resource:read", "resource:write"})
      * @Assert\NotBlank
-     * @Assert\Valid()
-     * @ApiSubresource(maxDepth=1)
      */
     private $author;
 
