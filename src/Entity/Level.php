@@ -42,7 +42,7 @@ class Level
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"level:read", "level:write"})
+     * @Groups({"program:read", "level:read", "level:write"})
      * @Assert\NotBlank
      */
     private $name;

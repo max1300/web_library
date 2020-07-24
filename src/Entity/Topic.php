@@ -28,13 +28,14 @@ abstract class Topic
      * @ORM\Column(type="integer")
      * @Groups({"resource:read", "author:read", "level:read", "framework:read"})
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="topic")
      * @Assert\NotNull
+     * @Groups({"program:read", "framework:read"})
      */
-    private $ressources;
+    protected $ressources;
 
     public function __construct()
     {

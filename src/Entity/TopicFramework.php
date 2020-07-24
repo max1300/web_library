@@ -16,7 +16,7 @@ class TopicFramework extends Topic
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Framework", inversedBy="topic", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read", "author:read", "level:read", "framework:write"})
+     * @Groups({"resource:read", "author:read", "level:read", "framework:write", "framework:read"})
      * @Assert\NotNull
      */
     private $framework;

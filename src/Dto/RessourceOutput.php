@@ -16,43 +16,43 @@ final class RessourceOutput
 
     /**
      * @var string
-     * @Groups({"resource:read", "level:read", "comment:read"})
+     * @Groups({"program:read", "resource:read", "level:read", "comment:read", "framework:read"})
      */
     public $resourceName;
 
     /**
      * @var string
-     * @Groups({"resource:read"})
+     * @Groups({"resource:read", "program:read", "framework:read"})
      */
     public $url;
 
     /**
      * @var Author
-     * @Groups({"resource:read", "level:read"})
+     * @Groups({"resource:read", "level:read", "program:read", "framework:read"})
      */
     public $author;
 
     /**
      * @var Level
-     * @Groups({"resource:read"})
+     * @Groups({"resource:read", "program:read", "framework:read"})
      */
     public $level;
 
     /**
      * @var string
-     * @Groups({"resource:read", "level:read"})
+     * @Groups({"resource:read", "level:read", "program:read", "framework:read"})
      */
     public $language;
 
     /**
      * @var Topic
-     * @Groups({"resource:read", "level:read"})
+     * @Groups({"resource:read", "level:read", "program:read", "framework:read"})
      */
     public $topic;
 
     /**
      * @var User
-     * @Groups({"resource:read"})
+     * @Groups({"resource:read", "program:read", "framework:read"})
      */
     public $publisher;
 
