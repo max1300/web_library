@@ -1,4 +1,5 @@
 # Les DTO
+
 ![Image of startocat](https://images-na.ssl-images-amazon.com/images/I/41tMI1Rv75L._AC_.jpg)
 
 L'application back de symfony dispose de _DTO_. (**Documentation sur les *Data Transfer Object*** = [dto](https://fr.wikipedia.org/wiki/Objet_de_transfert_de_donn%C3%A9es)))
@@ -117,9 +118,9 @@ class RessourceOutputDataTransformer implements DataTransformerInterface
 
 ````
 
-3.Il ne faut pas oublier de préciser à l'entité à quel *DTO* elle se rapporte.
+3. Il ne faut pas oublier de préciser à l'entité à quel *DTO* elle se rapporte.
 ```sh
-// Ne pa soublier le use dans l entité ressource
+// Ne pas oublier le use dans l entité ressource
 use App\Dto\RessourceOutput;
 ```
 ```sh
