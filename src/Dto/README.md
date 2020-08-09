@@ -66,7 +66,7 @@ final class RessourceOutput
 }
 
 ```
-2.Ensuite il va falloir créer un *dataTransformer*. Il s'agît en fait d'une classe qui va permettre de transformer les attibuts de l'entitée PHP en variables du *DTO*. 
+2. Ensuite il va falloir créer un *dataTransformer*. Il s'agît en fait d'une classe qui va permettre de transformer les attibuts de l'entitée PHP en variables du *DTO*. 
 ```sh
 class RessourceOutputDataTransformer implements DataTransformerInterface
 {
