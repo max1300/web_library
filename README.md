@@ -2,7 +2,7 @@
 
 Cette application est une sorte de **librairie de tutoriels** en lien avec la programmation informatique. 
 
-This application is a kind of ** library of tutorials ** related to computer programming.
+This application is a kind of **web library of tutorials** related to computer programming.
 
 ## The team 
 
