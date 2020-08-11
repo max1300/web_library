@@ -2,6 +2,8 @@
 
 Cette application est une sorte de **librairie de tutoriels** en lien avec la programmation informatique. 
 
+This application is a kind of ** library of tutorials ** related to computer programming.
+
 ## The team 
 
 - **Maxime RENAUD**  [Github](https://github.com/max1300)
@@ -54,10 +56,10 @@ Before continuing, make sure to:
 
 #### Create a .env.local file with the followings :
 
-**DATABASE_URL**=mysql://user-name:password@127.0.0.1:3306/DBName?serverVersion=5.7
-**JWT_PASSPHRASE**=*****
-**MAILER_DSN**=gmail://emailAdress:password@default
-**ADMIN_EMAIL**=emailAdress
+- **DATABASE_URL**=mysql://user-name:password@127.0.0.1:3306/DBName?serverVersion=5.7
+- **JWT_PASSPHRASE**=*****
+- **MAILER_DSN**=gmail://emailAdress:password@default
+- **ADMIN_EMAIL**=emailAdress
 
 #### Generate the JWT passphrase:
 
