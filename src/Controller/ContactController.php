@@ -51,7 +51,7 @@ class ContactController extends AbstractController
         $contact-> setSubject($data['subject']);
         $contact-> setMessage($data['message']);
 
-        //we you need to customize the errors with symfony validator; 
+        //we need to customize the errors with symfony validator; 
         $nameError = $validator->validateProperty($contact, 'name');
         $emailError = $validator->validateProperty($contact, 'email');
         $subjectError = $validator->validateProperty($contact, 'subject');

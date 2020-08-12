@@ -104,7 +104,58 @@ La fonction `resetForgotPassword` va servir quant à elle à reinitialiser le mo
 
 ---
 ## ContactController
+Ce controller sert à la fonction d'envoi de message depuis le formulaire de contact. On y retrouvera la fonction `SendMessage`.
 
+### SendMessage
+La fonction `SendMessage` sert à créer l'objet contact, puis récupèrer les valeurs json et les insérer dans l'objet contact qu'on vient de créer, ce qui va permettre de recevoir un tableau avec l'objet json. Ensuite, elle permet aussi de récupérer les champs de l'entité crée `Contact.php`, et puis gérer les erreurs de chaque champs en utilisant `symfony validator`. Si le formulaire de contact ne contient pas d'erreur, le message sera envoyé grâce au `Mailer de Symfony`.
+
+```php
+public function SendMessage(Request $request, ValidatorInterface $validator)
+    { 
+       //Creation de l'objet
+        $contact = new Contact();
+
+       //Récuperer les valeurs json et les insérer dans le new contact que je viens de créer
+       //je reçoi un tableau avec l'objet json
+        $data =json_decode($request -> getContent(), true);
+        //Récupérer les champs
+        //En créant l'entité contact je vais devoir faire : 
+        $contact -> setName($data['name']);
+        $contact-> setEmail($data['email']);
+        $contact-> setSubject($data['subject']);
+        $contact-> setMessage($data['message']);
+
+        //we need to customize the errors with symfony validator; 
+        $nameError = $validator->validateProperty($contact, 'name');
+        $emailError = $validator->validateProperty($contact, 'email');
+        $subjectError = $validator->validateProperty($contact, 'subject');
+        $messageError = $validator->validateProperty($contact, 'message');
+
+        $formErrors = [];
+        if(count($nameError) > 0) {
+            $formErrors['nameError'] = $nameError[0]->getMessage();
+        }
+        if(count($emailError) > 0) {
+            $formErrors['emailError'] = $emailError[0]->getMessage();
+        }
+        if(count($subjectError) > 0) {
+            $formErrors['subjectError'] = $subjectError[0]->getMessage();
+        }   
+        if(count($messageError) > 0) {
+            $formErrors['messageError'] = $messageError[0]->getMessage();
+        }         
+        if($formErrors) {
+            return new JsonResponse($formErrors);
+        }
+
+        //Sending mail if the contact form does not contain errors
+        if (!$formErrors)
+        {
+            $this->mailer->sendContactMessage($contact);
+            return new Response('OK');
+        }
+    }
+```
 
 ---
 ## DefaultController
