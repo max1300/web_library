@@ -80,45 +80,45 @@ class AppFixtures extends Fixture
         $programs = ['PHP', 'JAVASCRIPT', 'JAVA'];
 
         for($i = 0; $i < 3; $i++) {
-          $author = new Author();
-          $author->setName($authors[$i])
-                 ->setWebsite($websites[$i]);
-          $manager->persist($author);
+            $author = new Author();
+            $author->setName($authors[$i])
+                ->setWebsite($websites[$i]);
+            $manager->persist($author);
 
-          $level = new Level();
-          $level->setName($levels[$i]);
-          $manager->persist($level);
+            $level = new Level();
+            $level->setName($levels[$i]);
+            $manager->persist($level);
 
-          $program = new Program();
-          $program->setName($programs[$i]);
-          $manager->persist($program);
+            $program = new Program();
+            $program->setName($programs[$i]);
+            $manager->persist($program);
 
-          if($i === 0){
-              try {
-                  $this->getDataPhp($manager, $program, $author, $level, $users);
-              } catch (Exception $e) {
-                  echo 'Exception reçue : ',  $e->getMessage(), "\n";
-              }
-          }
+            if($i === 0){
+                try {
+                    $this->getDataPhp($manager, $program, $author, $level, $users);
+                } catch (Exception $e) {
+                    echo 'Exception reçue : ',  $e->getMessage(), "\n";
+                }
+            }
 
-          if($i === 1){
-              try {
-                  $this->getDataJavascript($manager, $program, $author, $level, $users);
-              } catch (Exception $e) {
-                  echo 'Exception reçue : ',  $e->getMessage(), "\n";
-              }
-          }
+            if($i === 1){
+                try {
+                    $this->getDataJavascript($manager, $program, $author, $level, $users);
+                } catch (Exception $e) {
+                    echo 'Exception reçue : ',  $e->getMessage(), "\n";
+                }
+            }
 
-          if($i === 2){
-              try {
-                  $this->getDataJava($manager, $program, $author, $level, $users);
-              } catch (Exception $e) {
-                  echo 'Exception reçue : ',  $e->getMessage(), "\n";
-              }
-          }
-      }
+            if($i === 2){
+                try {
+                    $this->getDataJava($manager, $program, $author, $level, $users);
+                } catch (Exception $e) {
+                    echo 'Exception reçue : ',  $e->getMessage(), "\n";
+                }
+            }
+        }
     $manager->flush();
-  }
+}
 
     /**
      * @param ObjectManager $manager
@@ -358,5 +358,4 @@ class AppFixtures extends Fixture
             ->setUser($users);
         $manager->persist($resource);
     }
-  
 }
