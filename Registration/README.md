@@ -1,6 +1,5 @@
 # Les formulaires d'inscriptions
 --------
-**--------**
 
 ## La class User
 --------
