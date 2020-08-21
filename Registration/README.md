@@ -1,20 +1,20 @@
-#Les formulaires d'inscriptions
+# Les formulaires d'inscriptions
 --------
 **--------**
 
-##La class User
+## La class User
 --------
 **--------**
 
-##Le formulaire
+## Le formulaire
 --------
 **--------**
 
-##Le controller
+## Le controller
 --------
 **--------**
 
-##La protection de l'application
+## La protection de l'application
 --------
 **--------**
 
