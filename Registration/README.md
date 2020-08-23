@@ -12,8 +12,6 @@ Lors de l'utilisattion de la commande *php bin/console make:user* un provider a 
 
 Nos utilisateurs ont besoin de mots de passe pour se connecter à l'application, on peut controler la manière dont les mots de passe sont encodés dans le fichier *security.yaml* la commande *php bin/console make:user* à préconfiguré cela pour nous. On pourra ensuite utiliser le **UserPasswordEncoderInterface** pour encoder le mot de passe avant d'enregistrer nos utilisateurs dans la base de données.
 
-
-
 ## Le formulaire
 --------
 **--------**
