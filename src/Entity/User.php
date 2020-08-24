@@ -122,7 +122,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:get", "user:post", "user:put", "resource:read"})
+     * @Groups({"user:get", "user:post", "user:put", "resource:read", "program:read"})
      * @Assert\NotBlank(groups={"user:post", "user:put"})
      * @Assert\Length(min=5, max=255, groups={"user:post", "user:put"})
      */

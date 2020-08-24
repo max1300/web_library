@@ -67,14 +67,14 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:write", "comment:read"})
+     * @Groups({"program:read", "resource:read", "resource:write", "comment:read", "framework:read"})
      * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:write"})
+     * @Groups({"resource:read", "resource:write", "framework:read"})
      * @Assert\Url(
      *    message = "The url '{{ value }}' is not a valid url",
      * )
@@ -84,14 +84,14 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="ressources", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read", "resource:write"})
+     * @Groups({"resource:read", "resource:write", "framework:read"})
      * @Assert\NotBlank
      */
     private $author;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:write"})
+     * @Groups({"resource:read", "resource:write", "framework:read"})
      * @Assert\Choice({"French", "English"})
      */
     protected $language;
@@ -99,7 +99,7 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read", "resource:write"})
+     * @Groups({"resource:read", "resource:write", "framework:read"})
      * @Assert\NotBlank
      * @Assert\Valid()
      * @ApiSubresource(maxDepth=1)
@@ -129,7 +129,7 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read"})
+     * @Groups({"resource:read", "program:read", "framework:read"})
      */
     private $user;
 

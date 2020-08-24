@@ -23,13 +23,13 @@ final class FrameworkOutput
 
     /**
      * @var string
-     * @Groups({"resource:read", "author:read", "framework:write", "framework:read"})
+     * @Groups({"resource:read", "author:read", "framework:write", "framework:read", "program:read"})
      */
     public $docUrl;
 
     /**
      * @var Topic
-     * @Groups({"resource:read"})
+     * @Groups({"resource:read", "program:read", "framework:read"})
      */
     public $topic;
 
