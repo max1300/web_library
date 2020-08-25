@@ -5,8 +5,15 @@
 swagger_ui:
   path: /docs
   controller: api_platform.swagger.action.ui
-api_login_check:
-    path: /api/login_check
+
+register:
+  path: /register
+  controller: App\Controller\AuthController::register
+  methods: POST
+
+login_check:
+  path: /login_check
+
 reset-password:
-    path: /users/{id}/reset-password
+  path: /users/{id}/reset-password
 

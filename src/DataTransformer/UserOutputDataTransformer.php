@@ -33,6 +33,7 @@ class UserOutputDataTransformer implements DataTransformerInterface
             $this->validator->validate($data);
 
             $output = new UserOutput();
+            $output->id = $data ->getId();
             $output->login = $data->getLogin();
             $output->picture = $data->getProfilePic();
             $output->email = $data->getEmail();

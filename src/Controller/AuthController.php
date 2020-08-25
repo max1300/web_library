@@ -60,6 +60,8 @@ class AuthController extends AbstractController
 
     /**
      * @Route("/api/login_check", name="login")
+     * @param Request $request
+     * @param UserRepository $repository
      * @return JsonResponse
      */
     public function login(Request $request, UserRepository $repository): JsonResponse
@@ -71,6 +73,33 @@ class AuthController extends AbstractController
             'roles'=>$user->getRoles(),
             'login'=>$user->getLogin()
         ]);
+    }
+
+    public function register(Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        //on récupère le contenu de l'objet JSON
+        $content = json_decode($request->getContent(), true);
+
+        // on insere chaque champ de l'objet JSON dans un champ distinct
+        $username = $content['login'];
+        $mail = $content['email'];
+        $password = $content['password'];
+
+        //Creation d'un nouvel utilisateur
+        $user = new User();
+        $user->setEmail($mail);
+        $user->setLogin($username);
+        $user->setPassword($encoder->encodePassword($user, $password));
+        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
+        $user->setTokenConfirmation($this->tokenGenerator->getRandomToken());
+        //on persist le user
+        $this->entityManager->persist($user);
+        //on enregistre dans la BDD
+        $this->entityManager->flush();
+
+        //on envoit l'email de confirmation
+        $this->mailer->sendEmailConfirmation($user);
+        return new Response(sprintf('User %s successfully created', $user->getUsername()));
     }
 
     /**

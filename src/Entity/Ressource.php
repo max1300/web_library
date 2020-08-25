@@ -37,9 +37,7 @@ use DateTimeInterface;
  *      "patch"
  *     },
  *     collectionOperations={
- *      "post"={
- *        "acces_control"="is_granted('ROLE_ADMIN') or object.user == user"
- *      },
+ *      "post",
  *      "get"
  *     },
  *     output=RessourceOutput::class,
