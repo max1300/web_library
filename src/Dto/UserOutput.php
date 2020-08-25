@@ -9,6 +9,12 @@ final class UserOutput
 {
 
     /**
+     * @var int
+     * @Groups({"user:get", "comment:read", "resource:read", "program:read", "framework:read"})
+     */
+    public $id;
+
+    /**
      * @var string
      * @Groups({"user:get", "comment:read", "resource:read", "program:read", "framework:read"})
      */
