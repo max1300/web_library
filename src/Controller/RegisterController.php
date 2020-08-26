@@ -22,7 +22,7 @@ class RegisterController
 
 
     /**
-     * LoginController constructor.
+     * RegisterController constructor.
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(
