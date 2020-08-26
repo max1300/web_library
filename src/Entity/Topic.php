@@ -32,7 +32,7 @@ abstract class Topic
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="topic")
      * @Assert\NotNull
-     * @Groups({"program:read"})
+     * @Groups({"program:read", "framework:read"})
      */
     protected $ressources;
 

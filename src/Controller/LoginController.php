@@ -15,44 +15,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class LoginController extends AbstractController
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    //pour modifier la base de donnée
-    private $entityManager;
-
-    /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $passwordEncoder;
-    /**
-     * @var SymfonyMailer
-     */
-    private $mailer;
-    /**
-     * @var TokenGenerator
-     */
-    private $tokenGenerator;
-
-    /**
-     * LoginController constructor.
-     * @param EntityManagerInterface $entityManager
-     * @param SymfonyMailer $mailer
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param TokenGenerator $tokenGenerator
-     */
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        SymfonyMailer $mailer,
-        UserPasswordEncoderInterface $passwordEncoder,
-        TokenGenerator $tokenGenerator
-    )
-    {
-        $this->entityManager = $entityManager;
-        $this->mailer = $mailer;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->tokenGenerator = $tokenGenerator;
-    }
 
     /**
      * @Route("/api/login_check", name="login")

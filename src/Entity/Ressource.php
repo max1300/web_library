@@ -65,14 +65,14 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"program:read", "resource:read", "resource:write", "comment:read", "framework:read"})
+     * @Groups({"program:read", "resource:read", "resource:write"})
      * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:write", "framework:read"})
+     * @Groups({"resource:read", "resource:write"})
      * @Assert\Url(
      *    message = "The url '{{ value }}' is not a valid url",
      * )
@@ -82,14 +82,14 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="ressources", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read", "resource:write", "framework:read"})
+     * @Groups({"resource:read", "resource:write"})
      * @Assert\NotBlank
      */
     private $author;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:write", "framework:read"})
+     * @Groups({"resource:read", "resource:write"})
      * @Assert\Choice({"French", "English"})
      */
     protected $language;
@@ -97,7 +97,7 @@ class Ressource implements AuthorEntityInterface, PublishedAtInterface
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="ressources")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read", "resource:write", "framework:read"})
+     * @Groups({"resource:read", "resource:write"})
      * @Assert\NotBlank
      * @Assert\Valid()
      * @ApiSubresource(maxDepth=1)
