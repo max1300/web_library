@@ -93,13 +93,23 @@ class User implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Groups({"user:post", "user:put"})
-     * @Assert\NotBlank()
      * @Assert\Regex(
      *     pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
      *     message="Password must be at least seven character long and containe at least one digit or one special character, one upper case letter and one lower case letter"
      * )
      */
     private $password;
+
+    /**
+     * @var string
+     * @Groups({"user:post", "user:put"})
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *     pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
+     *     message="Password must be at least seven character long and containe at least one digit or one special character, one upper case letter and one lower case letter"
+     * )
+     */
+    private $plainPassword;
 
     /**
      * @var string The hashed password
@@ -244,15 +254,6 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword(string $password): void
-    {
-        $this->plainPassword = $password;
-    }
 
     public function setPassword(string $password): self
     {
@@ -293,7 +294,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLogin(): string
+    public function getLogin(): ?string
     {
         return $this->login;
     }
@@ -482,5 +483,15 @@ class User implements UserInterface
         $this->forgotPasswordToken = $forgotPasswordToken;
 
         return $this;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 }
