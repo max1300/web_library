@@ -54,10 +54,7 @@ class AppFixtures extends Fixture
             $login = $faker->userName;
             $user->setEmail($faker->email)
                 ->setLogin($login)
-                ->setPassword($this->encoder->encodePassword(
-                    $user,
-                    'pass_' . $login
-                ))
+                ->setPlainPassword('pass_' . $login)
                 ->setForgotPasswordToken($this->tokenGenerator->getRandomToken())
                 ->setRoles(['ROLE_USER'])
                 ->setProfilePic($faker->imageUrl(150, 150));

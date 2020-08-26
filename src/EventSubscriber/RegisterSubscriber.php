@@ -2,89 +2,88 @@
 
 namespace App\EventSubscriber;
 
-use ApiPlatform\Core\EventListener\EventPriorities;
-
-use ApiPlatform\Core\Validator\ValidatorInterface;
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use App\Mail\SymfonyMailer;
 use App\Entity\User;
 use App\Security\TokenGenerator;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
-use Symfony\Component\HttpKernel\Event\ViewEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
-//Permet d'envoyer le mail
-class RegisterSubscriber implements EventSubscriberInterface
+//Permet d'envoyer le mail de confirmation
+// il s'agit d'un doctrine eventSubscriber et non plus d'un symfony eventsubscriber
+// la différence est que les events se déclenchent sur les événements en relation avec la base de données
+class RegisterSubscriber implements EventSubscriber
 {
+
     private $encoder;
+
     /**
      * @var TokenGenerator
      */
     private $tokenGenerator;
 
     /**
-
      * @var SymfonyMailer
      */
     private $symfonyMailer;
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
 
     /**
      * RegisterSubscriber constructor.
      * @param UserPasswordEncoderInterface $encoder
      * @param TokenGenerator $tokenGenerator
      * @param SymfonyMailer $mailer
-     * @param ValidatorInterface $validator
      */
     public function __construct(
         UserPasswordEncoderInterface $encoder,
         TokenGenerator $tokenGenerator,
-        SymfonyMailer $mailer,
-        ValidatorInterface $validator
+        SymfonyMailer $mailer
     )
     {
         $this->encoder = $encoder;
         $this->tokenGenerator = $tokenGenerator;
         $this->symfonyMailer = $mailer;
-        $this->validator = $validator;
     }
 
-    /**
-     * @return array
-     */
-    public static function getSubscribedEvents()
+    public function getSubscribedEvents()
     {
-        return [
-            KernelEvents::VIEW => ['userRegistered', EventPriorities::PRE_WRITE]
-
-        ];
+        //on indique à Symfony que l'événement qui sera déclenché ici
+        //sera un évènement qui se passera juste avant une action de persistence
+        //ex : $this->entityManager->persist($user);
+        return array(
+            'prePersist',
+        );
     }
 
-    public function userRegistered(ViewEvent $event)
-    {
-        $user = $event->getControllerResult();
-        $method = $event->getRequest()->getMethod();
 
-        if(!$user instanceof User || $method !== Request::METHOD_POST) {
+    public function prePersist(LifecycleEventArgs $args)
+    {
+        //on indique clairement que cette évènement déclenchera la fonction userRegistered()
+        $this->userRegistered($args);
+    }
+
+    public function userRegistered(LifecycleEventArgs $args)
+    {
+
+        //on recupère l'entity sur laquelle l'évènement s'est déclenché
+        $user = $args->getEntity();
+
+        //si cette entity n'est pas une entity User alors on ne retourne rien
+        if(!$user instanceof User) {
             return;
         }
-        $errors = $this->validator->validate($user);
 
-        if (empty($errors)){
-            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
-            $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
-
-            $user->setTokenConfirmation($this->tokenGenerator->getRandomToken());
-
-            $this->symfonyMailer->sendEmailConfirmation($user);
-        }
-
+        //sinon si on est bien sur une entity User alors on :
+        //encode le mot de passe
+        $user->setPassword($this->encoder->encodePassword($user, $user->getPlainPassword()));
+        $user->setPlainPassword("");
+        //on construit le token pour récupérer le mot de passe si oublié lors du login
+        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
+        //on construit le token qui va servir lors de la confirmation du compte
+        $user->setTokenConfirmation($this->tokenGenerator->getRandomToken());
+        //on envoit l'email contenant le token pour la confirmation du compte
+        $this->symfonyMailer->sendEmailConfirmation($user);
     }
+
+
 }

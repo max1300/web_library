@@ -11,7 +11,7 @@ final class ProgramOutput
 
     /**
      * @var string
-     * @Groups({"resource:read", "program:read", "framework:read"})
+     * @Groups({"resource:read", "program:read", "framework:read", "programLang:read"})
      */
     public $programName;
 

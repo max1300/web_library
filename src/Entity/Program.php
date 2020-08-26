@@ -45,7 +45,7 @@ class Program
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"author:read", "level:read", "program:write", "program:read"})
+     * @Groups({"author:read", "level:read", "program:write", "program:read", "programLang:read"})
      */
     private $name;
 

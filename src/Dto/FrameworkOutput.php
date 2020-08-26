@@ -11,7 +11,7 @@ final class FrameworkOutput
 
     /**
      * @var string
-     * @Groups({"resource:read", "author:read", "level:read", "framework:write", "program:read", "framework:read"})
+     * @Groups({"resource:read", "author:read", "level:read", "framework:write", "program:read", "framework:read", "topicFram:read"})
      */
     public $frameworkName;
 

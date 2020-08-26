@@ -4,14 +4,17 @@ namespace App\Controller;
 
 use App\Entity\ForgotPassword;
 use App\Entity\User;
+use App\Form\UserType;
 use App\Mail\SymfonyMailer;
 use App\Repository\UserRepository;
 use App\Security\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -68,6 +71,9 @@ class AuthController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         $user = $repository->findOneBy(['email' => $data["username"]]);
+        if ($user === null){
+            return $this->json('user not identified', 400);
+        }
         return $this->json([
             'username'=>$user->getUsername(),
             'roles'=>$user->getRoles(),
@@ -75,30 +81,41 @@ class AuthController extends AbstractController
         ]);
     }
 
-    public function register(Request $request, UserPasswordEncoderInterface $encoder)
+    public function register(Request $request)
     {
         //on récupère le contenu de l'objet JSON
         $content = json_decode($request->getContent(), true);
 
-        // on insere chaque champ de l'objet JSON dans un champ distinct
-        $username = $content['login'];
-        $mail = $content['email'];
-        $password = $content['password'];
-
         //Creation d'un nouvel utilisateur
         $user = new User();
-        $user->setEmail($mail);
-        $user->setLogin($username);
-        $user->setPassword($encoder->encodePassword($user, $password));
-        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
-        $user->setTokenConfirmation($this->tokenGenerator->getRandomToken());
-        //on persist le user
+
+        //on crée un formulaire symfony d'enregistrement de user tel que cela a été
+        //défini dans la classe Usertype du package form
+        $form = $this->createForm(UserType::class, $user);
+        //on insère les données du formulaire react dans le formulaire symfony
+        //si le nom des champs ne correspondent pas on aura une erreur
+        $form->submit($content);
+
+        //on check la validité de chaque champ contenu dans le formulaire
+        //on laisse la main à l'entity user pour le login et l'email
+        //par contre on prend la main dans le formulaire sur les contraintes de validation sur le champ plainPassword
+        //afin de s'assurer que le mot de passe du formulaire react se conforme bien aux contraintes de validité (voir dans UserType)
+        if (!$form->isValid()) {
+            $errors = $this->getErrors($form);
+            throw new BadRequestHttpException(json_encode($errors));
+            //si on détecte une contrainte de validation non respectée, on lance une reponse JSON vers le front
+//            return $this->json($errors, 400);
+        }
+
+        //Ici intervient le registerSubscriber qui est un doctrine subscriber
+        //et qui va encoder le mot de passe, créé le token pour envoyer la confirmation
+        //et envoyer l'email pour l'activation du compte
+
+        //sinon on fait persister le nouveau user créé
         $this->entityManager->persist($user);
-        //on enregistre dans la BDD
+        //puis on l'enregistre en BDD
         $this->entityManager->flush();
 
-        //on envoit l'email de confirmation
-        $this->mailer->sendEmailConfirmation($user);
         return new Response(sprintf('User %s successfully created', $user->getUsername()));
     }
 
@@ -154,13 +171,15 @@ class AuthController extends AbstractController
         //recuperation de l'utilisateur lié au token et à la demande de mot de passe oublié
         $user = $repository->findOneBy(['forgotPasswordToken' => $token]);
 
-        if ($user !== null && $token === $user->getForgotPasswordToken())
-        {
-            $user->setPassword($this->passwordEncoder->encodePassword($user, $forgotPassword->getPassword()));
-            $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
-            $this->entityManager->flush();
-            return new Response("OK");
+        if ($user === null || $token !== $user->getForgotPasswordToken()) {
+            return new Response("user not identified or token not equal to forgotPasswordToken", 400);
         }
+
+        $user->setPassword($this->passwordEncoder->encodePassword($user, $forgotPassword->getPassword()));
+        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
+        $this->entityManager->flush();
+        return new Response("OK");
+
     }
 
     /**
@@ -185,5 +204,20 @@ class AuthController extends AbstractController
         $forgotPassword = new ForgotPassword();
         $forgotPassword->setPassword($password['password']);
         return $forgotPassword;
+    }
+
+    private function getErrors(FormInterface $form): array
+    {
+        $errors = [];
+        $formErrors = $form->getErrors(true);
+
+        foreach ($formErrors as $error) {
+            $field = $error->getOrigin()->getName();
+            $message = $error->getMessage();
+
+            $errors[$field] = $message;
+        }
+
+        return $errors;
     }
 }

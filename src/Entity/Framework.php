@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -40,7 +39,7 @@ class Framework
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "author:read", "level:read", "framework:write", "program:read", "framework:read"})
+     * @Groups({"resource:read", "author:read", "level:read", "framework:write", "program:read", "framework:read", "topicFram:read"})
      * @Assert\NotBlank
      */
     private $name;
