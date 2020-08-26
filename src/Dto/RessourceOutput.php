@@ -16,7 +16,7 @@ final class RessourceOutput
 
     /**
      * @var string
-     * @Groups({"program:read", "resource:read", "level:read", "comment:read", "framework:read"})
+     * @Groups({"program:read", "resource:read", "level:read", "framework:read"})
      */
     public $resourceName;
 

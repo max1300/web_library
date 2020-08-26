@@ -2,14 +2,12 @@
 
 namespace App\Controller;
 
+
 use App\Entity\ForgotPassword;
-use App\Entity\User;
 use App\Mail\SymfonyMailer;
 use App\Repository\UserRepository;
 use App\Security\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,8 +15,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AuthController extends AbstractController
+
+class ForgotPasswordController  
 {
+
     /**
      * @var EntityManagerInterface
      */
@@ -39,7 +39,7 @@ class AuthController extends AbstractController
     private $tokenGenerator;
 
     /**
-     * AuthController constructor.
+     * LoginController constructor.
      * @param EntityManagerInterface $entityManager
      * @param SymfonyMailer $mailer
      * @param UserPasswordEncoderInterface $passwordEncoder
@@ -56,50 +56,6 @@ class AuthController extends AbstractController
         $this->mailer = $mailer;
         $this->passwordEncoder = $passwordEncoder;
         $this->tokenGenerator = $tokenGenerator;
-    }
-
-    /**
-     * @Route("/api/login_check", name="login")
-     * @param Request $request
-     * @param UserRepository $repository
-     * @return JsonResponse
-     */
-    public function login(Request $request, UserRepository $repository): JsonResponse
-    {
-        $data = json_decode($request->getContent(), true);
-        $user = $repository->findOneBy(['email' => $data["username"]]);
-        return $this->json([
-            'username'=>$user->getUsername(),
-            'roles'=>$user->getRoles(),
-            'login'=>$user->getLogin()
-        ]);
-    }
-
-    public function register(Request $request, UserPasswordEncoderInterface $encoder)
-    {
-        //on récupère le contenu de l'objet JSON
-        $content = json_decode($request->getContent(), true);
-
-        // on insere chaque champ de l'objet JSON dans un champ distinct
-        $username = $content['login'];
-        $mail = $content['email'];
-        $password = $content['password'];
-
-        //Creation d'un nouvel utilisateur
-        $user = new User();
-        $user->setEmail($mail);
-        $user->setLogin($username);
-        $user->setPassword($encoder->encodePassword($user, $password));
-        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
-        $user->setTokenConfirmation($this->tokenGenerator->getRandomToken());
-        //on persist le user
-        $this->entityManager->persist($user);
-        //on enregistre dans la BDD
-        $this->entityManager->flush();
-
-        //on envoit l'email de confirmation
-        $this->mailer->sendEmailConfirmation($user);
-        return new Response(sprintf('User %s successfully created', $user->getUsername()));
     }
 
     /**
@@ -121,6 +77,19 @@ class AuthController extends AbstractController
         }
 
         return new Response("OK");
+    }
+
+    /**
+     * @param ConstraintViolationListInterface $passwordError
+     * @return array
+     */
+    public function getFormError(ConstraintViolationListInterface $passwordError): array
+    {
+        $formErrors = [];
+        if (count($passwordError) > 0) {
+            $formErrors['passwordError'] = $passwordError[0]->getMessage();
+        }
+        return $formErrors;
     }
 
     /**
@@ -154,26 +123,15 @@ class AuthController extends AbstractController
         //recuperation de l'utilisateur lié au token et à la demande de mot de passe oublié
         $user = $repository->findOneBy(['forgotPasswordToken' => $token]);
 
-        if ($user !== null && $token === $user->getForgotPasswordToken())
-        {
-            $user->setPassword($this->passwordEncoder->encodePassword($user, $forgotPassword->getPassword()));
-            $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
-            $this->entityManager->flush();
-            return new Response("OK");
+        if ($user === null || $token !== $user->getForgotPasswordToken()) {
+            return new Response("user not identified or token not equal to forgotPasswordToken", 400);
         }
-    }
 
-    /**
-     * @param ConstraintViolationListInterface $passwordError
-     * @return array
-     */
-    public function getFormError(ConstraintViolationListInterface $passwordError): array
-    {
-        $formErrors = [];
-        if (count($passwordError) > 0) {
-            $formErrors['passwordError'] = $passwordError[0]->getMessage();
-        }
-        return $formErrors;
+        $user->setPassword($this->passwordEncoder->encodePassword($user, $forgotPassword->getPassword()));
+        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
+        $this->entityManager->flush();
+        return new Response("OK");
+
     }
 
     /**
@@ -186,4 +144,5 @@ class AuthController extends AbstractController
         $forgotPassword->setPassword($password['password']);
         return $forgotPassword;
     }
+
 }

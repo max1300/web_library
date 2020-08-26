@@ -93,13 +93,24 @@ class User implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Groups({"user:post", "user:put"})
-     * @Assert\NotBlank()
      * @Assert\Regex(
      *     pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
      *     message="Password must be at least seven character long and containe at least one digit or one special character, one upper case letter and one lower case letter"
      * )
      */
     private $password;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"user:post", "user:put"})
+     * @Assert\NotBlank(groups={"user:post"})
+     * @Assert\Regex(
+     *     pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
+     *     message="Password must be at least seven character long and containe at least one digit or one special character, one upper case letter and one lower case letter"
+     * )
+     */
+    private $plainPassword;
 
     /**
      * @var string The hashed password
@@ -244,15 +255,6 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword(string $password): void
-    {
-        $this->plainPassword = $password;
-    }
 
     public function setPassword(string $password): self
     {
@@ -293,7 +295,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLogin(): string
+    public function getLogin(): ?string
     {
         return $this->login;
     }
@@ -451,9 +453,10 @@ class User implements UserInterface
     }
 
 
-    public function setEnabledAccount(bool $enabledAccount): void
+    public function setEnabledAccount(bool $enabledAccount): self
     {
         $this->enabledAccount = $enabledAccount;
+        return $this;
     }
 
     /**
@@ -482,5 +485,16 @@ class User implements UserInterface
         $this->forgotPasswordToken = $forgotPasswordToken;
 
         return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password) :void
+    {
+        $this->plainPassword = $password;
+
     }
 }

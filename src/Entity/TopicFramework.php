@@ -8,7 +8,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource(mercure=true)
+ * @ApiResource(
+ *     mercure=true,
+ *     normalizationContext={"groups"={"topicFram:read"}},
+ *     denormalizationContext={"groups"={"topicFram:write"}}
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\TopicFrameworkRepository")
  */
 class TopicFramework extends Topic
@@ -16,7 +20,7 @@ class TopicFramework extends Topic
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Framework", inversedBy="topic", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read", "author:read", "level:read", "framework:write", "framework:read"})
+     * @Groups({"resource:read", "author:read", "level:read", "framework:write", "framework:read", "topicFram:read"})
      * @Assert\NotNull
      */
     private $framework;
