@@ -31,7 +31,8 @@ class JWTlistener
         }
 
         $data['data'] = [
-            'login' => $user->getLogin()
+            'login' => $user->getLogin(),
+            'roles' => $user->getRoles()
         ];
 
         $successEvent->setData($data);

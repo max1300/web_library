@@ -55,3 +55,8 @@ services:
         arguments: ['@security.token_storage']
         tags:
             - { name: 'serializer.normalizer', priority: 64 }
+
+    my.subscriber:
+        class: App\EventSubscriber\RegisterSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
