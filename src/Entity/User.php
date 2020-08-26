@@ -102,8 +102,9 @@ class User implements UserInterface
 
     /**
      * @var string
+     * @ORM\Column(type="string", nullable=true)
      * @Groups({"user:post", "user:put"})
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"user:post"})
      * @Assert\Regex(
      *     pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
      *     message="Password must be at least seven character long and containe at least one digit or one special character, one upper case letter and one lower case letter"
@@ -452,9 +453,10 @@ class User implements UserInterface
     }
 
 
-    public function setEnabledAccount(bool $enabledAccount): void
+    public function setEnabledAccount(bool $enabledAccount): self
     {
         $this->enabledAccount = $enabledAccount;
+        return $this;
     }
 
     /**
@@ -485,13 +487,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPlainPassword()
+    public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
 
-    public function setPlainPassword($password)
+    public function setPlainPassword($password) :void
     {
         $this->plainPassword = $password;
+
     }
 }
