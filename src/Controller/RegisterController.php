@@ -5,13 +5,14 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 
-class RegisterController
+class RegisterController extends AbstractController
 {
 
     /**
@@ -45,7 +46,7 @@ class RegisterController
         //on crée un formulaire symfony d'enregistrement de user tel que cela a été
         //défini dans la classe Usertype du package form
         //$form = $this->createForm(UserType::class, $user);
-        $form = $this->createFrom(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
         //on insère les données du formulaire react dans le formulaire symfony
         //si le nom des champs ne correspondent pas on aura une erreur
         $form->submit($content);
