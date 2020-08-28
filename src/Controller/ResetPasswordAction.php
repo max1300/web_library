@@ -22,6 +22,7 @@ class ResetPasswordAction
      * @var EntityManagerInterface
      */
     private $entityManager;
+
     /**
      * @var JWTTokenManagerInterface
      */
