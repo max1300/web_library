@@ -139,7 +139,7 @@ class ForgotPasswordController
     public function getFormError(ConstraintViolationListInterface $passwordError): array
     {
         $formErrors = [];
-        if (count($passwordError) > 0) {
+        if ($passwordError !== null) {
             $formErrors['passwordError'] = $passwordError[0]->getMessage();
         }
         return $formErrors;

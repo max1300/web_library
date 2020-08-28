@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-//Recoit le token transmis par l'utilisateur quand celui ci clique sur le lien dans l'email qu'on a envoyé et active le compte de l'utilisateur puis redirige sur "home"
+// Recoit le token transmis par l'utilisateur quand celui ci clique sur le lien dans l'email qu'on a envoyé et active le compte de l'utilisateur puis redirige sur "home"
 class AccountActivatorController extends AbstractController
 {
     /**
