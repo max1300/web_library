@@ -78,18 +78,16 @@ class ForgotPasswordController
 
         return new Response("OK");
     }
-
+    
     /**
-     * @param ConstraintViolationListInterface $passwordError
-     * @return array
+     * @param $password
+     * @return ForgotPassword
      */
-    public function getFormError(ConstraintViolationListInterface $passwordError): array
+    public function createNewForgotPassword($password): ForgotPassword
     {
-        $formErrors = [];
-        if (count($passwordError) > 0) {
-            $formErrors['passwordError'] = $passwordError[0]->getMessage();
-        }
-        return $formErrors;
+        $forgotPassword = new ForgotPassword();
+        $forgotPassword->setPassword($password['password']);
+        return $forgotPassword;
     }
 
     /**
@@ -135,14 +133,16 @@ class ForgotPasswordController
     }
 
     /**
-     * @param $password
-     * @return ForgotPassword
+     * @param ConstraintViolationListInterface $passwordError
+     * @return array
      */
-    public function createNewForgotPassword($password): ForgotPassword
+    public function getFormError(ConstraintViolationListInterface $passwordError): array
     {
-        $forgotPassword = new ForgotPassword();
-        $forgotPassword->setPassword($password['password']);
-        return $forgotPassword;
+        $formErrors = [];
+        if ($passwordError !== null) {
+            $formErrors['passwordError'] = $passwordError[0]->getMessage();
+        }
+        return $formErrors;
     }
 
 }

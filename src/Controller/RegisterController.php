@@ -23,7 +23,7 @@ class RegisterController extends AbstractController
 
 
     /**
-     * LoginController constructor.
+     * RegisterController constructor.
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(
@@ -45,7 +45,6 @@ class RegisterController extends AbstractController
 
         //on crée un formulaire symfony d'enregistrement de user tel que cela a été
         //défini dans la classe Usertype du package form
-        //$form = $this->createForm(UserType::class, $user);
         $form = $this->createForm(UserType::class, $user);
         //on insère les données du formulaire react dans le formulaire symfony
         //si le nom des champs ne correspondent pas on aura une erreur
@@ -59,7 +58,6 @@ class RegisterController extends AbstractController
             $errors = $this->getErrors($form);
             throw new BadRequestHttpException(json_encode($errors));
             //si on détecte une contrainte de validation non respectée, on lance une reponse JSON vers le front
-//            return $this->json($errors, 400);
         }
 
         //Ici intervient le registerSubscriber qui est un doctrine subscriber

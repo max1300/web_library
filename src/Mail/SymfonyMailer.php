@@ -11,6 +11,8 @@ use Twig\Environment;
 
 class SymfonyMailer
 {
+
+    public const BODY_CHARSET = 'text/html';
     /**
      * @var MailerInterface
      */
@@ -30,6 +32,7 @@ class SymfonyMailer
      * ADMIN_EMAIL variable
      */
     private $ADMIN_EMAIL;
+
 
     /**
      * SymfonyMailer constructor.
@@ -64,7 +67,7 @@ class SymfonyMailer
             ->from('webster-no-reply@gmail.com')
             ->to($user->getEmail())
             ->subject('Confirmation du compte')
-            ->text($body, 'text/html');
+            ->text($body, BODY_CHARSET);
 
         $this->mailer->send($email);
     }
@@ -82,7 +85,7 @@ class SymfonyMailer
             ->subject('Demande de réinitialisation de mot de passe')
             ->from('webster-no-reply@gmail.com')
             ->to($this->ADMIN_EMAIL)
-            ->text($body, 'text/html');
+            ->text($body, BODY_CHARSET);
 
         $this->mailer->send($email);
     }
@@ -101,7 +104,7 @@ class SymfonyMailer
             ->subject('Contact Message')
             ->from($contact->getEmail())
             ->to($this->ADMIN_EMAIL)
-            ->text($body, 'text/html');
+            ->text($body, BODY_CHARSET);
 
         $this->mailer->send($email);
     }

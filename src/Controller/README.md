@@ -1,7 +1,7 @@
 # Les controller
 ---
 
-## AuthController
+## LoginController
 Ce controller sert exclusivement aux fonctions d'authentification. On y retrouvera donc les fonctions de `login`, `register` et toutes les fonctions qui en découlent comme celles pour les mots de passes oubliés.
 
 ### *Login*
@@ -29,7 +29,7 @@ On retrouve donc le `user` grâce à son email (`qui sert d'identifiant unique`)
         ]);
     }
 ```
-### *mot de passe oublié*
+## ForgotPasswordController
 La fonction de mot de passe oublié est divisé en 2 fonctions qui vont avoir chacune un rôle particulier.
 
 La fonction `forgotPassword` va recevoir `l'email` de l'utilisateur via le front React. Grâce à ce mail, on va rechercher l'utilisateur en question afin de valider qu'il s'agisse d'un utilisateur inscrit. Une fois cela vérifié, on va construire un email via `SymfonyMailer` et envoyer ce mail à l'utilisateur avec un lien contenant un `token` de vérification. Ce lien va emmener l'utilisateur sur une nouvelle page `React` demandant à l'utilisateur de saisir son nouveau mot de passe. Cette page `React` va aussi se charger de récupérer le `token` présent dans le lien et de le renvoyer au Backend avec le nouveau mot de passe.
@@ -58,17 +58,24 @@ La fonction `forgotPassword` va recevoir `l'email` de l'utilisateur via le front
 ```
 Ce lien va emmener l'utilisateur sur une nouvelle page `React` demandant à l'utilisateur de saisir son nouveau mot de passe. Cette page `React` va aussi se charger de récupérer le `token` présent dans le lien et de le renvoyer au Backend avec le nouveau mot de passe.
 
+La fonction `createNewForgotPassword` va pouvoir créer un nouvel objet `$forgotPassword`et l'insérer dans le champs password.
+
 La fonction `resetForgotPassword` va servir quant à elle à reinitialiser le mot de passe depuis le backend vers la BDD. Le nouveau mot de passe va être récupéré et passer les contraintes de validation afin de terminer sa  validation. Puis le `user` faisant cette demande de nouveau mot de passe va être de nouveau authentifier via le `token` reçu dans la requête. Enfin si le `user` en question existe bien et si le `token` de vérification correspond bien au token de mot de passe oublié du `user` alors on peut encoder le nouveau mot de passe et l'insérer en base de donnée. De plus on attribut un nouveau `token` de verification au `user`
 
 ```php
-/**
-     * @Route("/reset-forgot-password/{token}", name="reset-forgot-password", methods={"PUT"})
-     * @param string $token
-     * @param Request $request
-     * @param UserRepository $repository
-     * @param ValidatorInterface $validator
-     * @return Response
+
+    
+    /**
+     * @param $password
+     * @return ForgotPassword
      */
+    public function createNewForgotPassword($password): ForgotPassword
+    {
+        $forgotPassword = new ForgotPassword();
+        $forgotPassword->setPassword($password['password']);
+        return $forgotPassword;
+    }
+
     public function resetForgotPassword(
         string $token,
         Request $request,
@@ -92,13 +99,15 @@ La fonction `resetForgotPassword` va servir quant à elle à reinitialiser le mo
         //recuperation de l'utilisateur lié au token et à la demande de mot de passe oublié
         $user = $repository->findOneBy(['forgotPasswordToken' => $token]);
 
-        if ($user !== null && $token === $user->getForgotPasswordToken())
-        {
-            $user->setPassword($this->passwordEncoder->encodePassword($user, $forgotPassword->getPassword()));
-            $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
-            $this->entityManager->flush();
-            return new Response("OK");
+        if ($user === null || $token !== $user->getForgotPasswordToken()) {
+            return new Response("user not identified or token not equal to forgotPasswordToken", 400);
         }
+
+        $user->setPassword($this->passwordEncoder->encodePassword($user, $forgotPassword->getPassword()));
+        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
+        $this->entityManager->flush();
+        return new Response("OK");
+
     }
 ```
 
@@ -158,7 +167,8 @@ public function SendMessage(Request $request, ValidatorInterface $validator)
 ```
 
 ---
-## DefaultController
+## AccountActivatorController
+Recoit le token transmis par l'utilisateur quand celui ci clique sur le lien dans l'email qu'on a envoyé et active le compte de l'utilisateur puis redirige sur "home".
 
 ### ConfirmUser
 La fonction `confirmUser` sert à recevoir le `token` présent dans le lien d'activation envoyé à l'utilisateur lors du processus d'activation d'un nouveau compte utilisateur. La fonction va faire appel à la class `UserConfirmationService` pour faire ce travail. Cette class va récupérer le `user` grâce au `token` et si le `user` est valide, elle va modifier la variable `isEnabledAccount` en BDD pour la mettre à `true`. Puis le `token` sera renouvelé. 
@@ -175,6 +185,67 @@ public function confirmUser(string $tokenConfirmation)
         $user->setEnabledAccount(true);
         $user->setTokenConfirmation(null);
         $this->entityManager->flush();
+    }
+```
+
+---
+## RegisterController
+
+Ce controller va servir à la création d'un nouvel utilisateur grâce à `registerSubscriber` qui un doctrine subscriber, à la validation des champs renseigné dans le formulaire, encoder le mot de passe, créer le token et envoyer le mail de la mail de l'activation.
+
+```php
+    public function register(Request $request)
+    {
+        //on récupère le contenu de l'objet JSON
+        $content = json_decode($request->getContent(), true);
+
+        //Creation d'un nouvel utilisateur
+        $user = new User();
+
+        //on crée un formulaire symfony d'enregistrement de user tel que cela a été
+        //défini dans la classe Usertype du package form
+        //$form = $this->createForm(UserType::class, $user);
+        $form = $this->createFrom(UserType::class, $user);
+        //on insère les données du formulaire react dans le formulaire symfony
+        //si le nom des champs ne correspondent pas on aura une erreur
+        $form->submit($content);
+
+        //on check la validité de chaque champ contenu dans le formulaire
+        //on laisse la main à l'entity user pour le login et l'email
+        //par contre on prend la main dans le formulaire sur les contraintes de validation sur le champ plainPassword
+        //afin de s'assurer que le mot de passe du formulaire react se conforme bien aux contraintes de validité (voir dans UserType)
+        if (!$form->isValid()) {
+            $errors = $this->getErrors($form);
+            throw new BadRequestHttpException(json_encode($errors));
+            //si on détecte une contrainte de validation non respectée, on lance une reponse JSON vers le front
+            //return $this->json($errors, 400);
+        }
+
+        //Ici intervient le registerSubscriber qui est un doctrine subscriber
+        //et qui va encoder le mot de passe, créé le token pour envoyer la confirmation
+        //et envoyer l'email pour l'activation du compte
+
+        //sinon on fait persister le nouveau user créé
+        $this->entityManager->persist($user);
+        //puis on l'enregistre en BDD
+        $this->entityManager->flush();
+
+        return new Response(sprintf('User %s successfully created', $user->getUsername()));
+    }
+
+    private function getErrors(FormInterface $form): array
+    {
+        $errors = [];
+        $formErrors = $form->getErrors(true);
+
+        foreach ($formErrors as $error) {
+            $field = $error->getOrigin()->getName();
+            $message = $error->getMessage();
+
+            $errors[$field] = $message;
+        }
+
+        return $errors;
     }
 ```
 
