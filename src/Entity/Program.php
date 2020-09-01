@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\ProgramOutput;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ApiResource(
@@ -28,6 +30,7 @@ use App\Dto\ProgramOutput;
  *     normalizationContext={"groups"={"program:read"}},
  *     denormalizationContext={"groups"={"program:write"}}
  * )
+ * @ApiFilter(SearchFilter::class, properties={"name": "exact"})
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
  */
 class Program
@@ -42,10 +45,10 @@ class Program
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "author:read", "level:read", "program:write", "program:read"})
+     * @Groups({"author:read", "level:read", "program:write", "program:read", "programLang:read"})
      */
     private $name;
-
+    
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Framework", mappedBy="program")
      * @Groups({"program:read"})

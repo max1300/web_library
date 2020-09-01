@@ -30,13 +30,16 @@ class UserOutputDataTransformer implements DataTransformerInterface
      */
     public function transform($data, string $to, array $context = []): UserOutput
     {
-        $this->validator->validate($data);
+            $this->validator->validate($data);
 
-        $output = new UserOutput();
-        $output->login = $data->getLogin();
-        $output->email = $data->getEmail();
-        $output->picture = $data->getProfilPic();
-        return $output;
+            $output = new UserOutput();
+            $output->id = $data ->getId();
+            $output->login = $data->getLogin();
+            $output->picture = $data->getProfilePic();
+            $output->email = $data->getEmail();
+            $output->role = $data->getRoles();
+            $output->username = $data->getUsername();
+            return $output;
     }
 
     /**

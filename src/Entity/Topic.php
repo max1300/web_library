@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -26,15 +25,16 @@ abstract class Topic
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "author:read", "level:read", "framework:write", "program:write"})
+     * @Groups({"resource:read", "author:read", "level:read", "framework:read"})
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="topic")
      * @Assert\NotNull
+     * @Groups({"program:read", "framework:read"})
      */
-    private $ressources;
+    protected $ressources;
 
     public function __construct()
     {

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,14 +16,13 @@ use App\Dto\LevelOutput;
  * @ApiResource(
  *     mercure=true,
  *     itemOperations={
- *     "get"={"path"="/level/{id}"},
- *      "put"={"path"="/level/{id}"},
- *      "delete"={"path"="/level/{id}"},
- *      "patch"={"path"="/level/{id}"}
+ *      "get",
+ *      "put",
+ *      "delete"
  *     },
  *     collectionOperations={
- *      "post"={"path"="/level"},
- *      "get"={"path"="/levels"}
+ *      "post",
+ *      "get"
  *     },
  *     output=LevelOutput::class,
  *     normalizationContext={"groups"={"level:read"}},
@@ -36,20 +36,20 @@ class Level
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "level:read", "level:write"})
+     * @Groups({"level:read", "level:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "level:read", "level:write"})
+     * @Groups({"program:read", "level:read", "level:write"})
      * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="level", orphanRemoval=true)
-     * @Groups("level:read")
+     * @ApiSubresource(maxDepth=1)
      * @ApiProperty(push=true)
      */
     private $ressources;

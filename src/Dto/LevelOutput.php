@@ -10,7 +10,7 @@ final class LevelOutput
 
     /**
      * @var string
-     * @Groups({"resource:read", "level:read", "level:write"})
+     * @Groups({"resource:read", "level:read", "level:write", "program:read", "framework:read"})
      */
     public $levelName;
 

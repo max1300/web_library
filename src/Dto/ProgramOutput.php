@@ -3,6 +3,7 @@
 namespace App\Dto;
 
 use App\Entity\Framework;
+use App\Entity\Topic;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 final class ProgramOutput
@@ -10,14 +11,20 @@ final class ProgramOutput
 
     /**
      * @var string
-     * @Groups({"program:read", "program:write", "framework:read"})
+     * @Groups({"resource:read", "program:read", "framework:read", "programLang:read"})
      */
     public $programName;
 
     /**
      * @var Framework
-     * @Groups({"program:read", "program:write"})
+     * @Groups({"resource:read", "program:read"})
      */
     public $frameworks;
+
+    /**
+     * @var Topic
+     * @Groups({"program:read"})
+     */
+    public $topic;
 
 }

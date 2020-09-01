@@ -38,6 +38,7 @@ class RessourceOutputDataTransformer implements DataTransformerInterface
         $output->level = $data->getLevel();
         $output->language = $data->getLanguage();
         $output->topic = $data->getTopic();
+        $output->publisher = $data->getUser();
         return $output;
     }
 

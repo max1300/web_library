@@ -9,37 +9,59 @@ use App\Entity\Program;
 use App\Entity\Ressource;
 use App\Entity\TopicFramework;
 use App\Entity\TopicProgrammingLanguage;
+use App\Security\TokenGenerator;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
+use Exception;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Validator\Constraints\Length;
 use Faker;
 use App\Entity\User;
 
 class AppFixtures extends Fixture
 {
     private $encoder;
+    /**
+     * @var TokenGenerator
+     */
+    private $tokenGenerator;
 
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordEncoderInterface $encoder, TokenGenerator $tokenGenerator)
     {
-      $this->encoder = $encoder;
+        $this->encoder = $encoder;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     public function load(ObjectManager $manager) :void
     {
         $faker = Faker\Factory::create('fr_FR');
+        $users = [];
 
-        for ($i = 0; $i < 70; $i++) {
+        $admin = new User();
+        $admin->setLogin('maxime')
+            ->setEmail('maxime@gmail.com')
+            ->setRoles(['ROLE_ADMIN'])
+            ->setEnabledAccount(true)
+            ->setPlainPassword('maxime1234');
+        $manager->persist($admin);
+
+        for ($i = 0; $i < 10; $i++) {
             $user = new User();
             $login = $faker->userName;
             $user->setEmail($faker->email)
                 ->setLogin($login)
-                ->setPassword($this->encoder->encodePassword(
-                    $user,
-                    'pass_' . $login
-                ))
-                ->setProfilPic($faker->imageUrl(150, 150));
+                ->setRoles(['ROLE_USER'])
+                ->setProfilePic($faker->imageUrl(150, 150));
+
+            $user->setPlainPassword('pass'.$login);
+            if ($i === 2 || $i === 6) {
+                $user->setEnabledAccount(false);
+                $user->setTokenConfirmation($this->tokenGenerator->getRandomToken());
+            } else {
+                $user->setEnabledAccount(true);
+            }
+
             $manager->persist($user);
+            $users[] = $user;
         }
 
 
@@ -49,41 +71,55 @@ class AppFixtures extends Fixture
         $programs = ['PHP', 'JAVASCRIPT', 'JAVA'];
 
         for($i = 0; $i < 3; $i++) {
-          $author = new Author();
-          $author->setName($authors[$i])
-                 ->setWebsite($websites[$i]);
-          $manager->persist($author);
+            $author = new Author();
+            $author->setName($authors[$i])
+                ->setWebsite($websites[$i]);
+            $manager->persist($author);
 
-          $level = new Level();
-          $level->setName($levels[$i]);
-          $manager->persist($level);
+            $level = new Level();
+            $level->setName($levels[$i]);
+            $manager->persist($level);
 
-          $program = new Program();
-          $program->setName($programs[$i]);
-          $manager->persist($program);
+            $program = new Program();
+            $program->setName($programs[$i]);
+            $manager->persist($program);
 
-          if($i === 0){
-              $this->getDataPhp($manager, $program, $author, $level);
-          }
+            if($i === 0){
+                try {
+                    $this->getDataPhp($manager, $program, $author, $level, $users);
+                } catch (Exception $e) {
+                    echo 'Exception reçue : ',  $e->getMessage(), "\n";
+                }
+            }
 
-          if($i === 1){
-              $this->getDataJavascript($manager, $program, $author, $level);
-          }
+            if($i === 1){
+                try {
+                    $this->getDataJavascript($manager, $program, $author, $level, $users);
+                } catch (Exception $e) {
+                    echo 'Exception reçue : ',  $e->getMessage(), "\n";
+                }
+            }
 
-          if($i === 2){
-              $this->getDataJava($manager, $program, $author, $level);
-          }
-      }
+            if($i === 2){
+                try {
+                    $this->getDataJava($manager, $program, $author, $level, $users);
+                } catch (Exception $e) {
+                    echo 'Exception reçue : ',  $e->getMessage(), "\n";
+                }
+            }
+        }
     $manager->flush();
-  }
+}
 
     /**
      * @param ObjectManager $manager
      * @param Program $program
      * @param Author $author
      * @param Level $level
+     * @param $users
+     * @throws Exception
      */
-    public function getDataPhp(ObjectManager $manager, Program $program, Author $author, Level $level): void
+    public function getDataPhp(ObjectManager $manager, Program $program, Author $author, Level $level, $users): void
     {
         $symfony = $this->getFramework(
             $manager,
@@ -103,7 +139,8 @@ class AppFixtures extends Fixture
             $phpTopic,
             'French',
             'Découvrez les tableaux en PHP',
-            'https://symfony.com/doc/current/index.html'
+            'https://symfony.com/doc/current/index.html',
+            $users[random_int(0,9)]
         );
 
         $this->getFrameworkResource(
@@ -113,7 +150,8 @@ class AppFixtures extends Fixture
             $symfonyTopic,
             'French',
             'Découvrez Symfony',
-            'https://symfony.com/doc/current/index.html'
+            'https://symfony.com/doc/current/index.html',
+            $users[random_int(0,9)]
         );
     }
 
@@ -122,8 +160,10 @@ class AppFixtures extends Fixture
      * @param Program $program
      * @param Author $author
      * @param Level $level
+     * @param $users
+     * @throws Exception
      */
-    public function getDataJavascript(ObjectManager $manager, Program $program, Author $author, Level $level): void
+    public function getDataJavascript(ObjectManager $manager, Program $program, Author $author, Level $level, $users): void
     {
         $react = $this->getFramework(
             $manager,
@@ -143,7 +183,8 @@ class AppFixtures extends Fixture
             $javascriptTopic,
             'French',
             'Découvrez les tableaux en javascript',
-            'https://react.com/doc/current/index.html'
+            'https://react.com/doc/current/index.html',
+            $users[random_int(0,9)]
         );
 
         $this->getFrameworkResource(
@@ -153,7 +194,8 @@ class AppFixtures extends Fixture
             $reactTopic,
             'French',
             'Découvrez React',
-            'https://react.com/doc/current/index.html'
+            'https://react.com/doc/current/index.html',
+            $users[random_int(0,9)]
         );
     }
 
@@ -162,8 +204,10 @@ class AppFixtures extends Fixture
      * @param Program $program
      * @param Author $author
      * @param Level $level
+     * @param $users
+     * @throws Exception
      */
-    public function getDataJava(ObjectManager $manager, Program $program, Author $author, Level $level): void
+    public function getDataJava(ObjectManager $manager, Program $program, Author $author, Level $level, $users): void
     {
         $spring = $this->getFramework(
             $manager,
@@ -183,7 +227,8 @@ class AppFixtures extends Fixture
             $javaTopic,
             'French',
             'Découvrez les tableaux en Java',
-            'https://java.com/doc/current/index.html'
+            'https://java.com/doc/current/index.html',
+            $users[random_int(0,9)]
         );
 
         $this->getFrameworkResource(
@@ -193,7 +238,8 @@ class AppFixtures extends Fixture
             $springTopic,
             'French',
             'Decouvrez Spring',
-            'https://spring.com/doc/current/index.html'
+            'https://spring.com/doc/current/index.html',
+            $users[random_int(0,9)]
         );
     }
 
@@ -248,6 +294,7 @@ class AppFixtures extends Fixture
      * @param $language
      * @param $name
      * @param $url
+     * @param $users
      */
     public function getResource(
         ObjectManager $manager,
@@ -256,7 +303,8 @@ class AppFixtures extends Fixture
         TopicProgrammingLanguage $programmingLanguage,
         $language,
         $name,
-        $url
+        $url,
+        $users
     ): void
     {
         $resource = new Ressource();
@@ -265,7 +313,8 @@ class AppFixtures extends Fixture
             ->setLevel($level)
             ->setName($name)
             ->setUrl($url)
-            ->setTopic($programmingLanguage);
+            ->setTopic($programmingLanguage)
+            ->setUser($users);
         $manager->persist($resource);
     }
 
@@ -277,6 +326,7 @@ class AppFixtures extends Fixture
      * @param $language
      * @param $name
      * @param $url
+     * @param $users
      */
     public function getFrameworkResource(
         ObjectManager $manager,
@@ -285,7 +335,8 @@ class AppFixtures extends Fixture
         TopicFramework $framework,
         $language,
         $name,
-        $url
+        $url,
+        $users
     ): void
     {
         $resource = new Ressource();
@@ -294,8 +345,8 @@ class AppFixtures extends Fixture
             ->setLevel($level)
             ->setName($name)
             ->setUrl($url)
-            ->setTopic($framework);
+            ->setTopic($framework)
+            ->setUser($users);
         $manager->persist($resource);
     }
-  
 }

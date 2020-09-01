@@ -6,9 +6,21 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Dto\ItemOutput;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     mercure=true,
+ *     normalizationContext={"groups"={"topicFram:write"}},
+ *     collectionOperations={
+ *        "get-select-items"={
+ *        "method"="GET",
+ *        "path"="/frameworks/getItems",
+ *        "normalization_context"={"groups"={"topicFram:get-select-items"}},
+ *        "output"=ItemOutput::class
+ *      },
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\TopicFrameworkRepository")
  */
 class TopicFramework extends Topic
@@ -16,7 +28,7 @@ class TopicFramework extends Topic
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Framework", inversedBy="topic", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read", "author:read", "level:read", "framework:write"})
+     * @Groups({"resource:read", "author:read", "level:read", "framework:write", "framework:read", "topicFram:get-select-items"})
      * @Assert\NotNull
      */
     private $framework;
