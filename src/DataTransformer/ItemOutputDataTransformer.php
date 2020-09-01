@@ -4,6 +4,7 @@ namespace App\DataTransformer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use ApiPlatform\Core\Validator\ValidatorInterface;
+use ApiPlatform\Core\Api\IriConverterInterface;
 use App\Dto\ItemOutput;
 use App\Entity\TopicFramework;
 
@@ -11,9 +12,12 @@ class ItemOutputDataTransformer implements DataTransformerInterface
 {
   private $validator;
 
-    public function __construct(ValidatorInterface $validator)
+  private $iriConverter;
+
+    public function __construct(ValidatorInterface $validator, IriConverterInterface $iriConverter)
     {
         $this->validator = $validator;
+        $this->iriConverter = $iriConverter;
     }
 
     public function transform($data, string $to, array $context = [])
@@ -21,7 +25,7 @@ class ItemOutputDataTransformer implements DataTransformerInterface
         $this->validator->validate($data);
 
         $output = new ItemOutput();
-        $output->value = $data->getId();
+        $output->value = $this->iriConverter->getIriFromItem($data);
         $output->label = $data->getFramework()->getName();
         return $output;
     }
