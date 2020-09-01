@@ -48,7 +48,7 @@ class Program
      * @Groups({"author:read", "level:read", "program:write", "program:read", "programLang:read"})
      */
     private $name;
-
+    
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Framework", mappedBy="program")
      * @Groups({"program:read"})
