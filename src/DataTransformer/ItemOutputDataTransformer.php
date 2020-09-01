@@ -3,53 +3,35 @@
 namespace App\DataTransformer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
-use ApiPlatform\Core\Validator\ValidatorInterface;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use App\Dto\ItemOutput;
-use App\Entity\TopicFramework;
-use App\Entity\TopicProgrammingLanguage;
-use App\Entity\Level;
-use App\Entity\Author;
+use App\Entity\IItemOutputTransformable;
 
 class ItemOutputDataTransformer implements DataTransformerInterface
 {
-    private $validator;
 
     private $iriConverter;
 
-    public function __construct(ValidatorInterface $validator, IriConverterInterface $iriConverter)
+    public function __construct(IriConverterInterface $iriConverter)
     {
-        $this->validator = $validator;
         $this->iriConverter = $iriConverter;
     }
 
     public function transform($data, string $to, array $context = [])
     {
-        $this->validator->validate($data);
+        if(!$data instanceof IItemOutputTransformable)
+        {
+            return null;
+        }
 
         $output = new ItemOutput();
         $output->value = $this->iriConverter->getIriFromItem($data);
-
-        if($data instanceof TopicFramework) 
-        {
-            $output->label = $data->getFramework()->getName();
-        } 
-
-        else if ($data instanceof TopicProgrammingLanguage)
-        {
-            $output->label = $data->getProgrammingLanguage()->getName();
-        } 
-
-        else if ($data instanceof Author)
-        {
-            $output->label = $data->getName();
-        }
-
-        else if ($data instanceof Level)
-        {
-            $output->label = $data->getName();
-
-        }
+        //ce que Lucas aimerait : pour chaque entité une methode getLabel
+        //on fait du polymorphisme dans $data->getLabel(), que ce soit un level, un author ou ...
+        //définir un methode getLabel qui est un contrat d'implementation comme ça qlq soit le type de l'entité
+        //le DataTransformer saura que le contrat est respecté par l'entité
+        //on va devoir dans notre dossier entity un nouveau fichier
+        $output->label = $data->getLabel();
 
         return $output;
     }
@@ -57,6 +39,6 @@ class ItemOutputDataTransformer implements DataTransformerInterface
     //Permet de récupérer les données de TopicFramework et les retourne transformer dans la classe ItemOutput
     public function supportsTransformation($data, string $to, array $context = []): bool
     {
-        return ItemOutput::class === $to && $data instanceof TopicFramework || $data instanceof TopicProgrammingLanguage || $data instanceof Author || $data instanceof Level;
+        return ItemOutput::class === $to && $data instanceof IItemOutputTransformable;
     }
 }

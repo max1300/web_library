@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\ItemOutput;
+use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
  * @ApiResource(
@@ -24,7 +25,7 @@ use App\Dto\ItemOutput;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\TopicProgrammingLanguageRepository")
  */
-class TopicProgrammingLanguage extends Topic
+class TopicProgrammingLanguage extends Topic implements IItemOutputTransformable
 {
   /**
    * @ORM\OneToOne(targetEntity="App\Entity\Program", inversedBy="topic", cascade={"persist", "remove"})
@@ -33,6 +34,11 @@ class TopicProgrammingLanguage extends Topic
    * @Assert\NotNull
    */
   private $programmingLanguage;
+
+  public function getLabel(): string
+  {
+    return $this->getProgrammingLanguage()->getName();
+  }
 
   public function getProgrammingLanguage(): ?Program
   {
