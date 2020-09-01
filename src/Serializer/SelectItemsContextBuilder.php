@@ -3,12 +3,16 @@
 namespace App\Serializer;
 
 use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
+use App\Entity\TopicProgrammingLanguage;
+use App\Entity\Author;
+use App\Entity\Level;
+use App\Entity\TopicFramework;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class SelectItemsContextBuilder implements SerializerContextBuilderInterface
 {
-  private $builder;
+    private $builder;
 
     /**
      * UserContextBuilder constructor.
@@ -31,6 +35,21 @@ class SelectItemsContextBuilder implements SerializerContextBuilderInterface
             isset($context['groups']) &&
             $normalization === true) {
             $context['groups'][] = 'topicFram:get-select-items';
+        }
+        else if( TopicProgrammingLanguage::class === $resourceClass &&
+        isset($context['groups']) &&
+        $normalization === true) {
+        $context['groups'][] = 'programLang:get-select-items';
+        }
+        else if( Author::class === $resourceClass &&
+        isset($context['groups']) &&
+        $normalization === true) {
+        $context['groups'][] = 'auhtors:get-select-items';
+        }
+        else if( Level::class === $resourceClass &&
+        isset($context['groups']) &&
+        $normalization === true) {
+        $context['groups'][] = 'levels:get-select-items';
         }
 
         return $context;
