@@ -32,13 +32,14 @@ class RessourceOutputDataTransformer implements DataTransformerInterface
         $this->validator->validate($data);
 
         $output = new RessourceOutput();
+        $output->id = $data ->getId();
         $output->resourceName = $data->getName();
         $output->url = $data->getUrl();
-        $output->author = $data->getAuthor();
-        $output->level = $data->getLevel();
+        $output->author = $data->getAuthor()->getName();
+        $output->level = $data->getLevel()->getName();
         $output->language = $data->getLanguage();
         $output->topic = $data->getTopic();
-        $output->publisher = $data->getUser();
+        $output->publisher = $data->getUser()->getLogin();
         return $output;
     }
 

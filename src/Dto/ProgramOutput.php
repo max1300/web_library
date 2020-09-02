@@ -10,6 +10,12 @@ final class ProgramOutput
 {
 
     /**
+     * @var int
+     * @Groups({"user:get", "comment:read", "resource:read", "program:read", "framework:read"})
+     */
+    public $id;
+
+    /**
      * @var string
      * @Groups({"resource:read", "program:read", "framework:read", "programLang:read"})
      */

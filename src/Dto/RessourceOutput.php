@@ -15,6 +15,12 @@ final class RessourceOutput
 {
 
     /**
+     * @var int
+     * @Groups({"user:get", "comment:read", "resource:read", "program:read", "framework:read"})
+     */
+    public $id;
+
+    /**
      * @var string
      * @Groups({"program:read", "resource:read", "level:read", "framework:read"})
      */

@@ -12,7 +12,6 @@ use Twig\Environment;
 class SymfonyMailer
 {
 
-    public const BODY_CHARSET = 'text/html';
     /**
      * @var MailerInterface
      */
@@ -67,7 +66,7 @@ class SymfonyMailer
             ->from('webster-no-reply@gmail.com')
             ->to($user->getEmail())
             ->subject('Confirmation du compte')
-            ->text($body, BODY_CHARSET);
+            ->text($body, 'text/html');
 
         $this->mailer->send($email);
     }
