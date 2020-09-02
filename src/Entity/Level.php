@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\LevelOutput;
 use App\Dto\ItemOutput;
 
+
 /**
  * @ApiResource(
  *     mercure=true,
@@ -37,8 +38,9 @@ use App\Dto\ItemOutput;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\LevelRepository")
  */
-class Level
+class Level implements IItemOutputTransformable
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -64,6 +66,10 @@ class Level
     public function __construct()
     {
         $this->ressources = new ArrayCollection();
+    }
+    public function getLabel(): string
+    {
+        return $this->getName();
     }
 
     public function getId(): ?int

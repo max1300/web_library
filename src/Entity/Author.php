@@ -38,7 +38,7 @@ use App\Dto\ItemOutput;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
  */
-class Author
+class Author implements IItemOutputTransformable
 {
     /**
      * @ORM\Id()
@@ -76,6 +76,11 @@ class Author
         $this->ressources = new ArrayCollection();
     }
 
+    public function getLabel(): string
+    {
+        return $this->getName();
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
