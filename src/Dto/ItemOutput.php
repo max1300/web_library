@@ -2,10 +2,7 @@
 
 namespace App\Dto;
 
-use App\Entity\TopicFramework;
-use App\Entity\TopicProgrammingLanguage;
-use App\Entity\Author;
-use App\Entity\Level;
+
 use Symfony\Component\Serializer\Annotation\Groups;
 
 final class ItemOutput {
