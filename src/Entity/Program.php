@@ -17,10 +17,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ApiResource(
  *     mercure=true,
  *     itemOperations={
- *     "get"={"path"="/program/{id}"},
- *      "put"={"path"="/program/{id}"},
- *      "delete"={"path"="/program/{id}"},
- *      "patch"={"path"="/program/{id}"}
+ *     "get"={"path"="/programs/{id}"},
+ *      "put"={"path"="/programs/{id}"},
+ *      "delete"={"path"="/programs/{id}"},
+ *      "patch"={"path"="/programs/{id}"}
  *     },
  *     collectionOperations={
  *      "post"={"path"="/programs"},

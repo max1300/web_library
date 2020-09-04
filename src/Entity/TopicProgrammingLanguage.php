@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use App\Dto\ItemOutput;
+use App\Dto\ProgramingLanguageOutput;
 
 /**
  * @ApiResource(
@@ -21,7 +22,8 @@ use App\Dto\ItemOutput;
  *        },
  *        "post",
  *        "get"
- *     }
+ *     },
+ *     output=ProgramingLanguageOutput::class,
  * )
  * @ORM\Entity(repositoryClass="App\Repository\TopicProgrammingLanguageRepository")
  */
