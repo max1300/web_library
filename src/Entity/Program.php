@@ -23,7 +23,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *      "patch"={"path"="/program/{id}"}
  *     },
  *     collectionOperations={
- *      "post"={"path"="/program"},
+ *      "post"={"path"="/programs"},
  *      "get"={"path"="/programs"}
  *     },
  *     output=ProgramOutput::class,
@@ -45,7 +45,7 @@ class Program
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"author:read", "level:read", "program:write", "program:read", "programLang:read"})
+     * @Groups({"author:read", "level:read", "program:write", "program:read", "programLang:read", "programLang:write"})
      */
     private $name;
     
@@ -58,8 +58,7 @@ class Program
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\TopicProgrammingLanguage", mappedBy="programmingLanguage", cascade={"persist", "remove"})
-     * @Groups("program:write")
-     * @Assert\NotBlank
+     * @Groups ({"programLang:write"})
      */
     private $topic;
 

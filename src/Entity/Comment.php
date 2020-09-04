@@ -70,11 +70,6 @@ class Comment implements AuthorEntityInterface, PublishedAtInterface
      * @Groups({"comment:read"})
      */
     private $user;
-    
-    public function __construct()
-    {
-
-    }
 
     public function getId(): ?int
     {
