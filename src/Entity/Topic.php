@@ -25,7 +25,7 @@ abstract class Topic
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "author:read", "level:read", "framework:read"})
+     * @Groups({"resource:read", "author:read", "level:read", "framework:read", "program:write", "programLang:write"})
      */
     protected $id;
 
