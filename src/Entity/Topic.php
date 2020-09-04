@@ -30,7 +30,7 @@ abstract class Topic
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="topic")
+     * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="topic", cascade={"remove"})
      * @Assert\NotNull
      * @Groups({"program:read", "framework:read"})
      */
