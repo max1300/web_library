@@ -26,11 +26,6 @@ class ItemOutputDataTransformer implements DataTransformerInterface
 
         $output = new ItemOutput();
         $output->value = $this->iriConverter->getIriFromItem($data);
-        //ce que Lucas aimerait : pour chaque entité une methode getLabel
-        //on fait du polymorphisme dans $data->getLabel(), que ce soit un level, un author ou ...
-        //définir un methode getLabel qui est un contrat d'implementation comme ça qlq soit le type de l'entité
-        //le DataTransformer saura que le contrat est respecté par l'entité
-        //on va devoir dans notre dossier entity un nouveau fichier
         $output->label = $data->getLabel();
 
         return $output;
