@@ -31,7 +31,7 @@ itemOperations={
 **Topic.php** -> ajout de l'annotation 'cascade={remove}' pour supprimer les ressources liées à un program lorsque ce program est supprimé
 
 **TopicProgrammingLanguage.php** -> ajout de l'annotation 'output=ProgramingLanguageOutput::class' afin d'affilier le DTO et l'entité.
-Le group de serialization ```php "programLang:read" ``` permet de transformer en objet JSON l'objet php Topic_programming_language. Les champs annotés par ce group
+Le group de serialization ``` "programLang:read" ``` permet de transformer en objet JSON l'objet php Topic_programming_language. Les champs annotés par ce group
 seront alors inclus dans l'objet JSON. Ces champs peuvent provenir de l'entity Topic_programming_language mais aussi d'autres entity
 
 exemple dans le FrameworkOutput.php:
