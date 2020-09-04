@@ -26,7 +26,6 @@ itemOperations={
  *      "put"={"path"="/programs/{id}"},
  *      "delete"={"path"="/programs/{id}"},
  *      "patch"={"path"="/programs/{id}"}
- *     }
 
 **Topic.php** -> ajout de l'annotation 'cascade={remove}' pour supprimer les ressources liées à un program lorsque ce program est supprimé
 
