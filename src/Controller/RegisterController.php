@@ -64,14 +64,12 @@ class RegisterController extends AbstractController
         //Ici intervient le registerSubscriber qui est un doctrine subscriber
         //et qui va encoder le mot de passe, créé le token pour envoyer la confirmation
         //et envoyer l'email pour l'activation du compte
-
+        $event = new UserRegisteredEvent($user);
+        $dispatcher->dispatch($event, UserRegisteredEvent::NAME);
         //sinon on fait persister le nouveau user créé
         $this->entityManager->persist($user);
         //puis on l'enregistre en BDD
         $this->entityManager->flush();
-
-        $event = new UserRegisteredEvent($user);
-        $dispatcher->dispatch($event, UserRegisteredEvent::NAME);
 
         return new Response(sprintf('User %s successfully created', $user->getUsername()));
     }
