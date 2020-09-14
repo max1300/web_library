@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Event\UserRegisteredEvent;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,14 +30,13 @@ class RegisterController extends AbstractController
      */
     public function __construct(
         EntityManagerInterface $entityManager
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
     }
 
 
 
-    public function register(Request $request)
+    public function register(Request $request, EventDispatcherInterface $dispatcher)
     {
         //on récupère le contenu de l'objet JSON
         $content = json_decode($request->getContent(), true);
@@ -68,6 +69,9 @@ class RegisterController extends AbstractController
         $this->entityManager->persist($user);
         //puis on l'enregistre en BDD
         $this->entityManager->flush();
+
+        $event = new UserRegisteredEvent($user);
+        $dispatcher->dispatch($event, UserRegisteredEvent::NAME);
 
         return new Response(sprintf('User %s successfully created', $user->getUsername()));
     }
