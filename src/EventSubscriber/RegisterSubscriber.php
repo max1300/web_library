@@ -12,8 +12,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 //Permet d'envoyer le mail de confirmation
-// il s'agit d'un doctrine eventSubscriber et non plus d'un symfony eventsubscriber
-// la différence est que les events se déclenchent sur les événements en relation avec la base de données
+// il s'agit d'un symfony eventsubscriber
 class RegisterSubscriber implements EventSubscriberInterface
 {
 
@@ -49,21 +48,13 @@ class RegisterSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         //on indique à Symfony que l'événement qui sera déclenché ici
-        //sera un évènement qui se passera juste avant une action de persistence
-        //ex : $this->entityManager->persist($user);
+        //sera un évènement personnalisé qui et qui ira récuperer le
+        //nom de l'event et appellera la fonction onUserRegisteredEvent 
         return array(
-            //'prePersist',
             UserRegisteredEvent::NAME => 'onUserRegisteredEvent'
         );
     }
-
-    /*
-    public function prePersist(UserRegisteredEvent $event)
-    {
-        //on indique clairement que cette évènement déclenchera la fonction userRegistered()
-        $this->userRegistered($event);
-    }
-    */
+    
     public function onUserRegisteredEvent(UserRegisteredEvent $event)
     {
 
