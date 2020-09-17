@@ -16,7 +16,7 @@ use App\Dto\ProgramingLanguageOutput;
  *     collectionOperations={
  *        "get-select-items"={
  *        "method"="GET",
- *        "path"="/programs/getItems",
+ *        "path"="/programsTopic/getItems",
  *        "normalization_context"={"groups"={"programLang:get-select-items"}},
  *        "output"=ItemOutput::class
  *        },

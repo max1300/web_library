@@ -107,4 +107,9 @@ pour récupérer les labels de chaque entité.
 - topicProgrammng language est un héritage de topic.
 - L’heritage veut dire qu’on peut pas faire une autre classe.
 - On peut pas deviner à une execution le type de l’entité.
+<<<<<<< HEAD
 - Dans le cas où on a un même namespace, pas besoin du use.
+
+=======
+- Dans le cas où on a un même namespace, pas besoin du use.
+>>>>>>> 262260df5541035aa4241a3592748383905ba3a0
