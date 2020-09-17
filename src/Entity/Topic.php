@@ -25,12 +25,12 @@ abstract class Topic
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "author:read", "level:read", "framework:read"})
+     * @Groups({"resource:read", "author:read", "level:read", "framework:read", "program:write", "programLang:write"})
      */
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="topic")
+     * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="topic", cascade={"remove"})
      * @Assert\NotNull
      * @Groups({"program:read", "framework:read"})
      */

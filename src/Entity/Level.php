@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\LevelOutput;
+use App\Dto\ItemOutput;
+
 
 /**
  * @ApiResource(
@@ -22,7 +24,13 @@ use App\Dto\LevelOutput;
  *     },
  *     collectionOperations={
  *      "post",
- *      "get"
+ *      "get",
+ *       "get-select-items"={
+ *       "method"="GET",
+ *       "path"="/levels/getItems",
+ *       "normalization_context"={"groups"={"levels:get-select-items"}},
+ *       "output"=ItemOutput::class
+ *      },
  *     },
  *     output=LevelOutput::class,
  *     normalizationContext={"groups"={"level:read"}},
@@ -30,19 +38,20 @@ use App\Dto\LevelOutput;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\LevelRepository")
  */
-class Level
+class Level implements IItemOutputTransformable
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"level:read", "level:write"})
+     * @Groups({"level:read", "level:write", "levels:get-select-items"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"program:read", "level:read", "level:write"})
+     * @Groups({"program:read", "level:read", "level:write", "levels:get-select-items"})
      * @Assert\NotBlank
      */
     private $name;
@@ -57,6 +66,10 @@ class Level
     public function __construct()
     {
         $this->ressources = new ArrayCollection();
+    }
+    public function getLabel(): string
+    {
+        return $this->getName();
     }
 
     public function getId(): ?int

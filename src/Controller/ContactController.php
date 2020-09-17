@@ -58,20 +58,20 @@ class ContactController extends AbstractController
         $messageError = $validator->validateProperty($contact, 'message');
 
         $formErrors = [];
-        if($nameError !== null) {
+        if(empty($nameError)) {
             $formErrors['nameError'] = $nameError[0]->getMessage();
         }
-        if($emailError !== null) {
+        if(empty($emailError)) {
             $formErrors['emailError'] = $emailError[0]->getMessage();
         }
-        if($subjectError !== null) {
+        if(empty($subjectError)) {
             $formErrors['subjectError'] = $subjectError[0]->getMessage();
         }   
-        if($messageError !== null) {
+        if(empty($messageError)) {
             $formErrors['messageError'] = $messageError[0]->getMessage();
         }         
         if($formErrors) {
-            return new JsonResponse($formErrors);
+            return new JsonResponse($formErrors, Response::HTTP_BAD_REQUEST);
         }
 
         //Sending mail if the contact form does not contain errors

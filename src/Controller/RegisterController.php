@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Event\UserRegisteredEvent;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,14 +30,13 @@ class RegisterController extends AbstractController
      */
     public function __construct(
         EntityManagerInterface $entityManager
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
     }
 
 
 
-    public function register(Request $request)
+    public function register(Request $request, EventDispatcherInterface $dispatcher)
     {
         //on récupère le contenu de l'objet JSON
         $content = json_decode($request->getContent(), true);
@@ -56,15 +57,17 @@ class RegisterController extends AbstractController
         //afin de s'assurer que le mot de passe du formulaire react se conforme bien aux contraintes de validité (voir dans UserType)
         if (!$form->isValid()) {
             $errors = $this->getErrors($form);
-            throw new BadRequestHttpException(json_encode($errors));
+            return new Response(json_encode($errors), Response::HTTP_BAD_REQUEST);
             //si on détecte une contrainte de validation non respectée, on lance une reponse JSON vers le front
         }
 
-        //Ici intervient le registerSubscriber qui est un doctrine subscriber
-        //et qui va encoder le mot de passe, créé le token pour envoyer la confirmation
-        //et envoyer l'email pour l'activation du compte
-
-        //sinon on fait persister le nouveau user créé
+        //Ici on crée un nouvel Event Personnalisé
+        //qui prend en paramètres un objet User ensuite 
+        //cet evenément sera dispatcher au Suscriber
+        //c'est à qu'il écoutera cet event en particulier  
+        $event = new UserRegisteredEvent($user);
+        $dispatcher->dispatch($event, UserRegisteredEvent::NAME);
+        //on fait persister le nouveau user créé
         $this->entityManager->persist($user);
         //puis on l'enregistre en BDD
         $this->entityManager->flush();

@@ -2,18 +2,18 @@
 
 namespace App\EventSubscriber;
 
-use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use App\Mail\SymfonyMailer;
 use App\Entity\User;
 use App\Security\TokenGenerator;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use App\Event\UserRegisteredEvent;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
+
 //Permet d'envoyer le mail de confirmation
-// il s'agit d'un doctrine eventSubscriber et non plus d'un symfony eventsubscriber
-// la différence est que les events se déclenchent sur les événements en relation avec la base de données
-class RegisterSubscriber implements EventSubscriber
+// il s'agit d'un symfony eventsubscriber
+class RegisterSubscriber implements EventSubscriberInterface
 {
 
     private $encoder;
@@ -45,28 +45,21 @@ class RegisterSubscriber implements EventSubscriber
         $this->symfonyMailer = $mailer;
     }
 
-    public function getSubscribedEvents()
+    public static function getSubscribedEvents()
     {
         //on indique à Symfony que l'événement qui sera déclenché ici
-        //sera un évènement qui se passera juste avant une action de persistence
-        //ex : $this->entityManager->persist($user);
+        //sera un évènement personnalisé qui et qui ira récuperer le
+        //nom de l'event et appellera la fonction onUserRegisteredEvent 
         return array(
-            'prePersist',
+            UserRegisteredEvent::NAME => 'onUserRegisteredEvent'
         );
     }
-
-
-    public function prePersist(LifecycleEventArgs $args)
-    {
-        //on indique clairement que cette évènement déclenchera la fonction userRegistered()
-        $this->userRegistered($args);
-    }
-
-    public function userRegistered(LifecycleEventArgs $args)
+    
+    public function onUserRegisteredEvent(UserRegisteredEvent $event)
     {
 
         //on recupère l'entity sur laquelle l'évènement s'est déclenché
-        $user = $args->getEntity();
+        $user = $event->getUserRegistered();
 
         //si cette entity n'est pas une entity User alors on ne retourne rien
         if(!$user instanceof User) {
@@ -84,6 +77,4 @@ class RegisterSubscriber implements EventSubscriber
         //on envoit l'email contenant le token pour la confirmation du compte
         $this->symfonyMailer->sendEmailConfirmation($user);
     }
-
-
 }

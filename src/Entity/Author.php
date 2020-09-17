@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Dto\AuthorOutput;
+use App\Dto\ItemOutput;
+
 
 /**
  * @ApiResource(
@@ -21,8 +23,14 @@ use App\Dto\AuthorOutput;
  *      "delete",
  *     },
  *     collectionOperations={
- *      "post",
- *      "get"
+ *       "post",
+ *       "get",
+ *       "get-select-items"={
+ *       "method"="GET",
+ *       "path"="/authors/getItems",
+ *       "normalization_context"={"groups"={"authors:get-select-items"}},
+ *       "output"=ItemOutput::class
+ *      },
  *     },
  *     output=AuthorOutput::class,
  *     normalizationContext={"groups"={"author:read"}},
@@ -30,26 +38,26 @@ use App\Dto\AuthorOutput;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
  */
-class Author
+class Author implements IItemOutputTransformable
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "resource:write", "author:read", "author:write"})
+     * @Groups({"resource:read", "resource:write", "author:read", "author:write", "authors:get-select-items"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:write", "author:read", "author:write"})
+     * @Groups({"resource:write", "author:read", "author:write", "authors:get-select-items"})
      * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"resource:write", "author:read", "author:write"})
+     * @Groups({"resource:write", "author:read", "author:write", "authors:get-select-items"})
      * @Assert\Url(
      *    message = "The url '{{ value }}' is not a valid url",
      * )
@@ -68,6 +76,11 @@ class Author
         $this->ressources = new ArrayCollection();
     }
 
+    public function getLabel(): string
+    {
+        return $this->getName();
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

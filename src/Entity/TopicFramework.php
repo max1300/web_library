@@ -23,7 +23,7 @@ use App\Dto\ItemOutput;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\TopicFrameworkRepository")
  */
-class TopicFramework extends Topic
+class TopicFramework extends Topic implements IItemOutputTransformable
 {
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Framework", inversedBy="topic", cascade={"persist", "remove"})
@@ -32,6 +32,11 @@ class TopicFramework extends Topic
      * @Assert\NotNull
      */
     private $framework;
+
+    public function getLabel(): string
+    {
+        return $this->getFramework()->getName();
+    }
 
     public function getFramework(): ?Framework
     {
