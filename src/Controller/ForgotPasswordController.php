@@ -74,21 +74,13 @@ class ForgotPasswordController
         if ($user !== null)
         {
             $this->mailer->sendEmailForgotPassword($user);
+            return new Response("OK");
+        } else {
+            return new Response("NOT OK");
         }
 
-        return new Response("OK");
     }
-    
-    /**
-     * @param $password
-     * @return ForgotPassword
-     */
-    public function createNewForgotPassword($password): ForgotPassword
-    {
-        $forgotPassword = new ForgotPassword();
-        $forgotPassword->setPassword($password['password']);
-        return $forgotPassword;
-    }
+
 
     /**
      * @Route("/reset-forgot-password/{token}", name="reset-forgot-password", methods={"PUT"})
@@ -109,40 +101,30 @@ class ForgotPasswordController
         $password = json_decode($request->getContent(), true);
 
         //creation d'un objet forgotPassword et insertion du nouveau password react dans le champ password de l'objet
-        $forgotPassword = $this->createNewForgotPassword($password);
+        $forgotPassword = new ForgotPassword();
+        $forgotPassword->setPassword($password['password']);
 
         $passwordError = $validator->validateProperty($forgotPassword, 'password');
-        $formErrors = $this->getFormError($passwordError);
-
-        if ($formErrors) {
-            return new Response($formErrors['passwordError']);
-        }
-
-        //recuperation de l'utilisateur lié au token et à la demande de mot de passe oublié
-        $user = $repository->findOneBy(['forgotPasswordToken' => $token]);
-
-        if ($user === null || $token !== $user->getForgotPasswordToken()) {
-            return new Response("user not identified or token not equal to forgotPasswordToken", 400);
-        }
-
-        $user->setPassword($this->passwordEncoder->encodePassword($user, $forgotPassword->getPassword()));
-        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
-        $this->entityManager->flush();
-        return new Response("OK");
-
-    }
-
-    /**
-     * @param ConstraintViolationListInterface $passwordError
-     * @return array
-     */
-    public function getFormError(ConstraintViolationListInterface $passwordError): array
-    {
         $formErrors = [];
-        if ($passwordError !== null) {
+        if (empty($passwordError)) {
             $formErrors['passwordError'] = $passwordError[0]->getMessage();
         }
-        return $formErrors;
+
+        if ($formErrors) {
+            return new Response($formErrors['passwordError'], Response::HTTP_BAD_REQUEST);
+        } else {
+            //recuperation de l'utilisateur lié au token et à la demande de mot de passe oublié
+            $user = $repository->findOneBy(['forgotPasswordToken' => $token]);
+
+            if ($user === null || $token !== $user->getForgotPasswordToken()) {
+                return new Response("user not identified or token not equal to forgotPasswordToken", 400);
+            }
+
+            $user->setPassword($this->passwordEncoder->encodePassword($user, $forgotPassword->getPassword()));
+            $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
+            $this->entityManager->flush();
+            return new Response("OK");
+        }
     }
 
 }

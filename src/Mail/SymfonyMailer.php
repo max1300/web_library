@@ -66,7 +66,7 @@ class SymfonyMailer
             ->from('webster-no-reply@gmail.com')
             ->to($user->getEmail())
             ->subject('Confirmation du compte')
-            ->text($body, 'text/html');
+            ->html($body, 'text/html');
 
         $this->mailer->send($email);
     }
@@ -84,7 +84,7 @@ class SymfonyMailer
             ->subject('Demande de réinitialisation de mot de passe')
             ->from('webster-no-reply@gmail.com')
             ->to($this->ADMIN_EMAIL)
-            ->text($body, 'text/html');
+            ->html($body, 'text/html');
 
         $this->mailer->send($email);
     }
@@ -103,7 +103,7 @@ class SymfonyMailer
             ->subject('Contact Message')
             ->from($contact->getEmail())
             ->to($this->ADMIN_EMAIL)
-            ->text($body, 'text/html');
+            ->html($body, 'text/html');
 
         $this->mailer->send($email);
     }

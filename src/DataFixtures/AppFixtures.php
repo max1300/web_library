@@ -40,10 +40,10 @@ class AppFixtures extends Fixture
         $admin->setLogin('maxime')
             ->setEmail('maxime@gmail.com')
             ->setRoles(['ROLE_ADMIN'])
-            ->setEnabledAccount(true)
-            ->setPlainPassword('maxime1234');
-        $admin->setPassword($this->encoder->encodePassword($admin, $admin->getPlainPassword()))
+            ->setEnabledAccount(true);
+        $admin->setPassword($this->encoder->encodePassword($admin, 'maxime1234'))
             ->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
+
         $manager->persist($admin);
 
         for ($i = 0; $i < 10; $i++) {
@@ -53,10 +53,7 @@ class AppFixtures extends Fixture
                 ->setLogin($login)
                 ->setRoles(['ROLE_USER'])
                 ->setProfilePic($faker->imageUrl(150, 150));
-
-            $user->setPlainPassword('pass'.$login);
-
-            $user->setPassword($this->encoder->encodePassword($user, $user->getPlainPassword()))
+            $user->setPassword($this->encoder->encodePassword($user, 'pass'.$login))
                 ->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
             if ($i === 2 || $i === 6) {
                 $user->setEnabledAccount(false);

@@ -57,7 +57,7 @@ class RegisterController extends AbstractController
         //afin de s'assurer que le mot de passe du formulaire react se conforme bien aux contraintes de validité (voir dans UserType)
         if (!$form->isValid()) {
             $errors = $this->getErrors($form);
-            throw new BadRequestHttpException(json_encode($errors));
+            return new Response(json_encode($errors), Response::HTTP_BAD_REQUEST);
             //si on détecte une contrainte de validation non respectée, on lance une reponse JSON vers le front
         }
 
