@@ -20,7 +20,7 @@ class UserConfirmation
 {
     /**
      * @Assert\NotBlank()
-     * @Assert\length(min=30, max=30)
+     * @Assert\Length(min=30, max=30)
      */
     public $confirmationToken;
 
