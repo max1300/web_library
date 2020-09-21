@@ -4,10 +4,14 @@ namespace App\Controller;
 
 
 use App\Entity\ForgotPassword;
+use App\Form\ResetPasswordType;
+use App\Form\UserType;
 use App\Mail\SymfonyMailer;
 use App\Repository\UserRepository;
 use App\Security\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +20,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
-class ForgotPasswordController  
+class ForgotPasswordController extends AbstractController
 {
 
     /**
@@ -67,18 +71,17 @@ class ForgotPasswordController
     public function forgotPassword(Request $request, UserRepository $repository)
     {
         $mail = json_decode($request->getContent(), true);
-
         $user = $repository->findOneBy(['email' => $mail]);
 
-
-        if ($user !== null)
-        {
-            $this->mailer->sendEmailForgotPassword($user);
-            return new Response("OK");
-        } else {
-            return new Response("NOT OK");
+        if ($user === null) {
+            return new Response("NOT OK", Response::HTTP_BAD_REQUEST);
         }
 
+        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+        $this->mailer->sendEmailForgotPassword($user);
+        return new Response("OK");
     }
 
 
@@ -87,44 +90,49 @@ class ForgotPasswordController
      * @param string $token
      * @param Request $request
      * @param UserRepository $repository
-     * @param ValidatorInterface $validator
      * @return Response
      */
-    public function resetForgotPassword(
-        string $token,
-        Request $request,
-        UserRepository $repository,
-        ValidatorInterface $validator
-    )
+    public function resetForgotPassword(string $token, Request $request, UserRepository $repository)
     {
         //recuperation du nouveau mot de passe envoyé depuis react
-        $password = json_decode($request->getContent(), true);
+        $content = json_decode($request->getContent(), true);
 
-        //creation d'un objet forgotPassword et insertion du nouveau password react dans le champ password de l'objet
-        $forgotPassword = new ForgotPassword();
-        $forgotPassword->setPassword($password['password']);
+        $user = $repository->findOneBy(['forgotPasswordToken' => $token]);
 
-        $passwordError = $validator->validateProperty($forgotPassword, 'password');
-        $formErrors = [];
-        if (empty($passwordError)) {
-            $formErrors['passwordError'] = $passwordError[0]->getMessage();
+        if($user === null){
+            return new Response("User not found", Response::HTTP_BAD_REQUEST);
         }
 
-        if ($formErrors) {
-            return new Response($formErrors['passwordError'], Response::HTTP_BAD_REQUEST);
-        } else {
-            //recuperation de l'utilisateur lié au token et à la demande de mot de passe oublié
-            $user = $repository->findOneBy(['forgotPasswordToken' => $token]);
+        $form = $this->createForm(ResetPasswordType::class, $user);
+        $form->submit($content);
 
-            if ($user === null || $token !== $user->getForgotPasswordToken()) {
-                return new Response("user not identified or token not equal to forgotPasswordToken", 400);
-            }
-
-            $user->setPassword($this->passwordEncoder->encodePassword($user, $forgotPassword->getPassword()));
-            $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
-            $this->entityManager->flush();
-            return new Response("OK");
+        if (!$form->isValid()){
+            $errors = $this->getErrors($form);
+            return new Response(json_encode($errors), Response::HTTP_BAD_REQUEST);
         }
+
+        $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPlainPassword()));
+        $user->setPlainPassword("");
+        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+        return new Response("OK");
+
+    }
+
+    private function getErrors(FormInterface $form): array
+    {
+        $errors = [];
+        $formErrors = $form->getErrors(true);
+
+        foreach ($formErrors as $error) {
+            $field = $error->getOrigin()->getName();
+            $message = $error->getMessage();
+
+            $errors[$field] = $message;
+        }
+
+        return $errors;
     }
 
 }
