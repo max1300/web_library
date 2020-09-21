@@ -70,8 +70,6 @@ class RegisterSubscriber implements EventSubscriberInterface
         //encode le mot de passe
         $user->setPassword($this->encoder->encodePassword($user, $user->getPlainPassword()));
         $user->setPlainPassword("");
-        //on construit le token pour récupérer le mot de passe si oublié lors du login
-        $user->setForgotPasswordToken($this->tokenGenerator->getRandomToken());
         //on construit le token qui va servir lors de la confirmation du compte
         $user->setTokenConfirmation($this->tokenGenerator->getRandomToken());
         //on envoit l'email contenant le token pour la confirmation du compte
