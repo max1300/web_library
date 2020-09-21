@@ -181,7 +181,7 @@ class User implements UserInterface
     private $tokenConfirmation;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $forgotPasswordToken;
 
