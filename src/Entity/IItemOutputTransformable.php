@@ -9,8 +9,8 @@ namespace App\Entity;
 
 interface IItemOutputTransformable 
 {
-    //on va définir que toute classe qui vont implementer cette interface 
-    //va devoir implementer la methode definit dans l interface
+    //on va définir que toute classe qui va implémenter cette interface 
+    //va devoir implémenter la méthode définit dans l'interface
     public function getLabel():string;
 
 }
